@@ -7,15 +7,13 @@ export default defineConfig({
     react(),
     babel({
       babelConfig: {
-        babelrc: false,
-        configFile: false,
+        presets: [
+          "@babel/preset-env",
+          "@babel/preset-react",
+          "@babel/preset-typescript",
+        ],
         plugins: ["@babel/plugin-transform-runtime"],
       },
     }),
   ],
-  build: {
-    rollupOptions: {
-      external: ["@babel/runtime/regenerator"],
-    },
-  },
 });
