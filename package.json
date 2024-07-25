@@ -24,6 +24,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.25.1",
     "react-speech-recognition": "^3.10.0",
+    "recoil": "^0.7.7",
     "regenerator-runtime": "^0.14.1"
   },
   "devDependencies": {
