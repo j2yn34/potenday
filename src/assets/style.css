@@ -44,6 +44,6 @@ body {
 .round-btn {
   width: 60px;
   height: 48px;
-  border-radius: 100%;
+  border-radius: 9999px;
   background-color: white;
 }
