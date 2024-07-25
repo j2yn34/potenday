@@ -40,3 +40,10 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.round-btn {
+  width: 60px;
+  height: 48px;
+  border-radius: 100%;
+  background-color: white;
+}

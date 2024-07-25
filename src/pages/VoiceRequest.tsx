@@ -3,8 +3,8 @@ import { IoChevronBackSharp } from "react-icons/io5";
 import LottieWho from "../assets/lottie/who.json";
 import { Link } from "react-router-dom";
 import { GrPowerReset } from "react-icons/gr";
-import { PiMicrophoneFill } from "react-icons/pi";
 import { TbKeyboard } from "react-icons/tb";
+import MicButton from "../components/button/MicButton";
 
 const VoiceRequest = () => {
   return (
@@ -54,15 +54,11 @@ const VoiceRequest = () => {
         </div>
         <div className="flex-center">
           <div className="flex-center gap-9">
-            <button className="w-[60px] h-12 rounded-full bg-white flex-center">
+            <button className="round-btn flex-center">
               <GrPowerReset />
             </button>
-            <button className="w-[100px] h-16 rounded-full bg-black flex-center text-white">
-              <PiMicrophoneFill size={32} />
-            </button>
-            <button className="w-[60px] h-12 rounded-full bg-white text-sm">
-              완료
-            </button>
+            <MicButton />
+            <button className="round-btn">완료</button>
           </div>
         </div>
       </div>
