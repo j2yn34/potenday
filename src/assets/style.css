@@ -33,3 +33,9 @@ body {
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9f9fc",endColorstr="#e6e4f1",GradientType=1);
 }
+
+.btn-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,6 +1,7 @@
 import headerLogo from "../assets/logo/headerLogo.svg";
 import heartIcon from "../assets/icons/heart.svg";
 import userIcon from "../assets/icons/user.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -10,12 +11,12 @@ const Header = () => {
           <img src={headerLogo} alt="TIFY 로고" />
         </button>
         <div className="flex gap-5">
-          <button>
+          <Link to="/heartlist">
             <img src={heartIcon} alt="관심목록" />
-          </button>
-          <button>
+          </Link>
+          <Link to="/mypage">
             <img src={userIcon} alt="내 정보" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

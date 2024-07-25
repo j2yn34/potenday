@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import HighSatisfactionList from "../components/HighSatisfactionList";
 
@@ -12,9 +13,12 @@ const Index = () => {
             <br />
             당신에게 딱 맞는 선물
           </h1>
-          <button className="w-[158px] h-14 bg-black text-white rounded-lg">
+          <Link
+            to="/request"
+            className="btn-center w-[158px] h-14 bg-black text-white rounded-lg"
+          >
             선물 고르러 가기
-          </button>
+          </Link>
         </div>
         <HighSatisfactionList />
       </div>
