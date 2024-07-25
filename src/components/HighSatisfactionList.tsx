@@ -2,7 +2,7 @@ import HighSatisfactionSection from "./HighSatisfactionSection";
 
 const HighSatisfactionList: React.FC = () => {
   const keyword = "직장동료";
-  const sections = Array.from({ length: 5 });
+  const sections = Array.from({ length: 3 });
 
   return (
     <>
