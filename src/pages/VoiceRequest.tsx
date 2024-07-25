@@ -11,7 +11,7 @@ import { IoChevronBackSharp } from "react-icons/io5";
 import RequestGuide from "../components/RequestGuide";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { TbKeyboard } from "react-icons/tb";
+import KeyboardBtn from "../components/buttons/KeyboardBtn";
 
 const VoiceRequest = () => {
   const [isVoiceRequset, setIsVoiceRequest] = useState<boolean>(false);
@@ -83,15 +83,7 @@ const VoiceRequest = () => {
       )}
       <div className="pb-8">
         <div className="w-full flex-center">
-          <Link
-            to="/keyboard"
-            className="flex-center w-40 py-1.5 mb-5 bg-white rounded-full"
-          >
-            <div className="pr-2">
-              <TbKeyboard />
-            </div>
-            <span className="text-sm">텍스트로 입력하기</span>
-          </Link>
+          <KeyboardBtn />
         </div>
         <div className="flex-center">
           <div className="flex-center gap-9">
