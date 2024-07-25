@@ -2,7 +2,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-const SpeechRec = () => {
+const MicTest = () => {
   const {
     transcript,
     listening,
@@ -54,4 +54,4 @@ const SpeechRec = () => {
   );
 };
 
-export default SpeechRec;
+export default MicTest;
