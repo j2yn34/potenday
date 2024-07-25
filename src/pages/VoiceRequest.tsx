@@ -57,7 +57,7 @@ const VoiceRequest = () => {
             <button className="w-[60px] h-12 rounded-full bg-white flex-center">
               <GrPowerReset />
             </button>
-            <button className="w-[100px] h-12 rounded-full bg-black flex-center text-white">
+            <button className="w-[100px] h-16 rounded-full bg-black flex-center text-white">
               <PiMicrophoneFill size={32} />
             </button>
             <button className="w-[60px] h-12 rounded-full bg-white text-sm">
