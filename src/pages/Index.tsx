@@ -14,7 +14,7 @@ const Index = () => {
             당신에게 딱 맞는 선물
           </h1>
           <Link
-            to="/request"
+            to="/voice"
             className="flex-center w-[158px] h-14 bg-black text-white rounded-lg"
           >
             선물 고르러 가기
