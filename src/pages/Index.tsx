@@ -15,7 +15,7 @@ const Index = () => {
           </h1>
           <Link
             to="/request"
-            className="btn-center w-[158px] h-14 bg-black text-white rounded-lg"
+            className="flex-center w-[158px] h-14 bg-black text-white rounded-lg"
           >
             선물 고르러 가기
           </Link>
