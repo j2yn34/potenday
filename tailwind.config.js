@@ -18,6 +18,7 @@ export default {
         "orange-50": "#FEEEE4",
         "orange-200": "#FFC09C ",
         "orange-500": "#FF5E00",
+        "purple-0": "#F9F9FC",
         "purple-50": "#F5F4FA",
         "purple-100": "#D6D3E3",
         "gray-50": "#F8F8F8",

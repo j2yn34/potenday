@@ -6,8 +6,8 @@ const Index = () => {
     <>
       <Header />
       <div className="px-5">
-        <div className="flex flex-col items-center mb-52">
-          <h1 className="text-center text-2xl font-semibold leading-9 mt-8 mb-6">
+        <div className="flex flex-col items-center mb-72">
+          <h1 className="text-center text-2xl font-semibold leading-9 mt-10 mb-6">
             1분 만에 고르는
             <br />
             당신에게 딱 맞는 선물
