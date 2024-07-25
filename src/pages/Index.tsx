@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import HighSatisfactionList from "../components/HighSatisfactionList";
+import Lottie from "lottie-react";
+import home from "../assets/lottie/home.json";
 
 const Index = () => {
   return (
     <>
       <Header />
       <div className="px-5">
-        <div className="flex flex-col items-center mb-72">
+        <div className="flex flex-col items-center mb-10">
           <h1 className="text-center text-2xl font-semibold leading-9 mt-10 mb-6">
             1분 만에 고르는
             <br />
@@ -19,6 +21,7 @@ const Index = () => {
           >
             선물 고르러 가기
           </Link>
+          <Lottie animationData={home} />
         </div>
         <HighSatisfactionList />
       </div>
