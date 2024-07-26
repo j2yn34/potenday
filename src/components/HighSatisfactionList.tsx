@@ -1,13 +1,13 @@
 import HighSatisfactionSection from "./HighSatisfactionSection";
 
-const HighSatisfactionList: React.FC = () => {
-  const keyword = "직장동료";
+const HighSatisfactionList = () => {
+  const category = "홈패브릭";
   const sections = Array.from({ length: 3 });
 
   return (
     <>
       {sections.map((_, index) => (
-        <HighSatisfactionSection key={index} keyword={keyword} />
+        <HighSatisfactionSection key={index} category={category} />
       ))}
     </>
   );
