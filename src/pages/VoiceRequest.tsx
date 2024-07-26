@@ -80,7 +80,7 @@ const VoiceRequest = () => {
                   </div>
                 </div>
               </div>
-              <div className="mx-auto min-w-[320px] max-w-72 my-5 px-4 overflow-y-auto">
+              <div className="mx-auto min-w-[320px] max-w-72 my-6 px-7 overflow-y-auto">
                 <p className="text-center text-gray-600 font-medium leading-7">
                   {transcript}
                 </p>

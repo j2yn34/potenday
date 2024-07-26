@@ -24,8 +24,8 @@ const DoneRequest = ({ transcript }: { transcript: string }) => {
           </div>
         </div>
       </>
-      <div className="flex-center mt-9 mx-auto min-w-[320px] max-w-72 min-h-[270px] border border-2 border-orange-500 bg-orange-0 rounded-lg my-5 px-5 overflow-y-auto">
-        <p className="text-center text-black h-full font-medium leading-7">
+      <div className="flex-center my-9 mx-auto min-w-[320px] max-w-72 min-h-[270px] max-h-80 border border-2 border-orange-500 bg-orange-0 rounded-lg overflow-hidden">
+        <p className="py-8 text-center px-7 text-black font-medium leading-7 text-overflow">
           {transcript}
         </p>
       </div>
