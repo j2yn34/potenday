@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import HighSatisfactionList from "../components/HighSatisfactionList";
+import TopHeartList from "../components/TopHeartList";
 import Lottie from "lottie-react";
 import home from "../assets/lottie/home.json";
 
@@ -26,7 +26,7 @@ const Index = () => {
         <div className="w-[134px] bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1">
           추천 만족도가 높은 상품
         </div>
-        <HighSatisfactionList />
+        <TopHeartList />
       </div>
     </>
   );

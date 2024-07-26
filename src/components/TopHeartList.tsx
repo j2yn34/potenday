@@ -1,4 +1,4 @@
-import HighSatisfactionSection from "./HighSatisfactionSection";
+import TopHeartSection from "./TopHeartSection";
 
 const HighSatisfactionList = () => {
   const category = "홈패브릭";
@@ -7,7 +7,7 @@ const HighSatisfactionList = () => {
   return (
     <>
       {sections.map((_, index) => (
-        <HighSatisfactionSection key={index} category={category} />
+        <TopHeartSection key={index} category={category} />
       ))}
     </>
   );
