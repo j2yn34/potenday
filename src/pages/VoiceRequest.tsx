@@ -14,10 +14,13 @@ import { useNavigate } from "react-router";
 import KeyboardBtn from "../components/buttons/KeyboardBtn";
 import DoneRequest from "../components/DoneRequest";
 import axios from "axios";
+import { useSetRecoilState } from "recoil";
+import { keywordListState } from "../state/recoil";
 
 const VoiceRequest = () => {
   const [isVoiceRequest, setIsVoiceRequest] = useState<boolean>(false);
   const [isDoneRequest, setIsDoneRequest] = useState(false);
+  const setKeywordList = useSetRecoilState(keywordListState);
   const navigate = useNavigate();
 
   const {
@@ -47,6 +50,8 @@ const VoiceRequest = () => {
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
       .then((res) => {
         console.log("Response:", res.data);
+        setKeywordList(res.data.data.keywordList);
+        console.log("keywordList: ", res.data.data.keywordList);
       })
       .catch((err) => {
         console.error("Error:", err);
