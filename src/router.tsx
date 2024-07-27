@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import VoiceRequest from "./pages/VoiceRequest";
 import Mypage from "./pages/Mypage";
@@ -14,6 +15,7 @@ const Router = (): JSX.Element => {
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/" element={<Index />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/voice" element={<VoiceRequest />} />
       <Route path="/keyboard" element={<KeyboardRequest />} />
       <Route path="/keyword" element={<KeywordListPage />} />
