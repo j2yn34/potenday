@@ -1,0 +1,9 @@
+diff a/src/router.tsx b/src/router.tsx	(rejected hunks)
+@@ -21,6 +21,7 @@
+       <Route path="/voice" element={<VoiceRequest />} />
+       <Route path="/keyboard" element={<KeyboardRequest />} />
+       <Route path="/keyword" element={<KeywordListPage />} />
++      <Route path="/giftlist" element={<GiftListPage />} />
+       <Route path="/heartlist" element={<HeartListPage />} />
+       <Route path="/mypage" element={<Mypage />} />
+       <Route path="/speech" element={<MicTest />} />

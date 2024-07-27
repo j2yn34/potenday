@@ -1,7 +1,15 @@
+export type UserInfoState = {
+  id: number;
+  nickname: string;
+};
+
 export type ProductCard = {
-  productId: number;
-  keyword: string[];
-  productName: string;
+  id: number;
+  name: string;
+  lgCtgryId: string;
+  mdCtgry: string;
   price: number;
-  imgSrc: string | undefined;
+  link: string;
+  imgLink: string | undefined;
+  cntWish: number;
 };
