@@ -16,4 +16,16 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://server.tify.co.kr",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+        secure: false,
+        ws: true,
+        followRedirects: true,
+      },
+    },
+  },
 });
