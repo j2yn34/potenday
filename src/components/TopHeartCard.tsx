@@ -2,9 +2,12 @@ import { ProductCard } from "../type";
 
 const TopHeartCard = ({ data }: { data: ProductCard }) => {
   const formattedPrice = data.price.toLocaleString("ko-KR");
+  const goToBuyGift = () => {
+    window.location.href = `${data.link}`;
+  };
 
   return (
-    <button>
+    <button onClick={goToBuyGift}>
       <img className="rounded-lg" src={data.imgLink} alt="상품 사진" />
       <div className="text-start">
         <div className="pt-2 pb-1 text-md font-medium">{data.name}</div>
