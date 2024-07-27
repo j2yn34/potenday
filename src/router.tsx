@@ -8,6 +8,7 @@ import Mypage from "./pages/Mypage";
 import HeartListPage from "./pages/HeartListPage";
 import KeyboardRequest from "./pages/KeyboardRequest";
 import KeywordListPage from "./pages/KeywordListPage";
+import GiftListPage from "./pages/GiftListPage";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
 
@@ -21,6 +22,7 @@ const Router = (): JSX.Element => {
       <Route path="/voice" element={<VoiceRequest />} />
       <Route path="/keyboard" element={<KeyboardRequest />} />
       <Route path="/keyword" element={<KeywordListPage />} />
+      <Route path="/giftlist" element={<GiftListPage />} />
       <Route path="/heartlist" element={<HeartListPage />} />
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/speech" element={<MicTest />} />

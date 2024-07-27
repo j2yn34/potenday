@@ -2,26 +2,28 @@ import { Link } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { keywordListState } from "../state/recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { keywordListState, giftListState } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
+import { ProductCard } from "../type";
 
 const KeywordListPage = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
+  const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
   const navigate = useNavigate();
   const nickname = "지연";
 
-  const submitRequest = () => {
+  const submitKeywords = () => {
     const queryString = keywordList
-      .map((keyword: string) => `keyword=${encodeURIComponent(keyword.trim())}`)
+      .map((keyword: string) => `keyword=${keyword.trim()}`)
       .join("&");
-
-    const url = `/api/v1/product/recommend?${queryString}`;
+    const url = `/api/api/v1/product/recommend?keyword=${queryString}`;
 
     axios
       .get(url)
       .then((res) => {
-        console.log("Response:", res.data);
+        console.log("Response:", res.data.data);
+        setGiftList(res.data.data);
       })
       .catch((err) => {
         console.error("Error:", err);
@@ -49,7 +51,7 @@ const KeywordListPage = () => {
           다시 할래요
         </button>
         <button
-          onClick={submitRequest}
+          onClick={submitKeywords}
           className="basic-button bg-black text-white"
         >
           맞아요
