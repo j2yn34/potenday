@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import TopHeartList from "./TopHeartList";
 import axios from "axios";
 import { ProductCard } from "../type";
+import Lottieloading from "../assets/lottie/loading.json";
+import Lottie from "lottie-react";
 
 const TopHeartSection = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [groupedProducts, setGroupedProducts] = useState<{
     [key: string]: ProductCard[];
   }>({});
 
   useEffect(() => {
     const getTopHeartData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get("/api/api/v1/product/popular/info");
-        console.log(response);
+        // console.log(response);
         const { popularCategory, popularInfoList } = response.data.data;
 
         if (popularCategory && popularInfoList) {
@@ -21,7 +25,6 @@ const TopHeartSection = () => {
               acc[category] = popularInfoList.filter(
                 (product: ProductCard) => product.lgCtgry === category
               );
-              console.log(popularInfoList);
 
               return acc;
             },
@@ -29,7 +32,8 @@ const TopHeartSection = () => {
           );
 
           setGroupedProducts(grouped);
-          console.log("grouped: ", grouped);
+          setIsLoading(false);
+          // console.log("grouped: ", grouped);
         }
       } catch (err) {
         console.error("Error:", err);
@@ -40,15 +44,24 @@ const TopHeartSection = () => {
   }, []);
 
   return (
-    <div>
-      {Object.keys(groupedProducts).map((category) => (
-        <TopHeartList
-          category={category}
-          products={groupedProducts[category]}
-          key={category}
-        />
-      ))}
-    </div>
+    <>
+      {isLoading ? (
+        <Lottie animationData={Lottieloading} />
+      ) : (
+        <>
+          <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
+            티피의 인기 상품
+          </div>
+          {Object.keys(groupedProducts).map((category) => (
+            <TopHeartList
+              category={category}
+              products={groupedProducts[category]}
+              key={category}
+            />
+          ))}
+        </>
+      )}
+    </>
   );
 };
 

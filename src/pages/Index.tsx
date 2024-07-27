@@ -23,9 +23,6 @@ const Index = () => {
           </Link>
           <Lottie className="w-[240px] h-[240px] mt-3" animationData={home} />
         </div>
-        <div className="w-[134px] bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1">
-          추천 만족도가 높은 상품
-        </div>
         <TopHeartSection />
       </div>
     </>
