@@ -1,12 +1,8 @@
-export type UserInfoState = {
-  id: number;
-  nickname: string;
-};
-
 export type ProductCard = {
   id: number;
   name: string;
-  lgCtgryId: string;
+  lgCtgryId?: string;
+  lgCtgry?: string;
   mdCtgry: string;
   price: number;
   link: string;

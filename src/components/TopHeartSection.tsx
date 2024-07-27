@@ -1,24 +1,53 @@
-import TopHeartCard from "./TopHeartCard";
-import productExample from "../assets/images/productExample.jpg";
+import { useEffect, useState } from "react";
+import TopHeartList from "./TopHeartList";
+import axios from "axios";
+import { ProductCard } from "../type";
 
-const TopHeartSection = ({ category }: { category: string }) => {
-  const products = Array.from({ length: 4 }, (_, i) => ({
-    productId: i + 1,
-    keyword: ["직장동료"],
-    category: { category },
-    productName: "미드센츄리 모던 스탠드 56cm",
-    price: 54000,
-    imgSrc: productExample,
-  }));
+const TopHeartSection = () => {
+  const [groupedProducts, setGroupedProducts] = useState<{
+    [key: string]: ProductCard[];
+  }>({});
+
+  useEffect(() => {
+    const getTopHeartData = async () => {
+      try {
+        const response = await axios.get("/api/api/v1/product/popular/info");
+        console.log(response);
+        const { popularCategory, popularInfoList } = response.data.data;
+
+        if (popularCategory && popularInfoList) {
+          const grouped = popularCategory.reduce(
+            (acc: { [key: string]: ProductCard[] }, category: string) => {
+              acc[category] = popularInfoList.filter(
+                (product: ProductCard) => product.lgCtgry === category
+              );
+              console.log(popularInfoList);
+
+              return acc;
+            },
+            {}
+          );
+
+          setGroupedProducts(grouped);
+          console.log("grouped: ", grouped);
+        }
+      } catch (err) {
+        console.error("Error:", err);
+      }
+    };
+
+    getTopHeartData();
+  }, []);
 
   return (
-    <div className="pb-14">
-      <div className="pt-2 pb-5 text-xl font-semibold">{category}</div>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-8">
-        {products.map((product) => (
-          <TopHeartCard data={product} key={product.productId} />
-        ))}
-      </div>
+    <div>
+      {Object.keys(groupedProducts).map((category) => (
+        <TopHeartList
+          category={category}
+          products={groupedProducts[category]}
+          key={category}
+        />
+      ))}
     </div>
   );
 };
