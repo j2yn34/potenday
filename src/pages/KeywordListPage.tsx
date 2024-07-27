@@ -7,13 +7,13 @@ import { keywordListState } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
 
 const KeywordListPage = () => {
-  const keywordList = useRecoilValue(keywordListState);
+  const keywordList = useRecoilValue<string[]>(keywordListState);
   const navigate = useNavigate();
   const nickname = "지연";
 
   const submitRequest = () => {
     const queryString = keywordList
-      .map((keyword) => `keyword=${encodeURIComponent(keyword.trim())}`)
+      .map((keyword: string) => `keyword=${encodeURIComponent(keyword.trim())}`)
       .join("&");
 
     const url = `/api/v1/product/recommend?${queryString}`;

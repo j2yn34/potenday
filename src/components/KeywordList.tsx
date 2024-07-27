@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 import { keywordListState } from "../state/recoil";
 
 const KeywordList = () => {
-  const keywordList = useRecoilValue(keywordListState);
+  const keywordList = useRecoilValue<string[]>(keywordListState);
   console.log(keywordList);
 
   if (!Array.isArray(keywordList)) {
