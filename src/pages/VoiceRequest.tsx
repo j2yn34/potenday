@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import KeyboardBtn from "../components/buttons/KeyboardBtn";
 import DoneRequest from "../components/DoneRequest";
+import axios from "axios";
 
 const VoiceRequest = () => {
   const [isVoiceRequest, setIsVoiceRequest] = useState<boolean>(false);
@@ -42,6 +43,14 @@ const VoiceRequest = () => {
   const submitRequest = () => {
     console.log(transcript);
     setIsDoneRequest(true);
+    axios
+      .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
+      .then((res) => {
+        console.log("Response:", res.data);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
     setTimeout(() => {
       navigate("/keyword");
     }, 2000);
