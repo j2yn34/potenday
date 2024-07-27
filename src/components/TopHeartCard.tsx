@@ -7,7 +7,7 @@ const TopHeartCard = ({ data }: { data: ProductCard }) => {
   };
 
   return (
-    <button onClick={goToBuyGift}>
+    <button className="card" onClick={goToBuyGift}>
       <img className="rounded-lg" src={data.imgLink} alt="상품 사진" />
       <div className="text-start">
         <div className="pt-2 pb-1 text-md font-medium">{data.name}</div>
