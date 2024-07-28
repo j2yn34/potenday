@@ -3,17 +3,23 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { keywordListState, giftListState } from "../state/recoil";
+import {
+  keywordListState,
+  giftListState,
+  userInfoState,
+} from "../state/recoil";
 import KeywordList from "../components/KeywordList";
 import { ProductCard } from "../type";
 import { useState } from "react";
 import LoadingFull from "../components/LoadingFull";
+import { UserInfoState } from "../state/recoilType";
 
 const KeywordListPage = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
+  const userInfo = useRecoilValue<UserInfoState>(userInfoState);
   const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
   const navigate = useNavigate();
-  const nickname = "지연";
+  const nickname = userInfo.nickname;
   const [isLoading, setIsLoading] = useState(false);
 
   const submitKeywords = () => {
@@ -49,7 +55,7 @@ const KeywordListPage = () => {
         </Link>
       </div>
       <h1 className="pt-[84px] text-center font-semibold text-xl leading-8">
-        {nickname}님이
+        {nickname ? `${nickname}` : "게스트"}님이
         <br />
         원하시는 선물은
       </h1>
