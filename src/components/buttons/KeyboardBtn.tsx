@@ -4,7 +4,7 @@ import { TbKeyboard } from "react-icons/tb";
 const KeyboardBtn = () => {
   return (
     <Link
-      to="/keyboard"
+      to="/text"
       className="flex-center w-40 py-1.5 mb-5 bg-white rounded-full"
     >
       <div className="pr-2">

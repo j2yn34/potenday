@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import prepare from "../assets/images/sadTifu.svg";
 
-const Preparation = () => {
+const PreparingPage = () => {
   return (
     <div className="h-screen flex flex-col items-center justify-center pb-28">
       <img src={prepare} alt="준비중" />
@@ -19,4 +19,4 @@ const Preparation = () => {
   );
 };
 
-export default Preparation;
+export default PreparingPage;

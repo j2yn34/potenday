@@ -26,7 +26,7 @@ const Router = (): JSX.Element => {
       <Route path="/giftlist" element={<GiftListPage />} />
       <Route path="/heartlist" element={<MyHeartListPage />} />
       <Route path="/mypage" element={<Mypage />} />
-      <Route path="/preparing" element={<Preparation />} />
+      <Route path="/preparing" element={<PreparingPage />} />
       <Route path="/speech" element={<MicTest />} />
       <Route path="/lottie" element={<LottieTest />} />
     </Routes>
