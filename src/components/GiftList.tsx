@@ -11,15 +11,18 @@ const GiftList = ({ data }: { data: ProductCard[] }) => {
       [id]: !prevLikedItems[id],
     }));
   };
+
   if (!Array.isArray(data)) {
     return null;
   }
 
   return (
     <div className="flex flex-col gap-3">
-      {data.map((gift) => (
+      {data.map((gift, index) => (
         <div
-          className="flex p-3 h-[132px] rounded-lg bg-white max-w-full"
+          className={`flex p-3 h-[132px] rounded-lg bg-white max-w-full ${
+            index === data.length - 1 ? "mb-[100px]" : ""
+          }`}
           onClick={() => (window.location.href = gift.link)}
           key={gift.id}
           role="button"
