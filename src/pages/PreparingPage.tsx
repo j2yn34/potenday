@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import prepare from "../assets/images/sadTifu.svg";
+import prepare from "../assets/images/sad.svg";
 
 const PreparingPage = () => {
   return (

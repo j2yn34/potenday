@@ -9,7 +9,7 @@ import MyHeartListPage from "./pages/MyHeartListPage";
 import TextRequest from "./pages/TextRequest";
 import KeywordListPage from "./pages/KeywordListPage";
 import GiftListPage from "./pages/GiftListPage";
-import Preparation from "./pages/Preparation";
+import PreparingPage from "./pages/PreparingPage";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
 
