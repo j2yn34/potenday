@@ -11,6 +11,7 @@ import KeywordListPage from "./pages/KeywordListPage";
 import GiftListPage from "./pages/GiftListPage";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
+import ServerTest from "./test/ServerTest";
 
 const Router = (): JSX.Element => {
   return (
@@ -27,6 +28,7 @@ const Router = (): JSX.Element => {
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/speech" element={<MicTest />} />
       <Route path="/lottie" element={<LottieTest />} />
+      <Route path="/test" element={<ServerTest />} />
     </Routes>
   );
 };
