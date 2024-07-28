@@ -1,7 +1,16 @@
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { ProductCard } from "../type";
+import { useState } from "react";
 
 const GiftList = ({ data }: { data: ProductCard[] }) => {
+  const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
+
+  const toggleLike = (id: number) => {
+    setLikedItems((prevLikedItems) => ({
+      ...prevLikedItems,
+      [id]: !prevLikedItems[id],
+    }));
+  };
   if (!Array.isArray(data)) {
     return null;
   }
@@ -31,8 +40,18 @@ const GiftList = ({ data }: { data: ProductCard[] }) => {
                 {gift.price.toLocaleString("ko-KR")}원
               </div>
             </div>
-            <button className="flex-shrink-0 ml-2">
-              <FaRegHeart size={24} />
+            <button
+              className="flex-shrink-0 ml-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleLike(gift.id);
+              }}
+            >
+              {likedItems[gift.id] ? (
+                <FaHeart size={24} />
+              ) : (
+                <FaRegHeart size={24} />
+              )}
             </button>
           </div>
         </div>
