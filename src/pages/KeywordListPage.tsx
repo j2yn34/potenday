@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoChevronBackSharp } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -50,8 +50,8 @@ const KeywordListPage = () => {
   return (
     <div className="px-5 h-screen flex flex-col justify-between">
       <div className="absolute z-40 pt-8 -ml-1">
-        <Link to="/">
-          <IoCloseOutline size={30} />
+        <Link to="/voice">
+          <IoChevronBackSharp size={24} />
         </Link>
       </div>
       <h1 className="pt-[84px] text-center font-semibold text-xl leading-8">
@@ -64,7 +64,7 @@ const KeywordListPage = () => {
       </div>
       <div className="flex-center gap-2 mb-8">
         <button className="basic-button bg-white border border-black">
-          다시 할래요
+          아니에요
         </button>
         <button
           onClick={submitKeywords}
