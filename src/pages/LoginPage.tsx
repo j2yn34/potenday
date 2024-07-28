@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import kakao from "../assets/images/kakao.svg";
 import loginLogo from "../assets/logo/loginLogo.svg";
 
@@ -26,9 +27,12 @@ const LoginPage = () => {
             <img src={kakao} alt="카카오톡" />
             <span className="ml-2 font-semibold">카카오로 시작하기</span>
           </button>
-          <button className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold">
+          <Link
+            to="/voice"
+            className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold"
+          >
             로그인없이 체험해보기
-          </button>
+          </Link>
         </div>
       </div>
     </>
