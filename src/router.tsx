@@ -24,7 +24,6 @@ const Router = (): JSX.Element => {
       <Route path="/keyboard" element={<KeyboardRequest />} />
       <Route path="/keyword" element={<KeywordListPage />} />
       <Route path="/giftlist" element={<GiftListPage />} />
-      <Route path="/heartlist" element={<HeartListPage />} />
       <Route path="/heartlist" element={<MyHeartListPage />} />
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/preparation" element={<Preparation />} />
