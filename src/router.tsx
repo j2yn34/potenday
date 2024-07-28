@@ -5,13 +5,13 @@ import LoginRedirectPage from "./pages/LoginRedirectPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import VoiceRequest from "./pages/VoiceRequest";
 import Mypage from "./pages/Mypage";
-import HeartListPage from "./pages/HeartListPage";
+import MyHeartListPage from "./pages/MyHeartListPage";
 import KeyboardRequest from "./pages/KeyboardRequest";
 import KeywordListPage from "./pages/KeywordListPage";
 import GiftListPage from "./pages/GiftListPage";
+import Preparation from "./pages/Preparation";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
-import ServerTest from "./test/ServerTest";
 
 const Router = (): JSX.Element => {
   return (
@@ -24,11 +24,11 @@ const Router = (): JSX.Element => {
       <Route path="/keyboard" element={<KeyboardRequest />} />
       <Route path="/keyword" element={<KeywordListPage />} />
       <Route path="/giftlist" element={<GiftListPage />} />
-      <Route path="/heartlist" element={<HeartListPage />} />
+      <Route path="/heartlist" element={<MyHeartListPage />} />
       <Route path="/mypage" element={<Mypage />} />
+      <Route path="/preparation" element={<Preparation />} />
       <Route path="/speech" element={<MicTest />} />
       <Route path="/lottie" element={<LottieTest />} />
-      <Route path="/test" element={<ServerTest />} />
     </Routes>
   );
 };

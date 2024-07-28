@@ -11,10 +11,10 @@ const Header = () => {
           <img src={headerLogo} alt="TIFY 로고" />
         </button>
         <div className="flex gap-5">
-          <Link to="/heartlist">
+          <Link to="/preparation">
             <img src={heartIcon} alt="관심목록" />
           </Link>
-          <Link to="/mypage">
+          <Link to="/preparation">
             <img src={userIcon} alt="내 정보" />
           </Link>
         </div>
