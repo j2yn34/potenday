@@ -6,7 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import VoiceRequest from "./pages/VoiceRequest";
 import Mypage from "./pages/Mypage";
 import MyHeartListPage from "./pages/MyHeartListPage";
-import KeyboardRequest from "./pages/KeyboardRequest";
+import TextRequest from "./pages/TextRequest";
 import KeywordListPage from "./pages/KeywordListPage";
 import GiftListPage from "./pages/GiftListPage";
 import Preparation from "./pages/Preparation";
@@ -21,7 +21,7 @@ const Router = (): JSX.Element => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/oauth2/callback" element={<LoginRedirectPage />} />
       <Route path="/voice" element={<VoiceRequest />} />
-      <Route path="/keyboard" element={<KeyboardRequest />} />
+      <Route path="/text" element={<TextRequest />} />
       <Route path="/keyword" element={<KeywordListPage />} />
       <Route path="/giftlist" element={<GiftListPage />} />
       <Route path="/heartlist" element={<MyHeartListPage />} />

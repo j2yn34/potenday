@@ -11,7 +11,7 @@ import {
 import KeywordList from "../components/KeywordList";
 import { ProductCard } from "../type";
 import { useState } from "react";
-import LoadingFull from "../components/LoadingFull";
+import LoadingFull from "../components/common/LoadingFull";
 import { UserInfoState } from "../state/recoilType";
 
 const KeywordListPage = () => {

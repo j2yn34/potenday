@@ -8,7 +8,7 @@ import Lottie from "lottie-react";
 import LottieListen from "../assets/lottie/listen.json";
 import { PiArrowUpBold } from "react-icons/pi";
 
-const KeyboardRequest = () => {
+const TextRequest = () => {
   const [message, setMessage] = useState<string>("");
   const [textareaHeight, setTextareaHeight] = useState<string>("auto");
   const setKeywordList = useSetRecoilState(keywordListState);
@@ -113,4 +113,4 @@ const KeyboardRequest = () => {
   );
 };
 
-export default KeyboardRequest;
+export default TextRequest;

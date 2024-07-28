@@ -50,7 +50,7 @@ const TopHeartSection = () => {
       ) : (
         <>
           <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
-            티피의 인기 상품
+            티피의 인기 선물
           </div>
           {Object.keys(groupedProducts).map((category) => (
             <TopHeartList

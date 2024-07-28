@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import Lottie from "lottie-react";
 import home from "../assets/lottie/home.json";
 import TopHeartSection from "../components/TopHeartSection";

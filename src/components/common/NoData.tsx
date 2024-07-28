@@ -1,4 +1,4 @@
-import prepare from "../assets/images/prepare.svg";
+import prepare from "../../assets/images/sadTifu.svg";
 
 const NoData = () => {
   return (
@@ -10,7 +10,7 @@ const NoData = () => {
             딱 맞는 선물을 찾지 못했어요.
           </span>
           <span className="text-gray-500 text-sm">
-            다음엔 티피가 더 좋은 상품을 가져올게요.
+            다음에 티피가 더 좋은 상품을 가져올게요.
           </span>
         </div>
       </div>
