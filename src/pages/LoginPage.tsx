@@ -26,9 +26,9 @@ const LoginPage = () => {
             <img src={kakao} alt="카카오톡" />
             <span className="ml-2 font-semibold">카카오로 시작하기</span>
           </button>
-          {/* <button className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold">
+          <button className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold">
             로그인없이 체험해보기
-          </button> */}
+          </button>
         </div>
       </div>
     </>
