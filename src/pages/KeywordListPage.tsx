@@ -6,30 +6,40 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { keywordListState, giftListState } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
 import { ProductCard } from "../type";
+import { useState } from "react";
+import LoadingFull from "../components/LoadingFull";
 
 const KeywordListPage = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
   const navigate = useNavigate();
   const nickname = "지연";
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitKeywords = () => {
+    setIsLoading(true);
     const queryString = keywordList
       .map((keyword: string) => `keyword=${keyword.trim()}`)
       .join("&");
-    const url = `/api/api/v1/product/recommend?keyword=${queryString}`;
+    const url = `/api/api/v1/product/recommend?${queryString}`;
 
     axios
       .get(url)
       .then((res) => {
         console.log("Response:", res.data.data);
         setGiftList(res.data.data);
+        setIsLoading(false);
+        navigate("/giftlist");
       })
       .catch((err) => {
         console.error("Error:", err);
+        setIsLoading(false);
       });
-    navigate("/giftlist");
   };
+
+  if (isLoading) {
+    return <LoadingFull />;
+  }
 
   return (
     <div className="px-5 h-screen flex flex-col justify-between">
