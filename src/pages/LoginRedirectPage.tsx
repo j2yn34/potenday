@@ -26,7 +26,7 @@ const LoginRedirectPage = () => {
         });
         console.log(token, response.data);
 
-        const { id, nickname } = response.data;
+        const { id, nickname } = response.data.data;
         setUserInfo({ id, nickname });
         navigate("/");
       } catch (error) {
