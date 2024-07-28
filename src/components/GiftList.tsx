@@ -1,6 +1,7 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { ProductCard } from "../type";
 import { useState } from "react";
+import NoData from "./NoData";
 
 const GiftList = ({ data }: { data: ProductCard[] }) => {
   const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
@@ -14,6 +15,10 @@ const GiftList = ({ data }: { data: ProductCard[] }) => {
 
   if (!Array.isArray(data)) {
     return null;
+  }
+
+  if (data.length === 0) {
+    return <NoData />;
   }
 
   return (
