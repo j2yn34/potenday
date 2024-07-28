@@ -15,7 +15,7 @@ const GiftListPage = () => {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden px-5">
+    <div className="relative w-full h-screen overflow-hidden px-5 mx-auto max-w-screen-lg">
       <div className="absolute z-40 pt-8 -ml-1">
         <Link to="/">
           <IoCloseOutline size={30} />
@@ -27,7 +27,7 @@ const GiftListPage = () => {
       <div className="overflow-y-auto h-full pb-24">
         <GiftList data={giftList} />
       </div>
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
+      <div className="absolute bottom-0 left-0 right-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
         <button className="basic-button bg-white border border-black">
           선물 다시 불러오기
         </button>
