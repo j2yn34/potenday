@@ -14,7 +14,7 @@ const Header = () => {
           <Link to="/preparation">
             <img src={heartIcon} alt="관심목록" />
           </Link>
-          <Link to="/preparation">
+          <Link to="/login">
             <img src={userIcon} alt="내 정보" />
           </Link>
         </div>
