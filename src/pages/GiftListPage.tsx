@@ -13,7 +13,6 @@ const GiftListPage = () => {
   const giftList = useRecoilValue(giftListState);
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const [isLoading, setIsLoading] = useState(false);
-  const [isNoData, setIsNoData] = useState(false);
   const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
   console.log(giftList);
   const navigate = useNavigate();
@@ -40,7 +39,6 @@ const GiftListPage = () => {
       .catch((err) => {
         console.error("Error:", err);
         setIsLoading(false);
-        setIsNoData(true);
       });
   };
 
@@ -59,7 +57,7 @@ const GiftListPage = () => {
         총 {length}개의 추천 선물
       </h1>
       <div className="overflow-y-auto h-full pb-24">
-        <GiftList data={giftList} isNoData={isNoData} />
+        <GiftList data={giftList} />
       </div>
       <div className="absolute bottom-0 left-0 right-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
         <button
