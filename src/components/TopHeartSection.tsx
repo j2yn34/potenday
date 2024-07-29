@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import TopHeartList from "./TopHeartList";
 import axios from "axios";
 import { ProductCard } from "../type";
-import Lottieloading from "../assets/lottie/loading.json";
-import Lottie from "lottie-react";
+import TopHeartListLoad from "./skeletonUI.tsx/TopHeartListLoad";
 
 const TopHeartSection = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,7 +45,7 @@ const TopHeartSection = () => {
   return (
     <>
       {isLoading ? (
-        <Lottie animationData={Lottieloading} />
+        <TopHeartListLoad />
       ) : (
         <>
           <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
