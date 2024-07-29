@@ -3,7 +3,13 @@ import { ProductCard } from "../type";
 import { useState } from "react";
 import Notice from "./common/Notice";
 
-const GiftList = ({ data }: { data: ProductCard[] }) => {
+const GiftList = ({
+  data,
+  isNoData,
+}: {
+  data: ProductCard[];
+  isNoData: boolean;
+}) => {
   const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
 
   const toggleLike = (id: number) => {
@@ -17,7 +23,7 @@ const GiftList = ({ data }: { data: ProductCard[] }) => {
     return null;
   }
 
-  if (data.length === 0) {
+  if (isNoData) {
     return (
       <Notice
         isSad={true}
