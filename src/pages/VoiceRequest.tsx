@@ -57,6 +57,7 @@ const VoiceRequest = () => {
       })
       .catch((err) => {
         console.error("Error:", err);
+        setTranscript("");
         navigate("/keyword");
       });
     setTimeout(() => {

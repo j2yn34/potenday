@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { keywordListState } from "../state/recoil";
+import { keywordListState, transcriptState } from "../state/recoil";
 import { Link, useNavigate } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import Lottie from "lottie-react";
@@ -9,11 +9,12 @@ import LottieListen from "../assets/lottie/listen.json";
 import { PiArrowUpBold } from "react-icons/pi";
 import DoneRequest from "../components/DoneRequest";
 
-const TesxRequest = () => {
+const TextRequest = () => {
   const [message, setMessage] = useState<string>("");
   const [textareaHeight, setTextareaHeight] = useState<string>("auto");
   const [isDoneRequest, setIsDoneRequest] = useState(false);
   const setKeywordList = useSetRecoilState(keywordListState);
+  const setTranscript = useSetRecoilState(transcriptState);
   const navigate = useNavigate();
 
   const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -39,6 +40,7 @@ const TesxRequest = () => {
   const submitRequest = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(message);
+    setTranscript(message);
     setIsDoneRequest(true);
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${message}`)
@@ -49,6 +51,7 @@ const TesxRequest = () => {
       })
       .catch((err) => {
         console.error("Error:", err);
+        setTranscript("");
       });
     setTimeout(() => {
       navigate("/keyword");
@@ -129,4 +132,4 @@ const TesxRequest = () => {
   );
 };
 
-export default TesxRequest;
+export default TextRequest;
