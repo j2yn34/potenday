@@ -1,7 +1,7 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { ProductCard } from "../type";
 import { useState } from "react";
-import NoData from "./common/NoData";
+import Notice from "./common/Notice";
 
 const GiftList = ({ data }: { data: ProductCard[] }) => {
   const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
@@ -18,7 +18,13 @@ const GiftList = ({ data }: { data: ProductCard[] }) => {
   }
 
   if (data.length === 0) {
-    return <NoData />;
+    return (
+      <Notice
+        isSad={true}
+        title={"딱 맞는 선물을 찾지 못했어요."}
+        text={"다음에 더 좋은 상품을 가져올게요."}
+      />
+    );
   }
 
   return (
