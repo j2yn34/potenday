@@ -23,6 +23,11 @@ export const userInfoState = atom<UserInfoState>({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const transcriptState = atom<string>({
+  key: "transcriptState",
+  default: "",
+});
+
 export const keywordListState = atom<string[]>({
   key: "keywordListState",
   default: [],

@@ -15,12 +15,14 @@ import KeyboardBtn from "../components/buttons/KeyboardBtn";
 import DoneRequest from "../components/DoneRequest";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
-import { keywordListState } from "../state/recoil";
+import { keywordListState, transcriptState } from "../state/recoil";
 
 const VoiceRequest = () => {
   const [isVoiceRequest, setIsVoiceRequest] = useState<boolean>(false);
   const [isDoneRequest, setIsDoneRequest] = useState(false);
+  const setTranscript = useSetRecoilState(transcriptState);
   const setKeywordList = useSetRecoilState(keywordListState);
+
   const navigate = useNavigate();
 
   const {
@@ -49,9 +51,9 @@ const VoiceRequest = () => {
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
       .then((res) => {
+        setTranscript(transcript);
         console.log("Response:", res.data);
         setKeywordList(res.data.data.keywordList);
-        console.log("keywordList: ", res.data.data.keywordList);
       })
       .catch((err) => {
         console.error("Error:", err);
