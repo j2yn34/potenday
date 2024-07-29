@@ -69,6 +69,10 @@ const KeywordListPage = () => {
       .then((res) => {
         console.log("Response:", res.data);
         setKeywordList(res.data.data.keywordList);
+        if (res.data.data.keywordList.length === 0) {
+          setIsLoading(false);
+          openKeywordErrModal();
+        }
         console.log("keywordList: ", res.data.data.keywordList);
         setIsLoading(false);
       })
@@ -143,7 +147,7 @@ const KeywordListPage = () => {
           </div>
         </div>
       </div>
-      {showKeywordErrModal && (
+      {(keywordList.length === 0 || showKeywordErrModal) && (
         <div className="h-screen">
           <ConfirmModal
             isSad={true}
