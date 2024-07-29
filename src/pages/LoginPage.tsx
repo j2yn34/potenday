@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import kakao from "../assets/images/kakao.svg";
 import loginLogo from "../assets/logo/loginLogo.svg";
+import { IoChevronBackSharp } from "react-icons/io5";
 
 const LoginPage = () => {
   const url = "https://server.tify.co.kr/api/v1/oauth2/authorization/kakao";
@@ -11,7 +12,12 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="px-5 h-screen flex flex-col justify-between p-20">
+      <div className="relative px-5 h-screen flex flex-col justify-between p-20">
+        <div className="absolute z-40 top-0 pt-8 -ml-1">
+          <Link to="/">
+            <IoChevronBackSharp size={24} />
+          </Link>
+        </div>
         <div className="flex-center mt-24">
           <img src={loginLogo} alt="TIFY 로고" />
         </div>
