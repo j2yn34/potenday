@@ -55,6 +55,8 @@ const TesxRequest = () => {
     }, 2000);
   };
 
+  const isEmpty = message.trim() === "";
+
   return (
     <div className="relative h-screen w-full m-auto px-5 -ml-1">
       {isDoneRequest ? (
@@ -109,7 +111,12 @@ const TesxRequest = () => {
                 />
                 <button
                   type="submit"
-                  className="w-[58px] h-[58px] text-white flex items-center justify-center -mr-2"
+                  className={`w-[54px] h-[44px] ml-2 flex items-center justify-center -mr-2 rounded-full ${
+                    isEmpty
+                      ? "bg-gray-200 text-gray-500 cursor-not-allowed text-black "
+                      : "bg-black text-white"
+                  }`}
+                  disabled={isEmpty}
                 >
                   <PiArrowUpBold size={24} />
                 </button>
