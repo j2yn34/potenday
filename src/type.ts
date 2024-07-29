@@ -9,3 +9,12 @@ export type ProductCard = {
   imgLink: string | undefined;
   cntWish: number;
 };
+
+export type NoticeType = {
+  isSad: boolean;
+  title: string;
+  text: string;
+  nav?: string;
+  btnName?: string;
+};
+
