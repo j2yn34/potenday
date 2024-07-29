@@ -44,7 +44,7 @@ const MyHeartList = () => {
       </h1>
       <div className="flex flex-col gap-3">
         {myHeartCards.length === 0 ? (
-          <div className="flex-center h-screen -mt-20">
+          <div className="flex-center h-screen -mt-16">
             <Notice
               isSad={false}
               title={"관심 선물이 없어요."}
