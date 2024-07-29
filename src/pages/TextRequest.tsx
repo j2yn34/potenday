@@ -21,7 +21,7 @@ const TesxRequest = () => {
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const textareaLineHeight = 24;
+    const textareaLineHeight = 26;
     const maxRows = 4;
 
     e.target.rows = 1;
@@ -100,7 +100,7 @@ const TesxRequest = () => {
               <div className="flex-center w-full">
                 <textarea
                   value={message}
-                  className="w-full p-2 pr-12 text-sm min-h-[42px] my-2 focus:outline-none rounded-lg resize-none overflow-y-auto"
+                  className="w-full py-2 px-3 leading-7 text-sm min-h-[42px] my-2 focus:outline-none rounded-lg resize-none overflow-y-auto"
                   onChange={(e) => {
                     onChangeText(e);
                     handleInput(e);
