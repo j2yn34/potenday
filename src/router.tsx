@@ -13,6 +13,7 @@ import PreparingPage from "./pages/PreparingPage";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
 import SplashScreen from "./pages/SplashScreen";
+import Onboarding from "./pages/OnBoarding";
 import { useEffect, useState } from "react";
 
 const Router = (): JSX.Element => {
@@ -36,6 +37,7 @@ const Router = (): JSX.Element => {
       ) : (
         <Route path="/" element={<Index />} />
       )}
+      <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/oauth2/callback" element={<LoginRedirectPage />} />
       <Route path="/voice" element={<VoiceRequest />} />
