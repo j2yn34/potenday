@@ -1,19 +1,24 @@
-import React from "react";
-import { useRecoilValue } from "recoil";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { Link, useNavigate } from "react-router-dom";
 import { accessTokenState, userInfoState } from "../state/recoil";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { UserInfoState } from "../state/recoilType";
 import { IoIosArrowForward } from "react-icons/io";
+import ConfirmModal from "../components/common/ConfirmModal";
+import axios from "axios";
 
 const Mypage = () => {
-  const token = useRecoilValue<string>(accessTokenState);
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
+  const [token, setToken] = useRecoilState<string>(accessTokenState);
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
+  const resetUserInfo = useResetRecoilState(userInfoState);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     if (!token) {
-      navigate("/mypage");
+      navigate("/login");
     } else {
       navigate("/mypage");
     }
@@ -24,6 +29,51 @@ const Mypage = () => {
     { title: "선물 추천 히스토리" },
     { title: "탈퇴하기" },
   ];
+
+  const handleClick = (title: string) => {
+    switch (title) {
+      case "로그아웃":
+        openModal(setShowLogoutModal);
+        break;
+      case "선물 추천 히스토리":
+        navigate("/preparing");
+        break;
+      default:
+        openModal(setShowWithdrawModal);
+    }
+  };
+
+  const runLogout = () => {
+    resetUserInfo();
+    setToken("");
+    closeModal(setShowLogoutModal);
+    navigate("/");
+  };
+
+  const runWithdraw = async () => {
+    try {
+      await axios({
+        method: "delete",
+        url: "/api/v1/user",
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: "json",
+      });
+      navigate("/");
+    } catch (err) {
+      console.error("Error:", err);
+      navigate("/");
+    }
+  };
+
+  const openModal = (setFunc: Dispatch<SetStateAction<boolean>>) => {
+    setFunc(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = (setFunc: Dispatch<SetStateAction<boolean>>) => {
+    setFunc(false);
+    document.body.style.overflow = "auto";
+  };
 
   return (
     <>
@@ -36,22 +86,25 @@ const Mypage = () => {
         <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
           내 정보
         </h1>
-        <div className="w-full h-[75px] bg-black rounded-xl px-5 py-3">
+        <button className="w-full h-[75px] bg-black rounded-xl px-5 py-3">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-white">{userInfo.nickname}박지연님</div>
+              <div className="text-white">{userInfo.nickname}님</div>
               <div>email</div>
             </div>
             <Link to="/" className="text-white">
               <IoIosArrowForward />
             </Link>
           </div>
-        </div>
+        </button>
         <div className="w-screen h-2 bg-purple-100 mt-5 -ml-5" />
         <div>
           {titleList.map((title) => (
             <div className="w-full h-14" key={title.title}>
-              <button className="flex items-center justify-between w-full">
+              <button
+                className="flex items-center justify-between w-full"
+                onClick={() => handleClick(title.title)}
+              >
                 <div className="text-sm h-14 font-medium flex items-center">
                   {title.title}
                 </div>
@@ -62,6 +115,28 @@ const Mypage = () => {
           ))}
         </div>
       </div>
+      {showLogoutModal && (
+        <ConfirmModal
+          isSad={false}
+          title={"로그아웃 하시겠어요?"}
+          text={""}
+          leftBtn={() => closeModal(setShowLogoutModal)}
+          confirm={runLogout}
+          leftName={"취소"}
+          rightName={"확인"}
+        />
+      )}
+      {showWithdrawModal && (
+        <ConfirmModal
+          isSad={false}
+          title={"정말 탈퇴하시겠어요?"}
+          text={"회원 탈퇴하시면 모든 기록을 잃게 돼요."}
+          leftBtn={() => closeModal(setShowWithdrawModal)}
+          confirm={runWithdraw}
+          leftName={"취소"}
+          rightName={"확인"}
+        />
+      )}
     </>
   );
 };
