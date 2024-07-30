@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
+import onboarding1 from "../assets/images/onboarding1.svg";
+import onboarding2 from "../assets/images/onboarding1.svg";
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -14,12 +16,12 @@ const Onboarding = () => {
 
   const slides = [
     {
-      image: "src/assets/images/onboarding1.svg",
+      image: `${onboarding1}`,
       title: "대화하듯 쉽게 고르는\n맞춤형 선물",
       description: "TIFY가 당신에게 딱 맞는 선물을 골라줄 거예요.",
     },
     {
-      image: "src/assets/images/onboarding2.svg",
+      image: `${onboarding2}`,
       title: "클릭 한 번으로 연결되는\n다양한 상품 링크",
       description: "다양한 선물에 대한 상품 링크를 제공해드려요.",
     },
