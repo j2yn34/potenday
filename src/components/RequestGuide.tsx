@@ -5,7 +5,7 @@ import { IoChevronBackSharp } from "react-icons/io5";
 
 const RequestGuide = () => {
   return (
-    <div>
+    <>
       <div className="absolute z-40 pt-8 -ml-1">
         <Link to="/">
           <IoChevronBackSharp size={24} />
@@ -27,7 +27,7 @@ const RequestGuide = () => {
           </div>
         </div>
       </div>
-      <div className="py-12 text-center font-semibold text-xl text-purple-100 leading-8">
+      <div className="flex-center mb-20 h-full text-center font-semibold text-xl text-purple-100 leading-8">
         어떤 관계인지
         <br /> 나이는 어떻게 되는지 <br />
         선물의 가격대와 <br />
@@ -35,7 +35,7 @@ const RequestGuide = () => {
         <br />
         말해 보세요
       </div>
-    </div>
+    </>
   );
 };
 
