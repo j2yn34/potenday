@@ -8,10 +8,10 @@ const Mypage = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (token) {
-      navigate("/preparing");
-    } else {
+    if (!token) {
       navigate("/login");
+    } else {
+      navigate("/preparing");
     }
   }, []);
 
