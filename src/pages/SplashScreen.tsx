@@ -15,7 +15,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ setShowSplash }) => {
       sessionStorage.setItem("hasSeenSplash", "true");
       setShowSplash(false);
       navigate("/onboarding");
-    }, 1600);
+    }, 1850);
     return () => clearTimeout(timer);
   }, [navigate, setShowSplash]);
 
