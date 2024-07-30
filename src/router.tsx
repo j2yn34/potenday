@@ -12,12 +12,30 @@ import GiftListPage from "./pages/GiftListPage";
 import PreparingPage from "./pages/PreparingPage";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
+import SplashScreen from "./pages/SplashScreen";
+import { useEffect, useState } from "react";
 
 const Router = (): JSX.Element => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
+    if (hasSeenSplash) {
+      setShowSplash(false);
+    }
+  }, []);
+
   return (
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
-      <Route path="/" element={<Index />} />
+      {showSplash ? (
+        <Route
+          path="/"
+          element={<SplashScreen setShowSplash={setShowSplash} />}
+        />
+      ) : (
+        <Route path="/" element={<Index />} />
+      )}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/oauth2/callback" element={<LoginRedirectPage />} />
       <Route path="/voice" element={<VoiceRequest />} />
