@@ -2,18 +2,23 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import onboarding1 from "../assets/images/onboarding1.svg";
 import onboarding2 from "../assets/images/onboarding2.svg";
+import useViewportHeight from "../hooks/useViewportHeight";
 
 const Onboarding = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const navigate = useNavigate();
+  const vh = useViewportHeight();
 
   const handleStart = () => {
     navigate("/");
   };
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  useEffect(() => {
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }, [vh]);
 
   const slides = [
     {
@@ -78,7 +83,7 @@ const Onboarding = () => {
   }, []);
 
   return (
-    <div className="h-screen px-5 flex flex-col justify-between py-8 bg-purple-50">
+    <div className="full-height px-5 flex flex-col justify-between py-8 bg-purple-50">
       <div className="flex-center flex-col pt-6">
         <h1 className="text-2xl leading-9 font-semibold text-center pb-4">
           {slides[currentIndex].title.split("\n").map((line, index) => (
