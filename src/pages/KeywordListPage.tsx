@@ -57,6 +57,7 @@ const KeywordListPage = () => {
       .catch((err) => {
         console.error("Error:", err);
         setIsLoading(false);
+        setGiftList([]);
         openGiftListErrModal();
       });
   };
