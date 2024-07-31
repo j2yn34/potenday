@@ -13,7 +13,7 @@ const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
-  const slidesLength = 2;
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const slides = [
     {
@@ -28,8 +28,20 @@ const Onboarding = () => {
     },
   ];
 
+  const resetInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 2700);
+  };
+
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.touches[0].clientX;
+    resetInterval();
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -48,20 +60,21 @@ const Onboarding = () => {
         setCurrentIndex(currentIndex - 1);
       }
     }
+    resetInterval();
   };
 
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
+    resetInterval();
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === slidesLength - 1 ? 0 : prevIndex + 1
-      );
-    }, 2800);
-
-    return () => clearInterval(interval);
+    resetInterval();
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
 
   return (
