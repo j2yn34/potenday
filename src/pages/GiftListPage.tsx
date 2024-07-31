@@ -34,7 +34,6 @@ const GiftListPage = () => {
         console.log("Response:", res.data.data);
         setGiftList(res.data.data);
         setIsLoading(false);
-        navigate("/giftlist");
       })
       .catch((err) => {
         console.error("Error:", err);

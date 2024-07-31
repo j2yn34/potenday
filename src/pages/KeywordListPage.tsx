@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -56,8 +55,8 @@ const KeywordListPage = () => {
       })
       .catch((err) => {
         console.error("Error:", err);
-        setIsLoading(false);
         setGiftList([]);
+        setIsLoading(false);
         openGiftListErrModal();
       });
   };
@@ -79,6 +78,7 @@ const KeywordListPage = () => {
       })
       .catch((err) => {
         console.error("Error:", err);
+        setKeywordList([]);
         setIsLoading(false);
         openKeywordErrModal();
       });
@@ -110,13 +110,18 @@ const KeywordListPage = () => {
     navigate("/");
   };
 
+  const onGoBackward = () => {
+    setKeywordList([]);
+    navigate("/voice");
+  };
+
   return (
     <>
       <div className="px-5 full-height flex flex-col justify-between">
         <div className="absolute z-40 pt-8 -ml-1">
-          <Link to="/voice">
+          <button onClick={onGoBackward}>
             <IoChevronBackSharp size={24} />
-          </Link>
+          </button>
         </div>
         <h1 className="pt-[84px] text-center font-semibold text-xl leading-8">
           {nickname ? `${nickname}` : "게스트"}님이
