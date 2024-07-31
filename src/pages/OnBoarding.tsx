@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import onboarding1 from "../assets/images/onboarding1.svg";
-import onboarding2 from "../assets/images/onboarding1.svg";
+import onboarding2 from "../assets/images/onboarding2.svg";
 
 const Onboarding = () => {
   const navigate = useNavigate();
