@@ -68,7 +68,7 @@ const VoiceRequest = () => {
   const isTranscriptEmpty = transcript.trim() === "";
 
   return (
-    <div className="px-5 h-screen flex flex-col justify-between">
+    <div className="px-5 full-height flex flex-col justify-between">
       {isDoneRequest ? (
         <DoneRequest transcript={transcript} />
       ) : (

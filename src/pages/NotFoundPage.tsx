@@ -2,7 +2,7 @@ import Notice from "../components/common/Notice";
 
 const NotFoundPage = () => {
   return (
-    <div className="h-screen">
+    <div className="full-height">
       <Notice
         isSad={true}
         title={"페이지를 찾을 수 없어요."}

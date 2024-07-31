@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import onboarding1 from "../assets/images/onboarding1.svg";
 import onboarding2 from "../assets/images/onboarding2.svg";
-import useViewportHeight from "../hooks/useViewportHeight";
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,15 +9,10 @@ const Onboarding = () => {
   const touchEndX = useRef(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const navigate = useNavigate();
-  const vh = useViewportHeight();
 
   const handleStart = () => {
     navigate("/");
   };
-
-  useEffect(() => {
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  }, [vh]);
 
   const slides = [
     {

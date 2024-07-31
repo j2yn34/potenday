@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { Link, useNavigate } from "react-router-dom";
 import { accessTokenState, userInfoState } from "../state/recoil";
@@ -16,7 +16,7 @@ const Mypage = () => {
   const resetUserInfo = useResetRecoilState(userInfoState);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
@@ -77,7 +77,7 @@ const Mypage = () => {
 
   return (
     <>
-      <div className="relative w-full h-screen overflow-hidden px-5 mx-auto max-w-screen-lg">
+      <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
         <div className="absolute z-40 pt-8 -ml-1">
           <Link to="/">
             <IoChevronBackSharp size={24} />

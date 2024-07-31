@@ -111,7 +111,7 @@ const KeywordListPage = () => {
 
   return (
     <>
-      <div className="px-5 h-screen flex flex-col justify-between">
+      <div className="px-5 full-height flex flex-col justify-between">
         <div className="absolute z-40 pt-8 -ml-1">
           <Link to="/voice">
             <IoChevronBackSharp size={24} />
@@ -148,7 +148,7 @@ const KeywordListPage = () => {
         </div>
       </div>
       {(keywordList.length === 0 || showKeywordErrModal) && (
-        <div className="h-screen">
+        <div className="full-height">
           <ConfirmModal
             isSad={true}
             title={"키워드를 불러올 수 없어요."}
@@ -161,7 +161,7 @@ const KeywordListPage = () => {
         </div>
       )}
       {showGistListErrModal && (
-        <div className="h-screen">
+        <div className="full-height">
           <ConfirmModal
             isSad={true}
             title={"딱 맞는 선물을 찾지 못했어요."}

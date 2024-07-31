@@ -2,19 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import LottieSplash from "../assets/lottie/splash.json";
-import useViewportHeight from "../hooks/useViewportHeight";
-
 interface SplashScreenProps {
   setShowSplash: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ setShowSplash }) => {
   const navigate = useNavigate();
-  const vh = useViewportHeight();
-
-  useEffect(() => {
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  }, [vh]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

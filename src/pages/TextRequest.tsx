@@ -61,7 +61,7 @@ const TextRequest = () => {
   const isEmpty = message.trim() === "";
 
   return (
-    <div className="relative h-screen w-full m-auto px-5 -ml-1">
+    <div className="relative full-height w-full m-auto px-5 -ml-1">
       {isDoneRequest ? (
         <DoneRequest transcript={message} />
       ) : (

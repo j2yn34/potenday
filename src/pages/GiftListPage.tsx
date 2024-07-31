@@ -14,9 +14,9 @@ const GiftListPage = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const [isLoading, setIsLoading] = useState(false);
   const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
-  console.log(giftList);
   const navigate = useNavigate();
   const length = giftList?.length ?? 0;
+
   const goHome = () => {
     navigate("/");
   };
@@ -47,7 +47,7 @@ const GiftListPage = () => {
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden px-5 mx-auto max-w-screen-lg">
+    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
       <div className="absolute z-40 pt-8 -ml-1">
         <Link to="/">
           <IoCloseOutline size={30} />
