@@ -19,11 +19,13 @@ const GiftList = ({ data }: { data: ProductCard[] }) => {
 
   if (data.length === 0) {
     return (
-      <Notice
-        isSad={true}
-        title={"딱 맞는 선물을 찾지 못했어요."}
-        text={"다음에 더 좋은 상품을 가져올게요."}
-      />
+      <div className="pt-28">
+        <Notice
+          isSad={true}
+          title={"딱 맞는 선물을 찾지 못했어요."}
+          text={"다음에 더 좋은 상품을 가져올게요."}
+        />
+      </div>
     );
   }
 
