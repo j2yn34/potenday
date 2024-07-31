@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import onboarding1 from "../assets/images/onboarding1.svg";
 import onboarding2 from "../assets/images/onboarding2.svg";
 
@@ -13,6 +13,7 @@ const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const slidesLength = 2;
 
   const slides = [
     {
@@ -53,6 +54,16 @@ const Onboarding = () => {
     setCurrentIndex(index);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === slidesLength - 1 ? 0 : prevIndex + 1
+      );
+    }, 2800);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="h-screen px-5 flex flex-col justify-between py-8 bg-purple-50">
       <div className="flex-center flex-col pt-6">
@@ -76,7 +87,7 @@ const Onboarding = () => {
           onTouchEnd={handleTouchEnd}
         >
           <div
-            className="flex transition-transform duration-500 mt-12"
+            className="flex transition-transform duration-500"
             style={{ transform: `translateX(-${currentIndex * 320}px)` }}
           >
             {slides.map((slide, index) => (
