@@ -11,6 +11,9 @@ export default {
       xl: "1200px",
     },
     extend: {
+      height: {
+        "vh-full": "var(--vh, 1vh) * 100",
+      },
       colors: {
         white: "#FFFFFF",
         black: "#000000",

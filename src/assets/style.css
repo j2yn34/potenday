@@ -15,7 +15,6 @@ body {
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  min-height: 100vh;
   background: rgb(249, 249, 252);
   background: -moz-linear-gradient(
     180deg,
@@ -79,5 +78,10 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.full-height {
+  min-height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 }
