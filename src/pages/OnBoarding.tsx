@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import onboarding1 from "../assets/images/onboarding1.svg";
-import onboarding2 from "../assets/images/onboarding2.svg";
+import onboarding1 from "../assets/images/onboarding1.png";
+import onboarding2 from "../assets/images/onboarding2.png";
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,7 +107,7 @@ const Onboarding = () => {
                 key={index}
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="min-w-[320px] flex-shrink-0"
+                className="w-[320px] flex-shrink-0"
               />
             ))}
           </div>
