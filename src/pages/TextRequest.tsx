@@ -89,11 +89,6 @@ const TextRequest = () => {
                 </div>
               </div>
             </div>
-            <div className="mx-auto min-w-[320px] max-w-72 my-6 px-7 overflow-y-auto">
-              <p className="text-center text-gray-600 font-medium leading-7">
-                {message}
-              </p>
-            </div>
           </>
           <div className="absolute bottom-0 right-0 w-full -mr-1">
             <form
@@ -103,7 +98,7 @@ const TextRequest = () => {
               <div className="flex-center w-full">
                 <textarea
                   value={message}
-                  className="w-full py-2 px-3 leading-7 text-sm min-h-[42px] my-2 focus:outline-none rounded-lg resize-none overflow-y-auto"
+                  className="w-full py-2 px-3 leading-7 min-h-[42px] my-2 focus:outline-none rounded-lg resize-none overflow-y-auto"
                   onChange={(e) => {
                     onChangeText(e);
                     handleInput(e);
