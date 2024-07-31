@@ -12,7 +12,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="relative px-5 h-screen flex flex-col justify-between p-20">
+      <div className="relative px-5 full-height flex flex-col justify-between p-20">
         <div className="absolute z-40 top-0 pt-8 -ml-1">
           <Link to="/">
             <IoChevronBackSharp size={24} />
