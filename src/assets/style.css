@@ -83,5 +83,4 @@ body {
 
 .full-height {
   min-height: calc(var(--vh, 1vh) * 100);
-  overflow: hidden;
 }
