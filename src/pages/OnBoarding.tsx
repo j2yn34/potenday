@@ -54,7 +54,7 @@ const Onboarding = () => {
   };
 
   return (
-    <div className="h-screen px-5 flex flex-col justify-between py-8">
+    <div className="h-screen px-5 flex flex-col justify-between py-8 bg-purple-50">
       <div className="flex-center flex-col pt-6">
         <h1 className="text-2xl leading-9 font-semibold text-center pb-4">
           {slides[currentIndex].title.split("\n").map((line, index) => (
@@ -84,14 +84,14 @@ const Onboarding = () => {
                 key={index}
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="w-[320px] flex-shrink-0"
+                className="min-w-[320px] flex-shrink-0"
               />
             ))}
           </div>
         </div>
       </div>
       <div className="flex-center flex-col gap-6">
-        <div className="flex mt-16 space-x-2">
+        <div className="flex space-x-2">
           {slides.map((_, index) => (
             <div
               key={index}
