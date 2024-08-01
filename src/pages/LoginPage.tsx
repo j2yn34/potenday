@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import { onboardingState } from "../state/recoil";
 
 const LoginPage = () => {
-  const goHome = useRecoilValue<boolean>(onboardingState);
+  const isOnboarding = useRecoilValue<boolean>(onboardingState);
 
   const url = "https://server.tify.co.kr/api/v1/oauth2/authorization/kakao";
 
@@ -17,11 +17,13 @@ const LoginPage = () => {
   return (
     <>
       <div className="relative px-5 full-height flex flex-col justify-between p-20">
-        <div className="absolute z-40 top-0 pt-8 -ml-1">
-          <Link to="/">
-            <IoChevronBackSharp size={24} />
-          </Link>
-        </div>
+        {!isOnboarding && (
+          <div className="absolute z-40 top-0 pt-8 -ml-1">
+            <Link to="/">
+              <IoChevronBackSharp size={24} />
+            </Link>
+          </div>
+        )}
         <div className="flex-center mt-24">
           <img src={loginLogo} alt="TIFY 로고" />
         </div>
@@ -37,7 +39,7 @@ const LoginPage = () => {
             <img src={kakao} alt="카카오톡" />
             <span className="ml-2 font-semibold">카카오로 시작하기</span>
           </button>
-          {goHome ? (
+          {isOnboarding ? (
             <Link
               to="/"
               className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold"
