@@ -1,6 +1,5 @@
 import Lottie from "lottie-react";
 import LottieListen from "../assets/lottie/listen.json";
-import { Link } from "react-router-dom";
 import { GrPowerReset } from "react-icons/gr";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -47,6 +46,7 @@ const VoiceRequest = () => {
 
   const submitRequest = () => {
     console.log(transcript);
+    SpeechRecognition.stopListening();
     setIsDoneRequest(true);
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
@@ -65,6 +65,12 @@ const VoiceRequest = () => {
     }, 2000);
   };
 
+  const goHome = () => {
+    SpeechRecognition.stopListening();
+    setTranscript("");
+    navigate("/");
+  };
+
   const isTranscriptEmpty = transcript.trim() === "";
 
   return (
@@ -76,11 +82,9 @@ const VoiceRequest = () => {
           {isVoiceRequest ? (
             <>
               <div>
-                <div className="absolute z-40 pt-8 -ml-1">
-                  <Link to="/">
-                    <IoChevronBackSharp size={24} />
-                  </Link>
-                </div>
+                <button className="absolute z-40 pt-8 -ml-1" onClick={goHome}>
+                  <IoChevronBackSharp size={24} />
+                </button>
                 <div className="pt-8">
                   <div className="w-full flex justify-center -mb-4">
                     <Lottie
