@@ -21,14 +21,15 @@ const KeywordListPage = () => {
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
   const setGiftList = useSetRecoilState<ProductType[]>(giftListState);
   const setKeywordList = useSetRecoilState(keywordListState);
-  const navigate = useNavigate();
-  const nickname = userInfo.nickname;
+  const [isReloaded, setIsReloaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(true);
   const [showKeywordErrModal, setShowKeywordErrModal] =
     useState<boolean>(false);
   const [showGistListErrModal, setShowGistListErrModal] =
     useState<boolean>(false);
+  const navigate = useNavigate();
+  const nickname = userInfo.nickname;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -63,6 +64,7 @@ const KeywordListPage = () => {
 
   const reloadKeyword = () => {
     setIsLoading(true);
+    setIsReloaded(true);
     console.log(transcript);
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
@@ -131,16 +133,23 @@ const KeywordListPage = () => {
         <div className="flex-center h-full mt-8 mb-9">
           <KeywordList />
         </div>
-        <div>
+        <div className="relative">
           {showMessage && (
-            <div className="w-fit text-center text-xs bg-black text-white p-1.5 px-35 rounded mb-3">
-              <span>키워드가 아쉽다면 다시 불러와 보세요.</span>
+            <div className="absolute -top-9 w-fit bg-black px-2 rounded">
+              <span className="text-center text-xs text-white">
+                키워드가 아쉽다면 다시 불러와 보세요.
+              </span>
             </div>
           )}
           <div className="flex-center mb-8">
             <button
               onClick={reloadKeyword}
-              className="basic-button bg-white border border-black mr-2"
+              className={`basic-button border mr-2 ${
+                isReloaded
+                  ? "bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-white border-black"
+              }`}
+              disabled={isReloaded}
             >
               아니에요
             </button>
