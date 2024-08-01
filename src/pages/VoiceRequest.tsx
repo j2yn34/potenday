@@ -116,11 +116,10 @@ const VoiceRequest = () => {
             <div className="flex-center">
               <div className="flex-center gap-9">
                 <button
-                  className={`round-btn flex-center ${
-                    isTranscriptEmpty ? "bg-gray-200 text-gray-500" : "bg-white"
+                  className={`round-btn ${
+                    isTranscriptEmpty ? "hidden" : "bg-white flex-center "
                   }`}
                   onClick={resetTranscript}
-                  disabled={isTranscriptEmpty}
                 >
                   <GrPowerReset size={20} />
                 </button>
@@ -136,10 +135,9 @@ const VoiceRequest = () => {
                 </button>
                 <button
                   className={`round-btn text-sm ${
-                    isTranscriptEmpty ? "bg-gray-200 text-gray-500" : "bg-white"
+                    isTranscriptEmpty ? "hidden" : "bg-white"
                   }`}
                   onClick={submitRequest}
-                  disabled={isTranscriptEmpty}
                 >
                   완료
                 </button>
