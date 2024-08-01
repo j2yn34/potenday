@@ -1,9 +1,9 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { ProductCard } from "../type";
+import { ProductType } from "../type";
 import { useState } from "react";
 import Notice from "./common/Notice";
 
-const GiftList = ({ data }: { data: ProductCard[] }) => {
+const GiftList = ({ data }: { data: ProductType[] }) => {
   const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
 
   const toggleLike = (id: number) => {

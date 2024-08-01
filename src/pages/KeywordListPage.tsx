@@ -9,7 +9,7 @@ import {
   transcriptState,
 } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
-import { ProductCard } from "../type";
+import { ProductType } from "../type";
 import { useEffect, useState } from "react";
 import LoadingFull from "../components/common/LoadingFull";
 import { UserInfoState } from "../state/recoilType";
@@ -19,7 +19,7 @@ const KeywordListPage = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const transcript = useRecoilValue<string>(transcriptState);
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
-  const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
+  const setGiftList = useSetRecoilState<ProductType[]>(giftListState);
   const setKeywordList = useSetRecoilState(keywordListState);
   const navigate = useNavigate();
   const nickname = userInfo.nickname;

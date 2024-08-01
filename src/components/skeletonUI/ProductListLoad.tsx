@@ -1,4 +1,4 @@
-const TopHeartListLoad = () => {
+const ProductListLoad = () => {
   return (
     <>
       <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
@@ -26,4 +26,4 @@ const TopHeartListLoad = () => {
   );
 };
 
-export default TopHeartListLoad;
+export default ProductListLoad;

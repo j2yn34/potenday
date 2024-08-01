@@ -7,13 +7,13 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState } from "react";
 import axios from "axios";
 import LoadingFull from "../components/common/LoadingFull";
-import { ProductCard } from "../type";
+import { ProductType } from "../type";
 
 const GiftListPage = () => {
   const giftList = useRecoilValue(giftListState);
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const [isLoading, setIsLoading] = useState(false);
-  const setGiftList = useSetRecoilState<ProductCard[]>(giftListState);
+  const setGiftList = useSetRecoilState<ProductType[]>(giftListState);
   const navigate = useNavigate();
   const length = giftList?.length ?? 0;
 

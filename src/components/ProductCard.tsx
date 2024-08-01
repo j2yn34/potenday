@@ -1,6 +1,6 @@
-import { ProductCard } from "../type";
+import { ProductType } from "../type";
 
-const TopHeartCard = ({ data }: { data: ProductCard }) => {
+const ProductCard = ({ data }: { data: ProductType }) => {
   const formattedPrice = data.price.toLocaleString("ko-KR");
 
   return (
@@ -16,4 +16,4 @@ const TopHeartCard = ({ data }: { data: ProductCard }) => {
   );
 };
 
-export default TopHeartCard;
+export default ProductCard;

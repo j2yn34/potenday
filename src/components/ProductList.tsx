@@ -1,23 +1,23 @@
-import TopHeartCard from "./TopHeartCard";
-import { ProductCard } from "../type";
+import ProductCard from "./ProductCard";
+import { ProductType } from "../type";
 
-const TopHeartList = ({
+const ProductList = ({
   category,
   products,
 }: {
   category: string;
-  products: ProductCard[];
+  products: ProductType[];
 }) => {
   return (
     <div className="pb-14">
       <div className="pt-2 pb-5 text-xl font-semibold">{category}</div>
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
         {products.map((product) => (
-          <TopHeartCard data={product} key={product.id} />
+          <ProductCard data={product} key={product.id} />
         ))}
       </div>
     </div>
   );
 };
 
-export default TopHeartList;
+export default ProductList;

@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 import { FaRegHeart } from "react-icons/fa";
-import { ProductCard } from "../type";
+import { ProductType } from "../type";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import Notice from "./common/Notice";
 
 const MyHeartList = () => {
   const token = useRecoilValue<string>(accessTokenState);
-  const [myHeartCards, setMyHeartCards] = useState<ProductCard[]>([]);
+  const [myHeartCards, setMyHeartCards] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const getHeartListData = async () => {

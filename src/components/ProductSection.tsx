@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import TopHeartList from "./TopHeartList";
+import ProductList from "./ProductList";
 import axios from "axios";
-import { ProductCard } from "../type";
-import TopHeartListLoad from "./skeletonUI.tsx/TopHeartListLoad";
+import { ProductType } from "../type";
+import ProductListLoad from "./skeletonUI/ProductListLoad";
 
-const TopHeartSection = () => {
+const ProductSection = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [groupedProducts, setGroupedProducts] = useState<{
-    [key: string]: ProductCard[];
+    [key: string]: ProductType[];
   }>({});
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const TopHeartSection = () => {
 
         if (popularCategory && popularInfoList) {
           const grouped = popularCategory.reduce(
-            (acc: { [key: string]: ProductCard[] }, category: string) => {
+            (acc: { [key: string]: ProductType[] }, category: string) => {
               acc[category] = popularInfoList.filter(
-                (product: ProductCard) => product.lgCtgry === category
+                (product: ProductType) => product.lgCtgry === category
               );
 
               return acc;
@@ -45,14 +45,14 @@ const TopHeartSection = () => {
   return (
     <>
       {isLoading ? (
-        <TopHeartListLoad />
+        <ProductListLoad />
       ) : (
         <>
           <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
             티피의 인기 선물
           </div>
           {Object.keys(groupedProducts).map((category) => (
-            <TopHeartList
+            <ProductList
               category={category}
               products={groupedProducts[category]}
               key={category}
@@ -64,4 +64,4 @@ const TopHeartSection = () => {
   );
 };
 
-export default TopHeartSection;
+export default ProductSection;

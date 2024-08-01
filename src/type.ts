@@ -1,4 +1,4 @@
-export type ProductCard = {
+export type ProductType = {
   id: number;
   name: string;
   lgCtgryId?: string;
@@ -17,4 +17,3 @@ export type NoticeType = {
   nav?: string;
   btnName?: string;
 };
-

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/common/Header";
 import Lottie from "lottie-react";
 import home from "../assets/lottie/home.json";
-import TopHeartSection from "../components/TopHeartSection";
+import ProductSection from "../components/ProductSection";
 
 const Index = () => {
   return (
@@ -23,7 +23,7 @@ const Index = () => {
           </Link>
           <Lottie className="w-[240px] h-[240px] mt-3" animationData={home} />
         </div>
-        <TopHeartSection />
+        <ProductSection />
       </div>
     </>
   );
