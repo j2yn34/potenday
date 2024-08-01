@@ -1,7 +1,16 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from "recoil";
 import { Link, useNavigate } from "react-router-dom";
-import { accessTokenState, userInfoState } from "../state/recoil";
+import {
+  accessTokenState,
+  onboardingState,
+  userInfoState,
+} from "../state/recoil";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { UserInfoState } from "../state/recoilType";
 import { IoIosArrowForward } from "react-icons/io";
@@ -14,11 +23,13 @@ const Mypage = () => {
   const [token, setToken] = useRecoilState<string>(accessTokenState);
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
   const resetUserInfo = useResetRecoilState(userInfoState);
+  const setOnboardingState = useSetRecoilState<boolean>(onboardingState);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
+      setOnboardingState(false);
     } else {
       navigate("/mypage");
     }

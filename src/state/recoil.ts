@@ -37,3 +37,8 @@ export const giftListState = atom<ProductType[]>({
   key: "giftListState",
   default: [],
 });
+
+export const onboardingState = atom<boolean>({
+  key: "onboardingState",
+  default: false,
+});

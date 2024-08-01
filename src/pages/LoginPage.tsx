@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import kakao from "../assets/images/kakao.svg";
 import loginLogo from "../assets/logo/loginLogo.svg";
 import { IoChevronBackSharp } from "react-icons/io5";
+import { useRecoilValue } from "recoil";
+import { onboardingState } from "../state/recoil";
 
 const LoginPage = () => {
+  const goHome = useRecoilValue<boolean>(onboardingState);
+
   const url = "https://server.tify.co.kr/api/v1/oauth2/authorization/kakao";
 
   const loginHandler = () => {
@@ -33,12 +37,21 @@ const LoginPage = () => {
             <img src={kakao} alt="카카오톡" />
             <span className="ml-2 font-semibold">카카오로 시작하기</span>
           </button>
-          <Link
-            to="/voice"
-            className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold"
-          >
-            로그인없이 체험해보기
-          </Link>
+          {goHome ? (
+            <Link
+              to="/"
+              className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold"
+            >
+              로그인 없이 둘러보기
+            </Link>
+          ) : (
+            <Link
+              to="/voice"
+              className="flex-center w-full h-14 bg-black text-white rounded-lg font-semibold"
+            >
+              로그인 없이 체험해보기
+            </Link>
+          )}
         </div>
       </div>
     </>

@@ -2,16 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import onboarding1 from "../assets/images/onboarding1.png";
 import onboarding2 from "../assets/images/onboarding2.png";
+import { useSetRecoilState } from "recoil";
+import { onboardingState } from "../state/recoil";
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const setOnboardingState = useSetRecoilState<boolean>(onboardingState);
   const navigate = useNavigate();
 
   const handleStart = () => {
-    navigate("/");
+    navigate("/login");
+    setOnboardingState(true);
   };
 
   const slides = [
