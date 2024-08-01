@@ -12,8 +12,9 @@ import { ProductType } from "../type";
 const GiftListPage = () => {
   const giftList = useRecoilValue(giftListState);
   const keywordList = useRecoilValue<string[]>(keywordListState);
-  const [isLoading, setIsLoading] = useState(false);
   const setGiftList = useSetRecoilState<ProductType[]>(giftListState);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isReloaded, setIsReloaded] = useState(false);
   const navigate = useNavigate();
   const length = giftList?.length ?? 0;
 
@@ -23,6 +24,7 @@ const GiftListPage = () => {
 
   const onReLoadGiftList = () => {
     setIsLoading(true);
+    setIsReloaded(true);
     const queryString = keywordList
       .map((keyword: string) => `keyword=${keyword.trim()}`)
       .join("&");
@@ -60,8 +62,13 @@ const GiftListPage = () => {
       </div>
       <div className="absolute bottom-0 left-0 right-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
         <button
-          className="basic-button bg-white border border-black"
+          className={`basic-button border mr-2 ${
+            isReloaded
+              ? "bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed"
+              : "bg-white border-black"
+          }`}
           onClick={onReLoadGiftList}
+          disabled={isReloaded}
         >
           선물 다시 불러오기
         </button>
