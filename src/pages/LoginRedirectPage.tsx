@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { accessTokenState, userInfoState } from "../state/recoil";
+import {
+  accessTokenState,
+  onboardingState,
+  userInfoState,
+} from "../state/recoil";
 import { useSetRecoilState } from "recoil";
 import { UserInfoState } from "../state/recoilType";
 import axios from "axios";
@@ -12,6 +16,7 @@ const LoginRedirectPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
+  const setOnboardingState = useSetRecoilState<boolean>(onboardingState);
 
   useEffect(() => {
     const token = new URL(window.location.href).searchParams.get("accessToken");
@@ -29,6 +34,7 @@ const LoginRedirectPage = () => {
         const { id, nickname } = response.data.data;
         setUserInfo({ id, nickname });
         navigate("/");
+        setOnboardingState(false);
       } catch (error) {
         console.error(error);
       }
