@@ -14,12 +14,10 @@ import SplashScreen from "./pages/SplashScreen";
 import Onboarding from "./pages/OnBoarding";
 import MicTest from "./test/MicTest";
 import LottieTest from "./test/LottieTest";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { showSplashState } from "./state/recoil";
+import { useEffect, useState } from "react";
 
 const Router = (): JSX.Element => {
-  const [showSplash, setShowSplash] = useRecoilState(showSplashState);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");

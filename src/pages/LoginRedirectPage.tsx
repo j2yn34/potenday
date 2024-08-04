@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  accessTokenState,
-  showSplashState,
-  userInfoState,
-} from "../state/recoil";
+import { accessTokenState, userInfoState } from "../state/recoil";
 import { useSetRecoilState } from "recoil";
 import { UserInfoState } from "../state/recoilType";
 import axios from "axios";
@@ -16,7 +12,6 @@ const LoginRedirectPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
-  const setShowSplash = useSetRecoilState<boolean>(showSplashState);
 
   useEffect(() => {
     const token = new URL(window.location.href).searchParams.get("accessToken");
@@ -33,8 +28,8 @@ const LoginRedirectPage = () => {
 
         const { id, nickname } = response.data.data;
         setUserInfo({ id, nickname });
+        sessionStorage.setItem("hasSeenSplash", "true");
         navigate("/");
-        setShowSplash(false);
       } catch (error) {
         console.error(error);
       }
