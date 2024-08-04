@@ -6,7 +6,7 @@ import { NoticeType } from "../../type";
 const Notice = ({ isSad, title, text, nav, btnName }: NoticeType) => {
   return (
     <>
-      <div className="full-height flex-center flex-col pb-28">
+      <div className="flex-center flex-col pb-28">
         {isSad ? <img src={sad} /> : <img src={caution} />}
         <div className="flex-center flex-col pt-6 gap-4">
           <span className="text-xl font-semibold">{title}</span>
