@@ -42,3 +42,8 @@ export const onboardingState = atom<boolean>({
   key: "onboardingState",
   default: false,
 });
+
+export const showSplashState = atom<boolean>({
+  key: "showSplashState",
+  default: false,
+});
