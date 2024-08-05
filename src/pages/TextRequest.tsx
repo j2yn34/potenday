@@ -11,29 +11,14 @@ import DoneRequest from "../components/DoneRequest";
 
 const TextRequest = () => {
   const [message, setMessage] = useState<string>("");
-  const [textareaHeight, setTextareaHeight] = useState<string>("auto");
   const [isDoneRequest, setIsDoneRequest] = useState(false);
   const setKeywordList = useSetRecoilState(keywordListState);
   const setTranscript = useSetRecoilState(transcriptState);
   const navigate = useNavigate();
 
   const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
-  };
-
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const textareaLineHeight = 26;
-    const maxRows = 4;
-
-    e.target.rows = 1;
-    const currentRows = ~~(e.target.scrollHeight / textareaLineHeight);
-
-    if (currentRows >= maxRows) {
-      e.target.rows = maxRows;
-      setTextareaHeight(`${textareaLineHeight * maxRows}px`);
-    } else {
-      e.target.rows = currentRows;
-      setTextareaHeight("auto");
+    if (e.target.value.length <= 200) {
+      setMessage(e.target.value);
     }
   };
 
@@ -61,62 +46,60 @@ const TextRequest = () => {
   const isEmpty = message.trim() === "";
 
   return (
-    <div className="relative full-height w-full m-auto px-5 -ml-1">
+    <div className="relative full-height w-full m-auto px-5">
       {isDoneRequest ? (
         <DoneRequest transcript={message} />
       ) : (
         <>
-          <>
-            <div>
-              <div className="absolute z-40 pt-8">
-                <Link to="/voice">
-                  <IoChevronBackSharp size={24} />
-                </Link>
+          <div>
+            <div className="absolute z-40 pt-8 -ml-1">
+              <Link to="/voice">
+                <IoChevronBackSharp size={24} />
+              </Link>
+            </div>
+            <div className="pt-8">
+              <div className="w-full flex justify-center -mb-4">
+                <Lottie
+                  className="w-[120px] h-[120px]"
+                  animationData={LottieListen}
+                />
               </div>
-              <div className="pt-8">
-                <div className="w-full flex justify-center -mb-4">
-                  <Lottie
-                    className="w-[120px] h-[120px]"
-                    animationData={LottieListen}
-                  />
-                </div>
-                <div className="flex-center pt-3.5">
-                  <div className="flex-center w-[296px] h-7 bg-white border rounded-full border-orange-200">
-                    <span className="text-sm text-orange-500">
-                      이야기를 작성해서 전송해주세요.
-                    </span>
-                  </div>
+              <div className="flex-center pt-3.5">
+                <div className="flex-center w-[296px] h-7 bg-white border rounded-full border-orange-200">
+                  <span className="text-sm text-orange-500">
+                    이야기를 작성해서 전송해주세요.
+                  </span>
                 </div>
               </div>
             </div>
-          </>
-          <div className="absolute bottom-0 right-0 w-full -mr-1">
+          </div>
+          <div className="absolute bottom-0 right-0 w-full">
+            <div className="absolute bottom-[130px] right-[20px] bg-gray-300 px-3 py-1 rounded-full">
+              <span className="text-gray-600 text-xs">
+                {message.length}/200
+              </span>
+            </div>
             <form
-              className="flex items-center justify-between px-4 bg-black"
+              className="flex items-center justify-between px-4"
               onSubmit={(e) => submitRequest(e)}
             >
               <div className="flex-center w-full">
                 <textarea
                   value={message}
-                  className="w-full py-2 px-3 leading-7 min-h-[42px] my-2 focus:outline-none rounded-lg resize-none overflow-y-auto"
-                  onChange={(e) => {
-                    onChangeText(e);
-                    handleInput(e);
-                  }}
-                  style={{ height: textareaHeight }}
+                  className="w-full py-2 pl-3 pr-10 leading-6 min-h-[87px] mb-8 focus:outline-none rounded-2xl resize-none overflow-y-auto"
+                  onChange={(e) => onChangeText(e)}
                   placeholder="어떤 스타일, 어떤 관계인가요? (최대 200자)"
-                  rows={1}
                 />
                 <button
                   type="submit"
-                  className={`w-[54px] h-[44px] ml-2 flex items-center justify-center -mr-2 rounded-full ${
+                  className={`absolute right-[30px] w-[34px] h-[34px] ml-2 flex items-center justify-center -mr-2 rounded-full ${
                     isEmpty
-                      ? "bg-gray-200 text-gray-500 cursor-not-allowed text-black "
+                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                       : "bg-black text-white"
                   }`}
                   disabled={isEmpty}
                 >
-                  <PiArrowUpBold size={24} />
+                  <PiArrowUpBold size={20} />
                 </button>
               </div>
             </form>
