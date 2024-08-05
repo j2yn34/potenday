@@ -2,15 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
-import { FaRegHeart } from "react-icons/fa";
-import { ProductType } from "../type";
+import { ProductListType, ProductType } from "../type";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import Notice from "./common/Notice";
+import ProductCard from "./ProductCard";
 
 const MyHeartList = () => {
   const token = useRecoilValue<string>(accessTokenState);
-  const [myHeartCards, setMyHeartCards] = useState<ProductType[]>([]);
+  const [myHeartCards, setMyHeartCards] = useState<ProductListType[]>([]);
 
   useEffect(() => {
     const getHeartListData = async () => {
@@ -22,7 +22,7 @@ const MyHeartList = () => {
           responseType: "json",
         });
         console.log(response.data.data);
-        const data = Array.isArray(response.data) ? response.data : [];
+        const data = Array.isArray(response.data.data) ? response.data : [];
         setMyHeartCards(data);
       } catch (err) {
         console.error("Error:", err);
@@ -54,35 +54,21 @@ const MyHeartList = () => {
             />
           </div>
         ) : (
-          myHeartCards.map((card) => (
-            <div
-              className="flex p-3 h-[132px] rounded-lg bg-white max-w-full"
-              onClick={() => (window.location.href = card.link)}
-              key={card.id}
-              role="button"
-            >
-              <div className="pr-3">
-                <img
-                  className="rounded-lg w-[80px] h-[108px]"
-                  src={card.imgLink}
-                  alt="상품 사진"
-                />
-              </div>
-              <div className="flex flex-1 items-start justify-between min-w-0">
-                <div className="flex flex-col flex-1 min-w-0">
-                  <p className="font-semibold mb-1 text-ellipsis overflow-hidden line-clamp-2">
-                    {card.name}
-                  </p>
-                  <div className="text-sm text-gray-800">
-                    {card.price.toLocaleString("ko-KR")}원
-                  </div>
+          <div className="flex flex-col gap-3">
+            {myHeartCards.map((gift) => (
+              <div key={gift.category}>
+                <div>{gift.category}</div>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-6 items-start">
+                  {gift.products.map((product: ProductType, index: number) => (
+                    <ProductCard
+                      data={product}
+                      key={`${product.productId}+${index}`}
+                    />
+                  ))}
                 </div>
-                <button className="flex-shrink-0 ml-2">
-                  <FaRegHeart size={24} />
-                </button>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
     </div>
