@@ -9,7 +9,7 @@ import {
   transcriptState,
 } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
-import { ProductType } from "../type";
+import { ProductListType } from "../type";
 import { useEffect, useState } from "react";
 import LoadingFull from "../components/common/LoadingFull";
 import { UserInfoState } from "../state/recoilType";
@@ -19,7 +19,7 @@ const KeywordListPage = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const transcript = useRecoilValue<string>(transcriptState);
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
-  const setGiftList = useSetRecoilState<ProductType[]>(giftListState);
+  const setGiftList = useSetRecoilState<ProductListType[]>(giftListState);
   const setKeywordList = useSetRecoilState(keywordListState);
   const [isReloaded, setIsReloaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,8 +49,8 @@ const KeywordListPage = () => {
     axios
       .get(url)
       .then((res) => {
-        console.log("Response:", res.data.data);
-        setGiftList(res.data.data);
+        console.log("Response:", res.data.data.items);
+        setGiftList(res.data.data.items);
         setIsLoading(false);
         navigate("/giftlist");
       })
