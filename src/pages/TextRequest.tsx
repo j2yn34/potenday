@@ -74,7 +74,7 @@ const TextRequest = () => {
             </div>
           </div>
           <div className="absolute bottom-0 right-0 w-full">
-            <div className="absolute bottom-[130px] right-[20px] bg-gray-300 px-3 py-1 rounded-full">
+            <div className="absolute bottom-[128px] right-[20px] bg-gray-300 px-3.5 py-1 rounded-full">
               <span className="text-gray-600 text-xs">
                 {message.length}/200
               </span>
@@ -86,13 +86,13 @@ const TextRequest = () => {
               <div className="flex-center w-full">
                 <textarea
                   value={message}
-                  className="w-full py-2 pl-3 pr-10 leading-6 min-h-[87px] mb-8 focus:outline-none rounded-2xl resize-none overflow-y-auto"
+                  className="w-full py-2 pl-3 pr-11 leading-6 min-h-[87px] mb-8 focus:outline-none rounded-2xl resize-none overflow-y-auto"
                   onChange={(e) => onChangeText(e)}
                   placeholder="어떤 스타일, 어떤 관계인가요? (최대 200자)"
                 />
                 <button
                   type="submit"
-                  className={`absolute right-[30px] w-[34px] h-[34px] ml-2 flex items-center justify-center -mr-2 rounded-full ${
+                  className={`absolute right-[30px] w-[34px] h-[34px] flex items-center justify-center -mr-2 -mb-2.5 rounded-full ${
                     isEmpty
                       ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                       : "bg-black text-white"
