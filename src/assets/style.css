@@ -84,3 +84,8 @@ body {
 .full-height {
   min-height: calc(var(--vh, 1vh) * 100);
 }
+
+.home-bg {
+  background: url("../assets/images/bgHome.png") no-repeat top center;
+  background-size: 480px 550px;
+}
