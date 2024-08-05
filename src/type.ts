@@ -1,13 +1,25 @@
 export type ProductType = {
-  id: number;
-  name: string;
-  lgCtgryId?: string;
-  lgCtgry?: string;
-  mdCtgry: string;
-  price: number;
+  title: string;
   link: string;
-  imgLink: string | undefined;
-  cntWish: number;
+  image: string;
+  lprice: number;
+  hprice: number | null;
+  mallName: string;
+  productId: number;
+  productType: number;
+  brand: string;
+  maker: string;
+  category1: string;
+  category2: string;
+  category3: string;
+  category4: string;
+  wish: boolean;
+  insDate: string;
+};
+
+export type ProductListType = {
+  category: string;
+  products: ProductType[];
 };
 
 export type NoticeType = {

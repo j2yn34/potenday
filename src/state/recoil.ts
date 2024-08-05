@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 import { UserInfoState } from "./recoilType";
-import { ProductType } from "../type";
+import { ProductListType } from "../type";
 
 const { persistAtom } = recoilPersist({
   key: "user",
@@ -33,7 +33,7 @@ export const keywordListState = atom<string[]>({
   default: [],
 });
 
-export const giftListState = atom<ProductType[]>({
+export const giftListState = atom<ProductListType[]>({
   key: "giftListState",
   default: [],
 });

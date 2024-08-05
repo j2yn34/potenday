@@ -3,39 +3,54 @@ import ProductList from "./ProductList";
 import axios from "axios";
 import { ProductType } from "../type";
 import ProductListLoad from "./skeletonUI/ProductListLoad";
+import { ProductListType } from "../type";
 
 const ProductSection = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [groupedProducts, setGroupedProducts] = useState<{
-    [key: string]: ProductType[];
-  }>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [groupedProducts, setGroupedProducts] = useState<ProductListType[]>([]);
 
   useEffect(() => {
     const getTopHeartData = async () => {
       setIsLoading(true);
       try {
         const response = await axios.get("/api/api/v1/product/popular/info");
-        // console.log(response);
-        const { popularCategory, popularInfoList } = response.data.data;
+        const { items }: { items: ProductListType[] } = response.data.data;
 
-        if (popularCategory && popularInfoList) {
-          const grouped = popularCategory.reduce(
-            (acc: { [key: string]: ProductType[] }, category: string) => {
-              acc[category] = popularInfoList.filter(
-                (product: ProductType) => product.lgCtgry === category
-              );
+        if (items) {
+          const allProducts = items.reduce<ProductType[]>((acc, item) => {
+            const category = item.category;
+            const productsWithCategory = item.products.map((product) => ({
+              ...product,
+              category1: category,
+            }));
+            return [...acc, ...productsWithCategory];
+          }, []);
 
+          const grouped = allProducts.reduce<{ [key: string]: ProductType[] }>(
+            (acc, product) => {
+              if (!acc[product.category1]) {
+                acc[product.category1] = [];
+              }
+              acc[product.category1].push(product);
               return acc;
             },
             {}
           );
 
-          setGroupedProducts(grouped);
+          const groupedArray: ProductListType[] = Object.entries(grouped).map(
+            ([key, value]) => ({
+              category: key,
+              products: value,
+            })
+          );
+
+          console.log("grouped: ", groupedArray);
+          setGroupedProducts(groupedArray);
           setIsLoading(false);
-          // console.log("grouped: ", grouped);
         }
       } catch (err) {
         console.error("Error:", err);
+        setIsLoading(false);
       }
     };
 
@@ -48,14 +63,11 @@ const ProductSection = () => {
         <ProductListLoad />
       ) : (
         <>
-          <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
-            티피의 인기 선물
-          </div>
-          {Object.keys(groupedProducts).map((category) => (
+          {groupedProducts.map((group) => (
             <ProductList
-              category={category}
-              products={groupedProducts[category]}
-              key={category}
+              category={group.category}
+              products={group.products}
+              key={group.category}
             />
           ))}
         </>

@@ -13,7 +13,7 @@ const ProductList = ({
       <div className="pt-2 pb-5 text-xl font-semibold">{category}</div>
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
         {products.map((product) => (
-          <ProductCard data={product} key={product.id} />
+          <ProductCard data={product} key={product.productId} />
         ))}
       </div>
     </div>
