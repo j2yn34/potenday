@@ -8,17 +8,19 @@ import { PiMicrophoneFill } from "react-icons/pi";
 import { MdOutlinePause } from "react-icons/md";
 import { IoChevronBackSharp } from "react-icons/io5";
 import RequestGuide from "../components/RequestGuide";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import KeyboardBtn from "../components/buttons/KeyboardBtn";
 import DoneRequest from "../components/DoneRequest";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { keywordListState, transcriptState } from "../state/recoil";
+import timerIcon from "../assets/icons/timer.png";
 
 const VoiceRequest = () => {
   const [isVoiceRequest, setIsVoiceRequest] = useState<boolean>(false);
   const [isDoneRequest, setIsDoneRequest] = useState(false);
+  const [timer, setTimer] = useState<number | null>(null);
   const setTranscript = useSetRecoilState(transcriptState);
   const setKeywordList = useSetRecoilState(keywordListState);
 
@@ -34,11 +36,29 @@ const VoiceRequest = () => {
   const toggleListening = () => {
     if (listening) {
       SpeechRecognition.stopListening();
+      setTimer((prevTimer) => prevTimer);
     } else {
       setIsVoiceRequest(true);
       SpeechRecognition.startListening({ continuous: true, language: "ko-KR" });
+      setTimer((prevTimer) => (prevTimer !== null ? prevTimer : 60));
     }
   };
+
+  useEffect(() => {
+    if (timer === null || timer === 0 || !listening) return;
+
+    const interval = setInterval(() => {
+      setTimer((prev) => (prev ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timer, listening]);
+
+  useEffect(() => {
+    if (timer === 0) {
+      submitRequest();
+    }
+  }, [timer]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>브라우저가 음성 인식을 지원하지 않습니다.</span>;
@@ -69,6 +89,14 @@ const VoiceRequest = () => {
     SpeechRecognition.stopListening();
     setTranscript("");
     navigate("/");
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(1, "0");
+    const seconds = (time % 60).toString().padStart(2, "0");
+    return `${minutes} : ${seconds}`;
   };
 
   const isTranscriptEmpty = transcript.trim() === "";
@@ -115,7 +143,16 @@ const VoiceRequest = () => {
           )}
           <div className="pb-8">
             <div className="w-full flex-center">
-              <KeyboardBtn />
+              {timer === null ? (
+                <KeyboardBtn />
+              ) : (
+                <div className="w-[90px] py-1.5 bg-purple-100 rounded-full mb-5">
+                  <span className="flex-center gap-[6px] text-center text-sm font-bold">
+                    <img src={timerIcon} className="w-[18px] h-[18px]"></img>
+                    {formatTime(timer)}
+                  </span>
+                </div>
+              )}
             </div>
             <div className="flex-center">
               <div className="flex-center gap-9">
