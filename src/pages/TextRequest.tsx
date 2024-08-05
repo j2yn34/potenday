@@ -74,8 +74,8 @@ const TextRequest = () => {
             </div>
           </div>
           <div className="absolute bottom-0 right-0 w-full">
-            <div className="absolute bottom-[128px] right-[20px] bg-gray-300 px-3.5 py-1 rounded-full">
-              <span className="text-gray-600 text-xs">
+            <div className="absolute bottom-[128px] right-[20px] min-w-[68px] bg-gray-300 py-[3px] rounded-full text-center">
+              <span className="text-gray-600 text-xs font-medium">
                 {message.length}/200
               </span>
             </div>
