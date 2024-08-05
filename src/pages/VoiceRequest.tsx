@@ -21,6 +21,9 @@ const VoiceRequest = () => {
   const [isVoiceRequest, setIsVoiceRequest] = useState<boolean>(false);
   const [isDoneRequest, setIsDoneRequest] = useState(false);
   const [timer, setTimer] = useState<number | null>(null);
+  const [lastTranscript, setLastTranscript] = useState("");
+  const [noInputWarning, setNoInputWarning] = useState(false);
+
   const setTranscript = useSetRecoilState(transcriptState);
   const setKeywordList = useSetRecoilState(keywordListState);
 
@@ -59,6 +62,27 @@ const VoiceRequest = () => {
       submitRequest();
     }
   }, [timer]);
+
+  useEffect(() => {
+    if (!listening) return;
+
+    const checkTranscript = setInterval(() => {
+      if (transcript === lastTranscript) {
+        setNoInputWarning(true);
+      } else {
+        setNoInputWarning(false);
+      }
+      setLastTranscript(transcript);
+    }, 5000);
+
+    return () => clearInterval(checkTranscript);
+  }, [transcript, lastTranscript, listening]);
+
+  useEffect(() => {
+    if (transcript !== lastTranscript) {
+      setNoInputWarning(false);
+    }
+  }, [transcript, lastTranscript]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>브라우저가 음성 인식을 지원하지 않습니다.</span>;
@@ -136,6 +160,13 @@ const VoiceRequest = () => {
                 <p className="text-center text-gray-600 font-medium leading-7">
                   {transcript}
                 </p>
+                {noInputWarning && (
+                  <p className="text-center text-gray-600 font-medium leading-7">
+                    마이크 상태를 확인하고
+                    <br />
+                    다시 이야기해 주세요.
+                  </p>
+                )}
               </div>
             </>
           ) : (
