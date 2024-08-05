@@ -16,6 +16,7 @@
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@babel/runtime": "^7.24.8",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.13",
     "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.7.2",

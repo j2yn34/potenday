@@ -36,5 +36,6 @@ export default {
       },
     },
   },
-  plugins: [typography],
+  // eslint-disable-next-line no-undef
+  plugins: [typography, require("@tailwindcss/aspect-ratio")],
 };
