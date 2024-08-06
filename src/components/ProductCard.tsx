@@ -6,10 +6,16 @@ import emptyHeart from "../assets/icons/emptyHeart.png";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 
-const ProductCard = ({ data }: { data: ProductType }) => {
-  const [isLiked, setIsLiked] = useState<boolean>(data.wish);
+const ProductCard = ({
+  data,
+  liked,
+}: {
+  data: ProductType;
+  liked: boolean;
+}) => {
   const token = useRecoilValue<string>(accessTokenState);
   const formattedPrice = data.lprice.toLocaleString("ko-KR");
+  const [isLiked, setIsLiked] = useState<boolean>(liked);
 
   const handleHeart = async (e: {
     preventDefault: () => void;

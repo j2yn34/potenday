@@ -63,6 +63,7 @@ const MyHeartList = () => {
                     <ProductCard
                       data={product}
                       key={`${product.productId}+${index}`}
+                      liked={true}
                     />
                   ))}
                 </div>

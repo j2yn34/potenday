@@ -24,6 +24,7 @@ const GiftList = ({ data }: { data: ProductListType[] }) => {
               <ProductCard
                 data={product}
                 key={`${product.productId}+${index}`}
+                liked={product.wish}
               />
             ))}
           </div>

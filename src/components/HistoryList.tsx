@@ -13,7 +13,11 @@ const HistoryList = ({
       <div className="pb-6 font-medium">{date}</div>
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
         {products.map((historyItem) => (
-          <ProductCard key={historyItem.id} data={historyItem.product} />
+          <ProductCard
+            key={historyItem.id}
+            data={historyItem.product}
+            liked={historyItem.wish}
+          />
         ))}
       </div>
     </div>
