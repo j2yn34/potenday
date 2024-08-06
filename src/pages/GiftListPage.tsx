@@ -71,7 +71,7 @@ const GiftListPage = () => {
               key={category}
               onClick={() => handleCategoryClick(category)}
               className={`${
-                selectedCategory === category ? "text-orange-500" : "text-black"
+                selectedCategory === category ? "text-black" : "text-gray-500"
               } font-semibold whitespace-nowrap`}
             >
               {category}
