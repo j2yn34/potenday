@@ -7,12 +7,15 @@ import GiftList from "../components/GiftList";
 import LoadingFull from "../components/common/LoadingFull";
 import { ProductListType } from "../type";
 import fullGift from "../assets/icons/fullGift.png";
+import Lottieloading from "../assets/lottie/loading.json";
+import Lottie from "lottie-react";
 
 const GiftListPage = () => {
   const giftList = useRecoilValue(giftListState);
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const setGiftList = useSetRecoilState<ProductListType[]>(giftListState);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [isReloaded, setIsReloaded] = useState(false);
   const [comment, setComment] = useRecoilState(commentState);
   const navigate = useNavigate();
@@ -33,21 +36,38 @@ const GiftListPage = () => {
 
   useEffect(() => {
     if (categories.length > 0 && selectedCategory) {
-      const commentUrl = `/api/api/v1/ai/category/comment`;
-      axios
-        .get(commentUrl, { params: { category: selectedCategory } })
-        .then((res) => {
+      const fetchComment = async () => {
+        setIsCommentLoading(true);
+        try {
+          const commentUrl = `/api/api/v1/ai/category/comment`;
+          const res = await axios.get(commentUrl, {
+            params: { category: selectedCategory },
+          });
           setComment(res.data.data.comment);
-        });
+        } catch (err) {
+          console.error("Error comment:", err);
+          setComment("코멘트를 불러오는 중 오류가 발생했어요.");
+        } finally {
+          setIsCommentLoading(false);
+        }
+      };
+      fetchComment();
     }
   }, []);
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = async (category: string) => {
+    setIsCommentLoading(true);
     setSelectedCategory(category);
-    const commentUrl = `/api/api/v1/ai/category/comment?category=${category}`;
-    axios.get(commentUrl).then((res) => {
+    try {
+      const commentUrl = `/api/api/v1/ai/category/comment?category=${category}`;
+      const res = await axios.get(commentUrl);
       setComment(res.data.data.comment);
-    });
+    } catch (err) {
+      console.error("Error comment:", err);
+      setComment("코멘트를 불러오는 중 오류가 발생했어요.");
+    } finally {
+      setIsCommentLoading(false);
+    }
   };
 
   const goHome = () => {
@@ -107,7 +127,14 @@ const GiftListPage = () => {
               </span>
             </div>
             <div className="w-full h-full bg-orange-50 rounded-xl border border-orange-200 px-5 py-3">
-              <p className="text-orange-500 text-sm font-medium">{comment}</p>
+              {isCommentLoading ? (
+                <Lottie
+                  animationData={Lottieloading}
+                  className="h-[90px] -m-2"
+                />
+              ) : (
+                <p className="text-orange-500 text-sm font-medium">{comment}</p>
+              )}
             </div>
           </div>
           <div className="w-screen h-[26px] mb-3 pl-5 -ml-5 bg-gray-100">
