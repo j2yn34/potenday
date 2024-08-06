@@ -9,6 +9,7 @@ import TextRequest from "./pages/TextRequest";
 import KeywordListPage from "./pages/KeywordListPage";
 import GiftListPage from "./pages/GiftListPage";
 import Mypage from "./pages/Mypage";
+import History from "./pages/History";
 import PreparingPage from "./pages/PreparingPage";
 import SplashScreen from "./pages/SplashScreen";
 import Onboarding from "./pages/OnBoarding";
@@ -46,6 +47,7 @@ const Router = (): JSX.Element => {
       <Route path="/giftlist" element={<GiftListPage />} />
       <Route path="/heartlist" element={<MyHeartListPage />} />
       <Route path="/mypage" element={<Mypage />} />
+      <Route path="/history" element={<History />} />
       <Route path="/preparing" element={<PreparingPage />} />
       <Route path="/speech" element={<MicTest />} />
       <Route path="/lottie" element={<LottieTest />} />

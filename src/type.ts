@@ -22,6 +22,14 @@ export type ProductListType = {
   products: ProductType[];
 };
 
+export type HistoryListType = {
+  item: ProductType;
+  date: string;
+  id: number;
+  product: ProductType;
+  wish: boolean;
+};
+
 export type NoticeType = {
   isSad: boolean;
   title: string;

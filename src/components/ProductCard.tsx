@@ -61,33 +61,33 @@ const ProductCard = ({ data }: { data: ProductType }) => {
   const handleCardClick = async () => {
     window.open(data.link, "_blank", "noopener,noreferrer");
 
-    // try {
-    //   const response = await axios.post(
-    //     `/api/api/v1/user/history`,
-    //     {
-    //       title: data.title,
-    //       link: data.link,
-    //       image: data.image,
-    //       lprice: data.lprice,
-    //       hprice: data.hprice,
-    //       mallName: data.mallName,
-    //       productId: data.productId,
-    //       productType: data.productType,
-    //       brand: data.brand,
-    //       maker: data.maker,
-    //       category1: data.category1,
-    //       category2: data.category2,
-    //       category3: data.category3,
-    //       category4: data.category4,
-    //     },
-    //     {
-    //       headers: { Authorization: `Bearer ${token}` },
-    //     }
-    //   );
-    //   console.log(response.data);
-    // } catch (err) {
-    //   console.error("Error:", err);
-    // }
+    try {
+      const response = await axios.post(
+        `/api/api/v1/user/history`,
+        {
+          title: data.title,
+          link: data.link,
+          image: data.image,
+          lprice: data.lprice,
+          hprice: data.hprice,
+          mallName: data.mallName,
+          productId: data.productId,
+          productType: data.productType,
+          brand: data.brand,
+          maker: data.maker,
+          category1: data.category1,
+          category2: data.category2,
+          category3: data.category3,
+          category4: data.category4,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.error("Error:", err);
+    }
   };
 
   const removeHTMLTags = (title: string) => {
