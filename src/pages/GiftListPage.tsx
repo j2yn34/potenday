@@ -19,16 +19,16 @@ const GiftListPage = () => {
     (acc, gift) => acc + gift.products.length,
     0
   );
-  // const [selectedCategory, setSelectedCategory] = useState<string>("");
-  // const categories = [...new Set(giftList.map((gift) => gift.category))];
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const categories = [...new Set(giftList.map((gift) => gift.category))];
 
-  // const filteredGifts = selectedCategory
-  //   ? giftList.filter((gift) => gift.category === selectedCategory)
-  //   : giftList;
+  const filteredGifts = selectedCategory
+    ? giftList.filter((gift) => gift.category === selectedCategory)
+    : giftList;
 
-  // const handleCategoryClick = (category: string) => {
-  //   setSelectedCategory(category);
-  // };
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
 
   const goHome = () => {
     navigate("/");
@@ -64,21 +64,23 @@ const GiftListPage = () => {
       <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
         총 {totalCount}개의 추천 선물
       </h1>
-      {/* {categories.length != 0 && (
-        <div className="absolute z-40 pt-8 -ml-1">
-          <button onClick={() => handleCategoryClick("")}>All</button>
+      {categories.length != 0 && (
+        <div className="flex overflow-x-auto gap-5 mb-6 px-5">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryClick(category)}
+              className={`${
+                selectedCategory === category ? "text-orange-500" : "text-black"
+              } font-semibold whitespace-nowrap`}
             >
               {category}
             </button>
           ))}
         </div>
-      )} */}
+      )}
       <div className="overflow-y-auto h-full px-5 pb-24">
-        <GiftList data={giftList} />
+        <GiftList data={filteredGifts} />
       </div>
       <div className="fixed w-full max-w-[480px] bottom-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
         <button
