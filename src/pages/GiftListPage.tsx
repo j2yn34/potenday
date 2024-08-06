@@ -60,7 +60,7 @@ const GiftListPage = () => {
   }
 
   return (
-    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
+    <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg">
       <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
         총 {totalCount}개의 추천 선물
       </h1>
@@ -77,10 +77,10 @@ const GiftListPage = () => {
           ))}
         </div>
       )} */}
-      <div className="overflow-y-auto h-full pb-24">
+      <div className="overflow-y-auto h-full px-5 pb-24">
         <GiftList data={giftList} />
       </div>
-      <div className="fixed max-w-[480px] bottom-0 left-0 right-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
+      <div className="fixed w-full max-w-[480px] bottom-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
         <button
           className={`basic-button border mr-2 ${
             isReloaded
