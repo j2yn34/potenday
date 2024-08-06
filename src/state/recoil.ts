@@ -38,6 +38,11 @@ export const giftListState = atom<ProductListType[]>({
   default: [],
 });
 
+export const commentState = atom<string>({
+  key: "commentState",
+  default: "",
+});
+
 export const onboardingState = atom<boolean>({
   key: "onboardingState",
   default: false,
