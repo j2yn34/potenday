@@ -54,18 +54,32 @@ const Mypage = () => {
     }
   };
 
-  const runLogout = () => {
-    resetUserInfo();
-    setToken("");
-    closeModal(setShowLogoutModal);
-    navigate("/");
+  const runLogout = async () => {
+    try {
+      await axios({
+        method: "post",
+        url: "/api/api/v1/user/logout",
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: "json",
+      });
+      resetUserInfo();
+      setToken("");
+      closeModal(setShowLogoutModal);
+      navigate("/");
+    } catch (err) {
+      console.error("Error:", err);
+      resetUserInfo();
+      setToken("");
+      closeModal(setShowLogoutModal);
+      navigate("/");
+    }
   };
 
   const runWithdraw = async () => {
     try {
       await axios({
         method: "delete",
-        url: "/api/v1/user",
+        url: "/api/api/v1/user",
         headers: { Authorization: `Bearer ${token}` },
         responseType: "json",
       });
