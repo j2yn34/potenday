@@ -37,7 +37,7 @@ const Mypage = () => {
 
   const titleList = [
     { title: "로그아웃" },
-    { title: "선물 추천 히스토리" },
+    { title: "최근 본 선물" },
     { title: "탈퇴하기" },
   ];
 
@@ -46,8 +46,8 @@ const Mypage = () => {
       case "로그아웃":
         openModal(setShowLogoutModal);
         break;
-      case "선물 추천 히스토리":
-        navigate("/preparing");
+      case "최근 본 선물":
+        navigate("/history");
         break;
       default:
         openModal(setShowWithdrawModal);
