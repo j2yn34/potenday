@@ -1,9 +1,6 @@
 const ProductListLoad = () => {
   return (
     <>
-      <div className="max-w-fit bg-orange-50 rounded text-xs text-orange-500 px-2.5 py-1 whitespace-nowrap">
-        티피의 인기 선물
-      </div>
       <div>
         {Array.from(Array(3)).map((_, index) => (
           <div className="pb-14 animate-pulse" key={index}>
