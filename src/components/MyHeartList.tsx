@@ -30,6 +30,7 @@ const MyHeartList = () => {
         const data = Array.isArray(response.data.data.userWishList)
           ? response.data.data.userWishList
           : [];
+        console.log(data);
         setMyHeartCards(data);
 
         const timeListData = data.flatMap(
@@ -76,10 +77,10 @@ const MyHeartList = () => {
     return groupedData;
   };
 
-  console.log("groupedHeart", groupedHeart);
+  // console.log("groupedHeart", groupedHeart);
 
   return (
-    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
+    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
       <div className="absolute z-40 pt-8 -ml-1">
         <Link to="/">
           <IoChevronBackSharp size={24} />
@@ -100,33 +101,36 @@ const MyHeartList = () => {
             />
           </div>
         ) : (
-          <div className="flex flex-col gap-3">
-            <div className="flex overflow-x-auto gap-5 mb-6 px-5">
-              <button
-                onClick={() => handleCategoryClick("")}
-                className={`${
-                  selectedCategory === "" ? "text-black" : "text-gray-500"
-                } font-semibold whitespace-nowrap`}
-              >
-                전체
-              </button>
-              {categories.map((category) => (
+          <div className="flex flex-col">
+            <div className="mb-6">
+              <div className="flex overflow-x-auto gap-5 pb-3">
                 <button
-                  key={category}
-                  onClick={() => handleCategoryClick(category)}
+                  onClick={() => handleCategoryClick("")}
                   className={`${
-                    selectedCategory === category
-                      ? "text-black"
-                      : "text-gray-500"
+                    selectedCategory === "" ? "text-black" : "text-gray-500"
                   } font-semibold whitespace-nowrap`}
                 >
-                  {category}
+                  전체
                 </button>
-              ))}
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => handleCategoryClick(category)}
+                    className={`${
+                      selectedCategory === category
+                        ? "text-black"
+                        : "text-gray-500"
+                    } font-semibold whitespace-nowrap`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+              <div className="w-screen -ml-5 h-[6px] bg-[#E7E5F2]" />
             </div>
             <div>
               {Object.keys(groupedHeart).map((date) => (
-                <div key={date} className="pb-14">
+                <div key={date} className="pb-8">
                   <div className="pb-6 font-medium">{date}</div>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
                     {groupedHeart[date].flatMap((item) =>

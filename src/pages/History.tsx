@@ -56,7 +56,7 @@ const History = () => {
   const groupedHistory = transformHistoryData(historyList);
 
   return (
-    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
+    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
       <div className="absolute z-40 pt-7 -ml-1">
         <Link to="/">
           <IoChevronBackSharp size={24} />
@@ -66,7 +66,7 @@ const History = () => {
         최근 본 선물
       </h1>
       <div className="w-screen h-[26px] mb-8 pl-5 -ml-5 bg-gray-100">
-        <span className="text-xs text-gray-600">
+        <span className="text-xs text-gray-600 font-medium">
           최근 7일 동안의 기록을 볼 수 있어요.
         </span>
       </div>

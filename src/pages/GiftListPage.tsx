@@ -103,7 +103,7 @@ const GiftListPage = () => {
   }
 
   return (
-    <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg">
+    <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg bg-purple-50">
       <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
         총 {totalCount}개의 추천 선물
       </h1>
@@ -122,7 +122,7 @@ const GiftListPage = () => {
               </button>
             ))}
           </div>
-          <div className="mb-4 px-5">
+          <div className="mb-6 px-5">
             <div className="flex items-center gap-[6px] pl-2 mb-2">
               <img src={fullGift} className="w-[16px] h-[16px]" />
               <span className="text-orange-500 text-sm font-semibold">
@@ -150,7 +150,7 @@ const GiftListPage = () => {
       <div className="overflow-y-auto h-full px-5 pb-24">
         <GiftList data={filteredGifts} />
       </div>
-      <div className="fixed w-full max-w-[480px] bottom-0 z-50 flex justify-center gap-2 p-4 bg-[#E6E4F1]">
+      <div className="fixed w-full max-w-[480px] bottom-0 z-50 flex justify-center gap-2 p-4 bg-purple-50">
         <button
           className={`basic-button border mr-2 ${
             isReloaded
