@@ -16,6 +16,7 @@ const ChangeNickname = () => {
   const token = useRecoilValue<string>(accessTokenState);
   const [inputValue, setInputValue] = useState<string>("");
   const [checkMessage, setCheckMessage] = useState<string | null>(null);
+  const userInfo = useRecoilValue<UserInfoState>(userInfoState);
   const setUserInfo = useSetRecoilState<UserInfoState>(userInfoState);
   const navigate = useNavigate();
 
@@ -74,6 +75,7 @@ const ChangeNickname = () => {
                 : "focus:outline-[#4227E7]"
             }`}
             onChange={handleChange}
+            placeholder={`${userInfo.nickname}`}
             value={inputValue}
             maxLength={10}
             required
