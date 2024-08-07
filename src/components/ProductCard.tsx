@@ -6,13 +6,23 @@ import emptyHeart from "../assets/icons/emptyHeart.png";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 
+type ProductCardProps = {
+  data: ProductType;
+  liked: boolean;
+  isShareMode?: boolean;
+  isSelected?: boolean;
+  onSelect?: () => void;
+  isSharedPage?: boolean;
+};
+
 const ProductCard = ({
   data,
   liked,
-}: {
-  data: ProductType;
-  liked: boolean;
-}) => {
+  isShareMode,
+  isSelected,
+  onSelect,
+  isSharedPage,
+}: ProductCardProps) => {
   const token = useRecoilValue<string>(accessTokenState);
   const formattedPrice = data.lprice.toLocaleString("ko-KR");
   const [isLiked, setIsLiked] = useState<boolean>(liked);
@@ -102,8 +112,15 @@ const ProductCard = ({
     return doc.body.textContent || "";
   };
 
+  const handleCheckboxClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    {
+      onSelect && onSelect();
+    }
+  };
+
   return (
-    <div onClick={handleCardClick} className="cursor-pointer">
+    <div onClick={handleCardClick} className="cursor-pointer relative">
       <div className="relative">
         <div className="aspect-w-1 aspect-h-1">
           <img
@@ -112,8 +129,24 @@ const ProductCard = ({
             alt="상품 사진"
           />
         </div>
-
-        <button className="absolute bottom-0 right-0" onClick={handleHeart}>
+        {isShareMode && (
+          <div
+            className="absolute top-2 left-2 w-[18px] h-[18px] bg-black/[0.1] border-[1px] border-white rounded-sm flex items-center justify-center cursor-pointer"
+            onClick={handleCheckboxClick}
+          >
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onChange={onSelect}
+              className="appearance-none w-full h-full"
+            />
+            {isSelected && <div className="w-full h-full bg-orange-500"></div>}
+          </div>
+        )}
+        <button
+          className={`absolute bottom-0 right-0 ${isSharedPage && "hidden"}`}
+          onClick={handleHeart}
+        >
           {isLiked ? (
             <div className="p-3">
               <FaHeart size={24} className="text-orange-500" />

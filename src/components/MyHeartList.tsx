@@ -8,12 +8,17 @@ import { IoChevronBackSharp } from "react-icons/io5";
 import Notice from "./common/Notice";
 import formatDate from "../hooks/formatDate";
 import ProductCard from "./ProductCard";
+import shareIcon from "../assets/icons/share.png";
 
 const MyHeartList = () => {
   const token = useRecoilValue<string>(accessTokenState);
   const [myHeartCards, setMyHeartCards] = useState<HeartListType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [groupedHeart, setGroupedHeart] = useState<GroupedHeartType>({});
+  const [isShareMode, setIsShareMode] = useState<boolean>(false);
+  const [selectedProducts, setSelectedProducts] = useState<Set<number>>(
+    new Set()
+  );
 
   type GroupedHeartType = {
     [key: string]: HeartTimeList[];
@@ -30,7 +35,6 @@ const MyHeartList = () => {
         const data = Array.isArray(response.data.data.userWishList)
           ? response.data.data.userWishList
           : [];
-        console.log(data);
         setMyHeartCards(data);
 
         const timeListData = data.flatMap(
@@ -77,7 +81,22 @@ const MyHeartList = () => {
     return groupedData;
   };
 
-  // console.log("groupedHeart", groupedHeart);
+  const handleShareModeToggle = () => {
+    setIsShareMode(!isShareMode);
+    if (isShareMode) {
+      setSelectedProducts(new Set());
+    }
+  };
+
+  const handleProductSelect = (productId: number) => {
+    const newSelectedProducts = new Set(selectedProducts);
+    if (newSelectedProducts.has(productId)) {
+      newSelectedProducts.delete(productId);
+    } else {
+      newSelectedProducts.add(productId);
+    }
+    setSelectedProducts(newSelectedProducts);
+  };
 
   return (
     <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
@@ -102,7 +121,7 @@ const MyHeartList = () => {
           </div>
         ) : (
           <div className="flex flex-col">
-            <div className="mb-6">
+            <div>
               <div className="flex overflow-x-auto gap-5 pb-3">
                 <button
                   onClick={() => handleCategoryClick("")}
@@ -128,6 +147,27 @@ const MyHeartList = () => {
               </div>
               <div className="w-screen -ml-5 h-[6px] bg-[#E7E5F2]" />
             </div>
+            <div className="flex w-full items-center justify-between">
+              {isShareMode && (
+                <span className="text-sm font-medium flex-shrink-0">
+                  {selectedProducts.size}개의 선물 선택
+                </span>
+              )}
+              <div className="flex w-full justify-end py-3">
+                <button
+                  className="flex-center gap-1 w-fit px-4 py-[6px] bg-white rounded-full border border-gray-300"
+                  onClick={handleShareModeToggle}
+                >
+                  <img
+                    src={shareIcon}
+                    className={`w-4 h-4 ${isShareMode && "hidden"}`}
+                  />
+                  <span className="text-sm font-medium">
+                    {isShareMode ? "취소" : "공유"}
+                  </span>
+                </button>
+              </div>
+            </div>
             <div>
               {Object.keys(groupedHeart).map((date) => (
                 <div key={date} className="pb-8">
@@ -139,6 +179,11 @@ const MyHeartList = () => {
                           key={product.productId}
                           data={product}
                           liked={true}
+                          isShareMode={isShareMode}
+                          isSelected={selectedProducts.has(product.productId)}
+                          onSelect={() =>
+                            handleProductSelect(product.productId)
+                          }
                         />
                       ))
                     )}
@@ -146,6 +191,13 @@ const MyHeartList = () => {
                 </div>
               ))}
             </div>
+            {isShareMode && (
+              <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
+                <button className="w-full py-4 bg-black text-white rounded-lg">
+                  링크 공유하기
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
