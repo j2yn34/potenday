@@ -89,3 +89,28 @@ body {
   background: url("../assets/images/bgHome.png") no-repeat top center;
   background-size: 480px 550px;
 }
+
+.shared-bg {
+  background: rgb(34, 38, 45);
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(34, 38, 45, 1) 10%,
+    rgba(14, 16, 19, 1) 70%
+  );
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(34, 38, 45, 1) 10%,
+    rgba(14, 16, 19, 1) 70%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(34, 38, 45, 1) 10%,
+    rgba(14, 16, 19, 1) 70%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#22262d",endColorstr="#0e1013",GradientType=1);
+}
+
+.shared-bg-img {
+  background: url("../assets/images/bgShared.png") repeat-y top center;
+  background-size: 480px 640px;
+}

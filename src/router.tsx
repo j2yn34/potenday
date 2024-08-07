@@ -10,6 +10,7 @@ import KeywordListPage from "./pages/KeywordListPage";
 import GiftListPage from "./pages/GiftListPage";
 import Mypage from "./pages/Mypage";
 import History from "./pages/History";
+import SharedPage from "./pages/SharedPage";
 import PreparingPage from "./pages/PreparingPage";
 import SplashScreen from "./pages/SplashScreen";
 import Onboarding from "./pages/OnBoarding";
@@ -48,6 +49,7 @@ const Router = (): JSX.Element => {
       <Route path="/heartlist" element={<MyHeartListPage />} />
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/history" element={<History />} />
+      <Route path="/shared/:id" element={<SharedPage />} />
       <Route path="/preparing" element={<PreparingPage />} />
       <Route path="/speech" element={<MicTest />} />
       <Route path="/lottie" element={<LottieTest />} />

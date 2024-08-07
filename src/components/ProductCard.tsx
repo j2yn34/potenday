@@ -159,10 +159,18 @@ const ProductCard = ({
         </button>
       </div>
       <div className="text-start">
-        <div className="pt-2 pb-1 text-md font-medium line-clamp-2">
+        <div
+          className={`pt-2 pb-1 text-md font-medium line-clamp-2 ${
+            isSharedPage && "text-white"
+          }`}
+        >
           {removeHTMLTags(data.title)}
         </div>
-        <div className="text-sm text-gray-500 font-normal">
+        <div
+          className={`text-sm text-gray-500 font-normal ${
+            isSharedPage && "text-white"
+          }`}
+        >
           {formattedPrice}원
         </div>
       </div>
