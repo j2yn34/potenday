@@ -188,7 +188,7 @@ const MyHeartList = () => {
                 </button>
               </div>
             </div>
-            <div>
+            <div className="pb-[100px]">
               {Object.keys(groupedHeart).map((date) => (
                 <div key={date} className="pb-8">
                   <div className="pb-6 font-medium">{date}</div>

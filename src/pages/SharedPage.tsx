@@ -38,15 +38,17 @@ const SharedPage = () => {
               <h1 className="text-white pt-10 mb-8 text-center font-semibold text-xl leading-8">
                 공유된 관심 선물을 둘러 보세요!
               </h1>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start pb-[120px]">
-                {products.map((product) => (
-                  <ProductCard
-                    key={product.productId}
-                    data={product}
-                    liked={false}
-                    isSharedPage={true}
-                  />
-                ))}
+              <div className="pb-[100px]">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
+                  {products.map((product) => (
+                    <ProductCard
+                      key={product.productId}
+                      data={product}
+                      liked={false}
+                      isSharedPage={true}
+                    />
+                  ))}
+                </div>
               </div>
               <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 px-5 pt-4 pb-8 z-50 bg-[#0E1013]">
                 <button className="w-full py-4 bg-orange-500 text-white rounded-lg">
