@@ -6,6 +6,7 @@ import HistoryList from "../components/HistoryList";
 import { HistoryListType } from "../type";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
+import formatDate from "../hooks/formatDate";
 
 const History = () => {
   const token = useRecoilValue<string>(accessTokenState);
@@ -30,21 +31,13 @@ const History = () => {
     getHistoryData();
   }, []);
 
-  function formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}.${month}.${day}`;
-  }
-
   type GroupedHistoryType = {
     [key: string]: HistoryListType[];
   };
 
-  function transformHistoryData(
+  const transformHistoryData = (
     historyList: HistoryListType[]
-  ): GroupedHistoryType {
+  ): GroupedHistoryType => {
     const transformedData: GroupedHistoryType = {};
 
     historyList.forEach((item) => {
@@ -58,7 +51,7 @@ const History = () => {
     });
 
     return transformedData;
-  }
+  };
 
   const groupedHistory = transformHistoryData(historyList);
 
