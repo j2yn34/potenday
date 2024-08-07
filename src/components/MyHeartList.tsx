@@ -2,28 +2,42 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
-import { ProductListType, ProductType } from "../type";
+import { HeartListType, HeartTimeList, ProductType } from "../type";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import Notice from "./common/Notice";
+import formatDate from "../hooks/formatDate";
 import ProductCard from "./ProductCard";
 
 const MyHeartList = () => {
   const token = useRecoilValue<string>(accessTokenState);
-  const [myHeartCards, setMyHeartCards] = useState<ProductListType[]>([]);
+  const [myHeartCards, setMyHeartCards] = useState<HeartListType[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [groupedHeart, setGroupedHeart] = useState<GroupedHeartType>({});
+
+  type GroupedHeartType = {
+    [key: string]: HeartTimeList[];
+  };
 
   useEffect(() => {
     const getHeartListData = async () => {
       try {
-        const response = await axios({
-          method: "get",
-          url: "/api/api/v1/user/wish",
+        const response = await axios.get("/api/api/v1/user/wish", {
           headers: { Authorization: `Bearer ${token}` },
           responseType: "json",
         });
-        console.log(response.data.data);
-        const data = Array.isArray(response.data.data) ? response.data : [];
+
+        const data = Array.isArray(response.data.data.userWishList)
+          ? response.data.data.userWishList
+          : [];
         setMyHeartCards(data);
+
+        const timeListData = data.flatMap(
+          (item: { timeList: HeartTimeList }) => item.timeList
+        );
+        setGroupedHeart(groupByDate(timeListData));
+
+        setSelectedCategory("");
       } catch (err) {
         console.error("Error:", err);
       }
@@ -31,6 +45,38 @@ const MyHeartList = () => {
 
     getHeartListData();
   }, [token]);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      const filteredItems =
+        myHeartCards.find((item) => item.category === selectedCategory)
+          ?.timeList || [];
+      setGroupedHeart(groupByDate(filteredItems));
+    } else {
+      const timeListData = myHeartCards.flatMap((item) => item.timeList);
+      setGroupedHeart(groupByDate(timeListData));
+    }
+  }, [selectedCategory, myHeartCards]);
+
+  const categories = [...new Set(myHeartCards.map((item) => item.category))];
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const groupByDate = (myHeartTimeList: HeartTimeList[]): GroupedHeartType => {
+    const groupedData: GroupedHeartType = {};
+    myHeartTimeList.forEach((item) => {
+      const formattedDate = formatDate(item.insDate);
+      if (!groupedData[formattedDate]) {
+        groupedData[formattedDate] = [];
+      }
+      groupedData[formattedDate].push(item);
+    });
+    return groupedData;
+  };
+
+  console.log("groupedHeart", groupedHeart);
 
   return (
     <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
@@ -55,20 +101,47 @@ const MyHeartList = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            {myHeartCards.map((gift) => (
-              <div key={gift.category}>
-                <div>{gift.category}</div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-6 items-start">
-                  {gift.products.map((product: ProductType, index: number) => (
-                    <ProductCard
-                      data={product}
-                      key={`${product.productId}+${index}`}
-                      liked={true}
-                    />
-                  ))}
+            <div className="flex overflow-x-auto gap-5 mb-6 px-5">
+              <button
+                onClick={() => handleCategoryClick("")}
+                className={`${
+                  selectedCategory === "" ? "text-black" : "text-gray-500"
+                } font-semibold whitespace-nowrap`}
+              >
+                전체
+              </button>
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryClick(category)}
+                  className={`${
+                    selectedCategory === category
+                      ? "text-black"
+                      : "text-gray-500"
+                  } font-semibold whitespace-nowrap`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            <div>
+              {Object.keys(groupedHeart).map((date) => (
+                <div key={date} className="pb-14">
+                  <div className="pb-6 font-medium">{date}</div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
+                    {groupedHeart[date].flatMap((item) =>
+                      item.itemList.map((product: ProductType) => (
+                        <ProductCard
+                          key={product.productId}
+                          data={product}
+                          liked={true}
+                        />
+                      ))
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </div>

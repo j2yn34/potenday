@@ -30,6 +30,16 @@ export type HistoryListType = {
   wish: boolean;
 };
 
+export type HeartListType = {
+  category: string;
+  timeList: HeartTimeList[];
+};
+
+export type HeartTimeList = {
+  insDate: string;
+  itemList: ProductType[];
+};
+
 export type NoticeType = {
   isSad: boolean;
   title: string;
