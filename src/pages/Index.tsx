@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import home from "../assets/lottie/home.json";
 import ProductSection from "../components/ProductSection";
 import icon from "../assets/images/tabIcon.png";
+import { BsChevronDown } from "react-icons/bs";
 
 const Index = () => {
   return (
@@ -24,8 +25,13 @@ const Index = () => {
               선물 고르러 가기
             </Link>
             <Lottie className="w-[240px] h-[240px] mt-3" animationData={home} />
+            <div className="relative w-full">
+              <BsChevronDown
+                size={32}
+                className="text-gray-500 absolute top-[-12px] left-[46.5%]"
+              />
+            </div>
           </div>
-
           <div className="flex-center flex-col py-12">
             <img src={icon} className="w-[32px] mb-[10px]" />
             <h1 className="text-[22px] font-semibold leading-9 mb-2">
