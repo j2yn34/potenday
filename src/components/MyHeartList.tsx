@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { accessTokenState } from "../state/recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { accessTokenState, shareLinkState } from "../state/recoil";
 import { HeartListType, HeartTimeList, ProductType } from "../type";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
@@ -19,6 +19,7 @@ const MyHeartList = () => {
   const [selectedProducts, setSelectedProducts] = useState<Set<number>>(
     new Set()
   );
+  const setShareLink = useSetRecoilState<string>(shareLinkState);
 
   type GroupedHeartType = {
     [key: string]: HeartTimeList[];
@@ -96,6 +97,25 @@ const MyHeartList = () => {
       newSelectedProducts.add(productId);
     }
     setSelectedProducts(newSelectedProducts);
+  };
+
+  const handleShare = async () => {
+    const prdIdList = Array.from(selectedProducts);
+    try {
+      const response = await axios.post(
+        "/api/api/v1/user/share",
+        { prdIdList },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setShareLink(response.data.data.userWishShareUrl);
+      console.log("Share link:", response.data.data.userWishShareUrl);
+    } catch (error) {
+      console.error("Error handleShare:", error);
+    } finally {
+      setIsShareMode(false);
+    }
   };
 
   return (
@@ -193,7 +213,10 @@ const MyHeartList = () => {
             </div>
             {isShareMode && (
               <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
-                <button className="w-full py-4 bg-black text-white rounded-lg">
+                <button
+                  className="w-full py-4 bg-black text-white rounded-lg"
+                  onClick={handleShare}
+                >
                   링크 공유하기
                 </button>
               </div>
