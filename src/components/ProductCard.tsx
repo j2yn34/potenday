@@ -32,6 +32,9 @@ const ProductCard = ({
     preventDefault: () => void;
     stopPropagation: () => void;
   }) => {
+    if (isShareMode) {
+      return;
+    }
     e.preventDefault();
     e.stopPropagation();
 
@@ -76,6 +79,9 @@ const ProductCard = ({
   };
 
   const handleCardClick = async () => {
+    if (isShareMode) {
+      return;
+    }
     window.open(data.link, "_blank", "noopener,noreferrer");
 
     try {
