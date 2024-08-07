@@ -130,7 +130,9 @@ const ProductCard = ({
     <div onClick={handleCardClick} className="cursor-pointer relative">
       <div className="relative">
         <div className="aspect-w-1 aspect-h-1">
-          {isSelected && <div className="w-full h-full bg-black/[0.2] z-10" />}
+          {isSelected && (
+            <div className="w-full h-full bg-black/[0.2] z-10 rounded-lg" />
+          )}
           <img
             className="rounded-lg object-cover"
             src={data.image}
