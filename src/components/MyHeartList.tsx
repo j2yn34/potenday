@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { accessTokenState, shareLinkState } from "../state/recoil";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../state/recoil";
 import { HeartListType, HeartTimeList, ProductType } from "../type";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
