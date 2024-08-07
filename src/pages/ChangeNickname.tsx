@@ -56,7 +56,7 @@ const ChangeNickname = () => {
 
   return (
     <>
-      <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg">
+      <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
         <div className="absolute z-40 pt-8 -ml-1">
           <Link to="/mypage">
             <IoChevronBackSharp size={24} />
@@ -75,15 +75,19 @@ const ChangeNickname = () => {
             }`}
             onChange={handleChange}
             value={inputValue}
+            maxLength={10}
             required
           />
-          <p
-            className={`text-sm pt-1 h-5 ${
-              checkMessage ? "text-danger" : "text-gray-500"
-            }`}
-          >
-            {checkMessage ? `${checkMessage}` : "한글, 영문, 숫자 혼용 가능"}
-          </p>
+          <div className="flex items-center justify-between pt-2">
+            <p
+              className={`text-sm h-5 ${
+                checkMessage ? "text-danger" : "text-gray-500"
+              }`}
+            >
+              {checkMessage ? `${checkMessage}` : "한글, 영문, 숫자 혼용 가능"}
+            </p>
+            <p className="text-sm text-gray-500">{inputValue.length}/10</p>
+          </div>
           <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 pb-8 px-5">
             <button
               type="submit"
