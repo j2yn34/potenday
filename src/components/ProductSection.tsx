@@ -4,16 +4,21 @@ import axios from "axios";
 import { ProductType } from "../type";
 import ProductListLoad from "./skeletonUI/ProductListLoad";
 import { ProductListType } from "../type";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../state/recoil";
 
 const ProductSection = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [groupedProducts, setGroupedProducts] = useState<ProductListType[]>([]);
+  const token = useRecoilValue<string>(accessTokenState);
 
   useEffect(() => {
     const getTopHeartData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("/api/api/v1/product/popular/info");
+        const response = await axios.get("/api/api/v1/product/popular/info", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const { items }: { items: ProductListType[] } = response.data.data;
 
         if (items) {
