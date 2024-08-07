@@ -46,6 +46,7 @@ const Mypage = () => {
         navigate("/history");
         break;
       case "이용약관":
+        navigate("/terms");
         break;
       default:
         openModal(setShowLogoutModal);
