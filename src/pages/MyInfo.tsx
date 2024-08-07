@@ -3,13 +3,14 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import { accessTokenState } from "../state/recoil";
-import { useRecoilValue } from "recoil";
+import { accessTokenState, userInfoState } from "../state/recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import ConfirmModal from "../components/common/ConfirmModal";
 
 const MyInfo = () => {
-  const token = useRecoilValue<string>(accessTokenState);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const [token, setToken] = useRecoilState<string>(accessTokenState);
+  const resetUserInfo = useResetRecoilState(userInfoState);
   const navigate = useNavigate();
 
   const titleList = [{ title: "닉네임 변경" }, { title: "회원 탈퇴" }];
@@ -32,10 +33,12 @@ const MyInfo = () => {
         headers: { Authorization: `Bearer ${token}` },
         responseType: "json",
       });
+      resetUserInfo();
+      setToken("");
       navigate("/");
     } catch (err) {
       console.error("Error:", err);
-      navigate("/");
+      return;
     }
   };
 
@@ -48,6 +51,7 @@ const MyInfo = () => {
     setFunc(false);
     document.body.style.overflow = "auto";
   };
+
   return (
     <>
       <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
