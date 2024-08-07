@@ -19,7 +19,6 @@ const GiftListPage = () => {
   const [isReloaded, setIsReloaded] = useState(false);
   const [comment, setComment] = useRecoilState(commentState);
   const navigate = useNavigate();
-  console.log(giftList);
   const totalCount = giftList.reduce(
     (acc, gift) => acc + gift.products.length,
     0
@@ -29,19 +28,20 @@ const GiftListPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0] || ""
   );
+  const [initialFetchDone, setInitialFetchDone] = useState(false);
 
   const filteredGifts = selectedCategory
     ? giftList.filter((gift) => gift.category === selectedCategory)
     : giftList;
 
   useEffect(() => {
-    if (categories.length > 0 && selectedCategory) {
-      const fetchComment = async () => {
+    if (categories.length > 0 && !initialFetchDone) {
+      const fetchComment = async (category: string) => {
         setIsCommentLoading(true);
         try {
           const commentUrl = `/api/api/v1/ai/category/comment`;
           const res = await axios.get(commentUrl, {
-            params: { category: selectedCategory },
+            params: { category },
           });
           setComment(res.data.data.comment);
         } catch (err) {
@@ -51,16 +51,19 @@ const GiftListPage = () => {
           setIsCommentLoading(false);
         }
       };
-      fetchComment();
+      fetchComment(categories[0]);
+      setInitialFetchDone(true);
     }
-  }, []);
+  }, [categories, initialFetchDone]);
 
   const handleCategoryClick = async (category: string) => {
     setIsCommentLoading(true);
     setSelectedCategory(category);
     try {
-      const commentUrl = `/api/api/v1/ai/category/comment?category=${category}`;
-      const res = await axios.get(commentUrl);
+      const commentUrl = `/api/api/v1/ai/category/comment`;
+      const res = await axios.get(commentUrl, {
+        params: { category },
+      });
       setComment(res.data.data.comment);
     } catch (err) {
       console.error("Error comment:", err);
