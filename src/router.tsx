@@ -53,7 +53,7 @@ const Router = (): JSX.Element => {
       <Route path="/myinfo" element={<MyInfo />} />
       <Route path="/changeNickname" element={<ChangeNickname />} />
       <Route path="/history" element={<History />} />
-      <Route path="/shared/:id" element={<SharedPage />} />
+      <Route path="/share/:id" element={<SharedPage />} />
       <Route path="/preparing" element={<PreparingPage />} />
       <Route path="/speech" element={<MicTest />} />
       <Route path="/lottie" element={<LottieTest />} />
