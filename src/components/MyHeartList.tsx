@@ -5,6 +5,7 @@ import { accessTokenState, shareLinkState } from "../state/recoil";
 import { HeartListType, HeartTimeList, ProductType } from "../type";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
+import { FaCheckCircle } from "react-icons/fa";
 import Notice from "./common/Notice";
 import formatDate from "../hooks/formatDate";
 import ProductCard from "./ProductCard";
@@ -16,10 +17,10 @@ const MyHeartList = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [groupedHeart, setGroupedHeart] = useState<GroupedHeartType>({});
   const [isShareMode, setIsShareMode] = useState<boolean>(false);
+  const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
   const [selectedProducts, setSelectedProducts] = useState<Set<number>>(
     new Set()
   );
-  const setShareLink = useSetRecoilState<string>(shareLinkState);
 
   type GroupedHeartType = {
     [key: string]: HeartTimeList[];
@@ -109,12 +110,18 @@ const MyHeartList = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setShareLink(response.data.data.userWishShareUrl);
+      const shareLink = response.data.data.userWishShareUrl;
       console.log("Share link:", response.data.data.userWishShareUrl);
+      navigator.clipboard.writeText(shareLink);
+      setShowCopiedMessage(true);
+      setTimeout(() => {
+        setShowCopiedMessage(false);
+      }, 2000);
     } catch (error) {
       console.error("Error handleShare:", error);
     } finally {
       setIsShareMode(false);
+      setSelectedProducts(new Set());
     }
   };
 
@@ -188,7 +195,7 @@ const MyHeartList = () => {
                 </button>
               </div>
             </div>
-            <div className="pb-[100px]">
+            <div className={`${isShareMode && "pb-[100px] "}`}>
               {Object.keys(groupedHeart).map((date) => (
                 <div key={date} className="pb-8">
                   <div className="pb-6 font-medium">{date}</div>
@@ -211,6 +218,16 @@ const MyHeartList = () => {
                 </div>
               ))}
             </div>
+            {showCopiedMessage && (
+              <div className="fixed bottom-0 w-full max-w-[480px] z-50 -ml-5 pt-4 pb-10 px-5">
+                <div className="flex-center w-full h-[41px] bg-black rounded-md">
+                  <FaCheckCircle className="text-orange-500 mr-2" />
+                  <span className="text-white text-sm">
+                    링크가 복사되었어요!
+                  </span>
+                </div>
+              </div>
+            )}
             {isShareMode && (
               <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
                 <button
