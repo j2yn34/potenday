@@ -4,6 +4,8 @@ import { accessTokenState, userInfoState } from "../state/recoil";
 import { useSetRecoilState } from "recoil";
 import { UserInfoState } from "../state/recoilType";
 import axios from "axios";
+import loading from "../assets/lottie/loading.json";
+import Lottie from "lottie-react";
 
 const LoginRedirectPage = () => {
   const setAccessToken = useSetRecoilState<string>(accessTokenState);
@@ -11,10 +13,10 @@ const LoginRedirectPage = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
-  const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
 
   useEffect(() => {
     const token = new URL(window.location.href).searchParams.get("accessToken");
+    sessionStorage.setItem("hasSeenSplash", "true");
 
     const getUserInfo = async (token: string) => {
       try {
@@ -28,7 +30,6 @@ const LoginRedirectPage = () => {
 
         const { id, nickname } = response.data.data;
         setUserInfo({ id, nickname });
-        sessionStorage.setItem("hasSeenSplash", "true");
         navigate("/");
       } catch (error) {
         console.error(error);
@@ -40,7 +41,6 @@ const LoginRedirectPage = () => {
       setIsLoading(false);
       setAccessToken(token);
       getUserInfo(token);
-      setShowWelcomeModal(true);
     } else {
       setIsLoading(false);
       setShowErrorModal(true);
@@ -50,13 +50,12 @@ const LoginRedirectPage = () => {
   return (
     <>
       {isLoading ? (
-        <div>
-          <span className="flex mx-auto loading loading-spinner loading-md text-gray/[0.2]"></span>
+        <div className="full-height flex-center">
+          <Lottie animationData={loading} />
         </div>
       ) : (
         <>{showErrorModal && <div>로그인 실패</div>}</>
       )}
-      {showWelcomeModal && <div>로그인 완료</div>}
     </>
   );
 };
