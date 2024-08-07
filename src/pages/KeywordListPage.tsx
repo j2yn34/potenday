@@ -14,8 +14,10 @@ import { useEffect, useState } from "react";
 import LoadingFull from "../components/common/LoadingFull";
 import { UserInfoState } from "../state/recoilType";
 import ConfirmModal from "../components/common/ConfirmModal";
+import { accessTokenState } from "../state/recoil";
 
 const KeywordListPage = () => {
+  const token = useRecoilValue<string>(accessTokenState);
   const keywordList = useRecoilValue<string[]>(keywordListState);
   const transcript = useRecoilValue<string>(transcriptState);
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
@@ -47,7 +49,9 @@ const KeywordListPage = () => {
     const url = `/api/api/v1/product/recommend?${queryString}`;
 
     axios
-      .get(url)
+      .get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log("Response:", res.data.data.items);
         setGiftList(res.data.data.items);
