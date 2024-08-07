@@ -130,6 +130,7 @@ const ProductCard = ({
     <div onClick={handleCardClick} className="cursor-pointer relative">
       <div className="relative">
         <div className="aspect-w-1 aspect-h-1">
+          {isSelected && <div className="w-full h-full bg-black/[0.2] z-10" />}
           <img
             className="rounded-lg object-cover"
             src={data.image}
@@ -138,7 +139,7 @@ const ProductCard = ({
         </div>
         {isShareMode && (
           <div
-            className={`absolute top-3 left-3 w-[18px] h-[18px] border-[1px] rounded-sm flex-center cursor-pointer ${
+            className={`z-20 absolute top-3 left-3 w-[18px] h-[18px] border-[1px] rounded-sm flex-center cursor-pointer ${
               isSelected
                 ? "bg-orange-500 border-orange-500"
                 : "bg-black/[0.1] border-white "
@@ -155,7 +156,9 @@ const ProductCard = ({
           </div>
         )}
         <button
-          className={`absolute bottom-0 right-0 ${isSharedPage && "hidden"}`}
+          className={`absolute z-20 bottom-0 right-0 ${
+            isSharedPage && "hidden"
+          }`}
           onClick={handleHeart}
         >
           {isLiked ? (

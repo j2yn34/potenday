@@ -219,7 +219,7 @@ const MyHeartList = () => {
               ))}
             </div>
             {showCopiedMessage && (
-              <div className="fixed bottom-0 w-full max-w-[480px] z-50 -ml-5 pt-4 pb-10 px-5">
+              <div className="fixed z-50 bottom-0 w-full max-w-[480px] -ml-5 pt-4 pb-10 px-5">
                 <div className="flex-center w-full h-[41px] bg-black rounded-md">
                   <FaCheckCircle className="text-orange-500 mr-2" />
                   <span className="text-white text-sm">
@@ -229,7 +229,7 @@ const MyHeartList = () => {
               </div>
             )}
             {isShareMode && (
-              <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
+              <div className="fixed z-50 bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
                 <button
                   className={`w-full py-4 rounded-lg ${
                     selectedProducts.size === 0
