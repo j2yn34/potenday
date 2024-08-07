@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProductType } from "../type";
 import { FaHeart } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 import axios from "axios";
 import emptyHeart from "../assets/icons/emptyHeart.png";
 import { useRecoilValue } from "recoil";
@@ -131,16 +132,20 @@ const ProductCard = ({
         </div>
         {isShareMode && (
           <div
-            className="absolute top-2 left-2 w-[18px] h-[18px] bg-black/[0.1] border-[1px] border-white rounded-sm flex items-center justify-center cursor-pointer"
+            className={`absolute top-3 left-3 w-[18px] h-[18px] border-[1px] rounded-sm flex-center cursor-pointer ${
+              isSelected
+                ? "bg-orange-500 border-orange-500"
+                : "bg-black/[0.1] border-white "
+            }`}
             onClick={handleCheckboxClick}
           >
             <input
               type="checkbox"
               checked={isSelected}
               onChange={onSelect}
-              className="appearance-none w-full h-full"
+              className="hidden w-full h-full"
             />
-            {isSelected && <div className="w-full h-full bg-orange-500"></div>}
+            {isSelected && <FaCheck className="w-[12px] h-[12px] text-white" />}
           </div>
         )}
         <button
