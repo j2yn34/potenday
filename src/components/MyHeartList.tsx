@@ -214,8 +214,13 @@ const MyHeartList = () => {
             {isShareMode && (
               <div className="fixed bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
                 <button
-                  className="w-full py-4 bg-black text-white rounded-lg"
+                  className={`w-full py-4 rounded-lg ${
+                    selectedProducts.size === 0
+                      ? "bg-gray-200 text-gray-600 cursor-not-allowed"
+                      : "bg-black text-white"
+                  }`}
                   onClick={handleShare}
+                  disabled={selectedProducts.size === 0}
                 >
                   링크 공유하기
                 </button>
