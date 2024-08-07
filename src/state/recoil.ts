@@ -47,8 +47,3 @@ export const onboardingState = atom<boolean>({
   key: "onboardingState",
   default: false,
 });
-
-export const shareLinkState = atom<string>({
-  key: "shareLinkState",
-  default: "",
-});
