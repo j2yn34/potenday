@@ -7,6 +7,8 @@ import emptyHeart from "../assets/icons/emptyHeart.png";
 import { keywordListState } from "../state/recoil";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
+import { useNavigate } from "react-router-dom";
+import ConfirmModal from "./common/ConfirmModal";
 
 type ProductCardProps = {
   data: ProductType;
@@ -31,16 +33,21 @@ const ProductCard = ({
   const formattedPrice = data.lprice.toLocaleString("ko-KR");
   const [isLiked, setIsLiked] = useState<boolean>(liked);
   const keywordList = useRecoilValue<string[]>(keywordListState);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleHeart = async (e: {
-    preventDefault: () => void;
-    stopPropagation: () => void;
-  }) => {
+  const handleHeart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isShareMode) {
       return;
     }
+
     e.preventDefault();
     e.stopPropagation();
+
+    if (!token) {
+      openModal();
+      return;
+    }
 
     try {
       if (isLiked) {
@@ -116,38 +123,49 @@ const ProductCard = ({
     }
   };
 
-  const handleCardClick = async () => {
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isShareMode) {
       return;
     }
-    window.open(data.link, "_blank", "noopener,noreferrer");
+    e.stopPropagation();
+    if (!showModal) {
+      window.open(data.link, "_blank", "noopener,noreferrer");
 
-    try {
-      const response = await axios.post(
-        `/api/api/v1/user/history`,
-        {
-          title: data.title,
-          link: data.link,
-          image: data.image,
-          lprice: data.lprice,
-          hprice: data.hprice,
-          mallName: data.mallName,
-          productId: data.productId,
-          productType: data.productType,
-          brand: data.brand,
-          maker: data.maker,
-          category1: data.category1,
-          category2: data.category2,
-          category3: data.category3,
-          category4: data.category4,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
+      if (token) {
+        try {
+          axios
+            .post(
+              `/api/api/v1/user/history`,
+              {
+                title: data.title,
+                link: data.link,
+                image: data.image,
+                lprice: data.lprice,
+                hprice: data.hprice,
+                mallName: data.mallName,
+                productId: data.productId,
+                productType: data.productType,
+                brand: data.brand,
+                maker: data.maker,
+                category1: data.category1,
+                category2: data.category2,
+                category3: data.category3,
+                category4: data.category4,
+              },
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            )
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((err) => {
+              console.error("Error:", err);
+            });
+        } catch (err) {
+          console.error("Error:", err);
         }
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.error("Error:", err);
+      }
     }
   };
 
@@ -157,11 +175,25 @@ const ProductCard = ({
     return doc.body.textContent || "";
   };
 
-  const handleCheckboxClick = (e: React.MouseEvent) => {
+  const handleCheckboxClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    {
-      onSelect && onSelect();
-    }
+    onSelect && onSelect();
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const cancel = () => {
+    setShowModal(false);
+    document.body.style.overflow = "auto";
+  };
+
+  const goLogin = () => {
+    setShowModal(false);
+    navigate("/login");
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -228,6 +260,19 @@ const ProductCard = ({
           {formattedPrice}원
         </div>
       </div>
+      {showModal && (
+        <div className="full-height">
+          <ConfirmModal
+            isSad={true}
+            title={"로그인이 필요한 기능이에요."}
+            text={"로그인하고 마음에 드는 선물을 골라보세요."}
+            leftBtn={cancel}
+            confirm={goLogin}
+            leftName={"취소"}
+            rightName={"로그인하기"}
+          />
+        </div>
+      )}
     </div>
   );
 };
