@@ -9,6 +9,7 @@ import { ProductListType } from "../type";
 import fullGift from "../assets/icons/fullGift.png";
 import Lottieloading from "../assets/lottie/loading.json";
 import Lottie from "lottie-react";
+import goHomeLottie from "../assets/lottie/home.json";
 
 const GiftListPage = () => {
   const giftList = useRecoilValue(giftListState);
@@ -18,6 +19,7 @@ const GiftListPage = () => {
   const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [isReloaded, setIsReloaded] = useState(false);
   const [comment, setComment] = useRecoilState(commentState);
+  const [showGoHomeScreen, setShowGoHomeScreen] = useState(false);
   const navigate = useNavigate();
   const totalCount = giftList.reduce(
     (acc, gift) => acc + gift.products.length,
@@ -74,7 +76,10 @@ const GiftListPage = () => {
   };
 
   const goHome = () => {
-    navigate("/");
+    setShowGoHomeScreen(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 1600);
   };
 
   const onReLoadGiftList = () => {
@@ -100,6 +105,24 @@ const GiftListPage = () => {
 
   if (isLoading) {
     return <LoadingFull />;
+  }
+
+  if (showGoHomeScreen) {
+    return (
+      <div className="full-height flex-center pb-24">
+        <div className="flex-col">
+          <Lottie
+            animationData={goHomeLottie}
+            className="w-[240px] h-[240px] mb-2"
+          />
+          <div className="text-xl text-center font-semibold">
+            TIFY의 추천 어떠셨나요?
+            <br />
+            다음에 또 찾아주세요!
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
