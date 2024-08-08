@@ -150,7 +150,7 @@ const GiftListPage = () => {
       <div className="overflow-y-auto h-full px-5 pb-24">
         <GiftList data={filteredGifts} />
       </div>
-      <div className="fixed w-full max-w-[480px] bottom-0 z-50 flex justify-center gap-2 p-4 bg-purple-50">
+      <div className="fixed w-full max-w-[480px] bottom-0 z-40 flex justify-center gap-2 p-4 bg-purple-50">
         <button
           className={`basic-button border mr-2 ${
             isReloaded
