@@ -123,6 +123,14 @@ const VoiceRequest = () => {
     navigate("/");
   };
 
+  const handleReset = () => {
+    SpeechRecognition.stopListening();
+    resetTranscript();
+    setTranscript("");
+    setTimer(null);
+    setIsVoiceRequest(false);
+  };
+
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60)
       .toString()
@@ -199,7 +207,7 @@ const VoiceRequest = () => {
                   className={`round-btn ${
                     isTranscriptEmpty ? "hidden" : "bg-white flex-center "
                   }`}
-                  onClick={resetTranscript}
+                  onClick={handleReset}
                 >
                   <GrPowerReset size={20} />
                 </button>
