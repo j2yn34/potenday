@@ -25,6 +25,7 @@ const GiftList = ({ data }: { data: ProductListType[] }) => {
                 data={product}
                 key={`${product.productId}+${index}`}
                 liked={product.wish}
+                giftCategory={gift.category}
               />
             ))}
           </div>

@@ -4,6 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import axios from "axios";
 import emptyHeart from "../assets/icons/emptyHeart.png";
+import { keywordListState } from "../state/recoil";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 
@@ -14,6 +15,7 @@ type ProductCardProps = {
   isSelected?: boolean;
   onSelect?: () => void;
   isSharedPage?: boolean;
+  giftCategory?: string;
 };
 
 const ProductCard = ({
@@ -23,10 +25,12 @@ const ProductCard = ({
   isSelected,
   onSelect,
   isSharedPage,
+  giftCategory,
 }: ProductCardProps) => {
   const token = useRecoilValue<string>(accessTokenState);
   const formattedPrice = data.lprice.toLocaleString("ko-KR");
   const [isLiked, setIsLiked] = useState<boolean>(liked);
+  const keywordList = useRecoilValue<string[]>(keywordListState);
 
   const handleHeart = async (e: {
     preventDefault: () => void;
@@ -47,6 +51,23 @@ const ProductCard = ({
           }
         );
         console.log(response.data);
+        if (giftCategory) {
+          const giftKeywords = [
+            ...keywordList,
+            ...Array(6 - keywordList.length).fill(""),
+          ].slice(0, 6);
+
+          const tuning = await axios.post("/api/api/v1/ai/tuning/delete", {
+            keyword1: giftKeywords[0],
+            keyword2: giftKeywords[1],
+            keyword3: giftKeywords[2],
+            keyword4: giftKeywords[3],
+            keyword5: giftKeywords[4],
+            keyword6: giftKeywords[5],
+            product: giftCategory,
+          });
+          console.log(tuning.data);
+        }
       } else {
         const response = await axios.post(
           `/api/api/v1/user/wish`,
@@ -71,6 +92,23 @@ const ProductCard = ({
           }
         );
         console.log(response.data);
+        if (giftCategory) {
+          const giftKeywords = [
+            ...keywordList,
+            ...Array(6 - keywordList.length).fill(""),
+          ].slice(0, 6);
+
+          const tuning = await axios.post("/api/api/v1/ai/tuning/add", {
+            keyword1: giftKeywords[0],
+            keyword2: giftKeywords[1],
+            keyword3: giftKeywords[2],
+            keyword4: giftKeywords[3],
+            keyword5: giftKeywords[4],
+            keyword6: giftKeywords[5],
+            product: giftCategory,
+          });
+          console.log(tuning.data);
+        }
       }
       setIsLiked(!isLiked);
     } catch (err) {
