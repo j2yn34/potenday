@@ -5,10 +5,6 @@ const KeywordList = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
   console.log(keywordList);
 
-  if (!Array.isArray(keywordList)) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="flex flex-col gap-4 items-center">
       {keywordList.map((keyword, index) => (

@@ -14,7 +14,11 @@ import KeyboardBtn from "../components/buttons/KeyboardBtn";
 import DoneRequest from "../components/DoneRequest";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
-import { keywordListState, transcriptState } from "../state/recoil";
+import {
+  isKeywordLoadingState,
+  keywordListState,
+  transcriptState,
+} from "../state/recoil";
 import timerIcon from "../assets/icons/timer.png";
 
 const VoiceRequest = () => {
@@ -23,6 +27,7 @@ const VoiceRequest = () => {
   const [timer, setTimer] = useState<number | null>(null);
   const [lastTranscript, setLastTranscript] = useState("");
   const [noInputWarning, setNoInputWarning] = useState(false);
+  const setIsKeywordLoading = useSetRecoilState(isKeywordLoadingState);
 
   const setTranscript = useSetRecoilState(transcriptState);
   const setKeywordList = useSetRecoilState(keywordListState);
@@ -91,16 +96,19 @@ const VoiceRequest = () => {
   const submitRequest = () => {
     console.log(transcript);
     SpeechRecognition.stopListening();
+    setIsKeywordLoading(true);
     setIsDoneRequest(true);
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
       .then((res) => {
         setTranscript(transcript);
-        console.log("Response:", res.data);
+        console.log("submit Response:", res.data);
         setKeywordList(res.data.data.keywordList);
+        setIsKeywordLoading(false);
       })
       .catch((err) => {
         console.error("Error:", err);
+        setIsKeywordLoading(false);
         setTranscript("");
         navigate("/keyword");
       });
@@ -179,7 +187,7 @@ const VoiceRequest = () => {
               ) : (
                 <div className="w-[90px] py-1.5 bg-purple-100 rounded-full mb-5">
                   <span className="flex-center gap-[6px] text-center text-sm font-bold">
-                    <img src={timerIcon} className="w-[18px] h-[18px]"></img>
+                    <img src={timerIcon} className="w-[18px] h-[18px]" />
                     {formatTime(timer)}
                   </span>
                 </div>

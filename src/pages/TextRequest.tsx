@@ -1,7 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { keywordListState, transcriptState } from "../state/recoil";
+import {
+  isKeywordLoadingState,
+  keywordListState,
+  transcriptState,
+} from "../state/recoil";
 import { Link, useNavigate } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import Lottie from "lottie-react";
@@ -12,6 +16,7 @@ import DoneRequest from "../components/DoneRequest";
 const TextRequest = () => {
   const [message, setMessage] = useState<string>("");
   const [isDoneRequest, setIsDoneRequest] = useState(false);
+  const setIsKeywordLoading = useSetRecoilState(isKeywordLoadingState);
   const setKeywordList = useSetRecoilState(keywordListState);
   const setTranscript = useSetRecoilState(transcriptState);
   const navigate = useNavigate();
@@ -26,17 +31,20 @@ const TextRequest = () => {
     e.preventDefault();
     console.log(message);
     setTranscript(message);
+    setIsKeywordLoading(true);
     setIsDoneRequest(true);
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${message}`)
       .then((res) => {
-        console.log("Response:", res.data);
-        setKeywordList(res.data.data.keywordList);
+        // console.log("Response:", res.data);
         console.log("keywordList: ", res.data.data.keywordList);
+        setKeywordList(res.data.data.keywordList);
+        setIsKeywordLoading(false);
       })
       .catch((err) => {
-        console.error("Error:", err);
+        console.error("keywordList Error:", err);
         setTranscript("");
+        setIsKeywordLoading(false);
       });
     setTimeout(() => {
       navigate("/keyword");

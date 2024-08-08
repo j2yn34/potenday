@@ -7,6 +7,7 @@ import {
   giftListState,
   userInfoState,
   transcriptState,
+  isKeywordLoadingState,
 } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
 import { ProductListType } from "../type";
@@ -19,6 +20,7 @@ import { accessTokenState } from "../state/recoil";
 const KeywordListPage = () => {
   const token = useRecoilValue<string>(accessTokenState);
   const keywordList = useRecoilValue<string[]>(keywordListState);
+  const isKeywordLoading = useRecoilValue(isKeywordLoadingState);
   const transcript = useRecoilValue<string>(transcriptState);
   const userInfo = useRecoilValue<UserInfoState>(userInfoState);
   const setGiftList = useSetRecoilState<ProductListType[]>(giftListState);
@@ -53,13 +55,13 @@ const KeywordListPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log("Response:", res.data.data.items);
+        console.log("giftlist Response:", res.data.data.items);
         setGiftList(res.data.data.items);
         setIsLoading(false);
         navigate("/giftlist");
       })
       .catch((err) => {
-        console.error("Error:", err);
+        console.error("giftlist Error:", err);
         setGiftList([]);
         setIsLoading(false);
         openGiftListErrModal();
@@ -73,13 +75,13 @@ const KeywordListPage = () => {
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
       .then((res) => {
-        console.log("Response:", res.data);
+        console.log("reloadKeyword Response:", res.data);
         setKeywordList(res.data.data.keywordList);
         if (res.data.data.keywordList.length === 0) {
           setIsLoading(false);
           openKeywordErrModal();
         }
-        console.log("keywordList: ", res.data.data.keywordList);
+        console.log("reloadKeyword keywordList: ", res.data.data.keywordList);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -90,9 +92,10 @@ const KeywordListPage = () => {
       });
   };
 
-  if (isLoading) {
+  if (isLoading || isKeywordLoading) {
     return <LoadingFull />;
   }
+
   const openKeywordErrModal = () => {
     setShowKeywordErrModal(true);
     document.body.style.overflow = "hidden";
@@ -135,7 +138,7 @@ const KeywordListPage = () => {
           원하시는 선물은
         </h1>
         <div className="flex-center h-full mt-8 mb-9">
-          <KeywordList />
+          {isKeywordLoading ? <LoadingFull /> : <KeywordList />}
         </div>
         <div className="relative">
           {showMessage && (
