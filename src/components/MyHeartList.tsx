@@ -149,7 +149,7 @@ const MyHeartList = () => {
         ) : (
           <div className="flex flex-col">
             <div>
-              <div className="flex overflow-x-auto gap-5 pb-3">
+              <div className="flex category-scroll overflow-x-auto gap-5 pb-3">
                 <button
                   onClick={() => handleCategoryClick("")}
                   className={`${
