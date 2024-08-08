@@ -104,19 +104,19 @@ const GiftListPage = () => {
 
   return (
     <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg bg-purple-50">
-      <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
+      <h1 className="mb-6 pt-8 text-center font-semibold text-xl leading-8">
         총 {totalCount}개의 추천 선물
       </h1>
       {categories.length !== 0 && (
         <>
-          <div className="flex overflow-x-auto gap-5 mb-6 px-5">
+          <div className="flex category-scroll overflow-x-auto gap-5 mb-4 px-5">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
                 className={`${
                   selectedCategory === category ? "text-black" : "text-gray-500"
-                } font-semibold whitespace-nowrap`}
+                } font-semibold whitespace-nowrap py-2`}
               >
                 {category}
               </button>

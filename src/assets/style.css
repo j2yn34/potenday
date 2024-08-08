@@ -114,3 +114,31 @@ body {
   background: url("../assets/images/bgShared.png") repeat-y top center;
   background-size: 480px 640px;
 }
+
+/* 스크롤바 전체 */
+.category-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* 스크롤바 트랙 */
+.category-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 20px;
+}
+
+/* 스크롤바 핸들 */
+.category-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+/* 스크롤바 핸들 hover 상태 */
+.category-scroll::-webkit-scrollbar-thumb:hover {
+  background: #d6d3e3;
+}
+
+/* Firefox 전용 커스텀 스크롤바 스타일 */
+.category-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d6d3e3 #f1f1f1;
+}
