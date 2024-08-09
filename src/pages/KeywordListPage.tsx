@@ -148,18 +148,23 @@ const KeywordListPage = () => {
               </span>
             </div>
           )}
-          <div className="flex-center mb-8">
-            <button
-              onClick={reloadKeyword}
-              className={`basic-button border mr-2 ${
-                isReloaded
-                  ? "bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed"
-                  : "bg-white border-black"
-              }`}
-              disabled={isReloaded}
-            >
-              아니에요
-            </button>
+          <div className="flex-center mb-8 gap-2">
+            <div className="relative w-full">
+              <button
+                onClick={reloadKeyword}
+                className={`basic-button border ${
+                  isReloaded
+                    ? "bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed"
+                    : "bg-white border-black"
+                }`}
+                disabled={isReloaded}
+              >
+                아니에요
+              </button>
+              {showMessage && (
+                <div className="absolute top-[-14px] left-[50%] transform -translate-x-1/2 w-0 h-0 border-t-[8px] border-t-black border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent" />
+              )}
+            </div>
             <button
               onClick={submitKeywords}
               className="basic-button bg-black text-white"
