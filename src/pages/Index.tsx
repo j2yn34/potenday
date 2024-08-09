@@ -9,7 +9,7 @@ import { BsArrowUp, BsChevronDown } from "react-icons/bs";
 
 const Index = () => {
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const [buttonRightPosition, setButtonRightPosition] = useState("20px");
+  const [buttonRightPosition, setButtonRightPosition] = useState("24px");
 
   const handleScroll = () => {
     window.scrollBy({ top: 476, left: 0, behavior: "smooth" });
@@ -21,7 +21,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScrollEvent = () => {
-      if (window.scrollY > 400) {
+      if (window.scrollY > 470) {
         setShowScrollTopButton(true);
       } else {
         setShowScrollTopButton(false);
@@ -31,7 +31,7 @@ const Index = () => {
     const updateButtonPosition = () => {
       const screenWidth = window.innerWidth;
       const buttonRight =
-        screenWidth > 480 ? `calc(20px + (50% - 240px))` : "20px";
+        screenWidth > 480 ? `calc(20px + (50% - 240px))` : "24px";
       setButtonRightPosition(buttonRight);
     };
 
@@ -85,7 +85,7 @@ const Index = () => {
         {showScrollTopButton && (
           <button
             onClick={scrollToTop}
-            className="fixed z-40 bottom-8 p-2.5 bg-white border-gray-200 border-[1px] border text-gray-800 rounded-full shadow-lg"
+            className="fixed z-40 bottom-8 p-3 bg-white text-gray-800 rounded-full shadow-[0_2px_6px_3px_rgba(0,0,0,0.1)]"
             style={{ right: buttonRightPosition }}
           >
             <BsArrowUp size={24} />
