@@ -8,12 +8,15 @@ import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 import formatDate from "../hooks/formatDate";
 import Notice from "../components/common/Notice";
+import HistoryLoad from "../components/skeletonUI/HistoryLoad";
 
 const History = () => {
   const token = useRecoilValue<string>(accessTokenState);
   const [historyList, setHistoryList] = useState<HistoryListType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const getHistoryData = async () => {
       try {
         const response = await axios({
@@ -24,8 +27,10 @@ const History = () => {
         });
         console.log(response.data.data.history);
         setHistoryList(response.data.data.history);
+        setIsLoading(false);
       } catch (err) {
         console.error("Error:", err);
+        setIsLoading(false);
       }
     };
 
@@ -66,31 +71,39 @@ const History = () => {
       <h1 className="mb-7 pt-7 text-center font-semibold text-xl leading-8">
         최근 본 선물
       </h1>
-      {historyList.length === 0 ? (
-        <div className="flex-center full-height -mt-16">
-          <Notice
-            isSad={false}
-            title={"최근 본 선물이 없어요."}
-            text={"선물을 추천 받고 구경해 보세요."}
-            nav="/voice"
-            btnName="선물 고르러 가기"
-          />
+      {isLoading ? (
+        <div className="pt-[58px]">
+          <HistoryLoad />
         </div>
       ) : (
-        <div>
-          <div className="w-screen h-[26px] mb-8 pl-5 -ml-5 bg-gray-100">
-            <span className="text-xs text-gray-600 font-medium">
-              최근 7일 동안의 기록을 볼 수 있어요.
-            </span>
-          </div>
-          {Object.keys(groupedHistory).map((date) => (
-            <HistoryList
-              key={date}
-              date={date}
-              products={groupedHistory[date]}
-            />
-          ))}
-        </div>
+        <>
+          {historyList.length === 0 ? (
+            <div className="flex-center full-height -mt-16">
+              <Notice
+                isSad={false}
+                title={"최근 본 선물이 없어요."}
+                text={"선물을 추천 받고 구경해 보세요."}
+                nav="/voice"
+                btnName="선물 고르러 가기"
+              />
+            </div>
+          ) : (
+            <div>
+              <div className="w-screen h-[26px] mb-8 pl-5 -ml-5 bg-gray-100">
+                <span className="text-xs text-gray-600 font-medium">
+                  최근 7일 동안의 기록을 볼 수 있어요.
+                </span>
+              </div>
+              {Object.keys(groupedHistory).map((date) => (
+                <HistoryList
+                  key={date}
+                  date={date}
+                  products={groupedHistory[date]}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
