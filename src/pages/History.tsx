@@ -64,7 +64,7 @@ const History = () => {
   return (
     <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
       <div className="absolute z-40 pt-7 -ml-1">
-        <Link to="/">
+        <Link to="/mypage">
           <IoChevronBackSharp size={24} />
         </Link>
       </div>

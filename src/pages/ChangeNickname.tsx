@@ -59,7 +59,7 @@ const ChangeNickname = () => {
     <>
       <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
         <div className="absolute z-40 pt-8 -ml-1">
-          <Link to="/mypage">
+          <Link to="/myinfo">
             <IoChevronBackSharp size={24} />
           </Link>
         </div>
