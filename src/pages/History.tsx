@@ -72,7 +72,7 @@ const History = () => {
         최근 본 선물
       </h1>
       {isLoading ? (
-        <div className="pt-[58px]">
+        <div className="pt-[54px]">
           <HistoryLoad />
         </div>
       ) : (
