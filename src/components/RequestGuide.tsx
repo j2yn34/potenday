@@ -31,8 +31,8 @@ const RequestGuide = () => {
       </div>
       <div className="flex-center mb-15 h-full text-center font-semibold text-xl text-purple-100 leading-8">
         어떤 관계인지
-        <br /> 나이는 어떻게 되는지 <br />
-        선물의 가격대 <br />
+        <br />
+        성별과 나이는 어떻게 되는지 <br />
         평소 좋아하는 스타일은 어떤지
         <br />
         말해 보세요
