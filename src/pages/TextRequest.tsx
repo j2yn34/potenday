@@ -12,6 +12,7 @@ import Lottie from "lottie-react";
 import LottieListen from "../assets/lottie/listen.json";
 import { PiArrowUpBold } from "react-icons/pi";
 import DoneRequest from "../components/DoneRequest";
+import bubble from "../assets/images/bubble.png";
 
 const TextRequest = () => {
   const [message, setMessage] = useState<string>("");
@@ -72,7 +73,11 @@ const TextRequest = () => {
                   animationData={LottieListen}
                 />
               </div>
-              <div className="flex-center pt-3.5">
+              <div className="relative flex-center pt-3.5">
+                <img
+                  src={bubble}
+                  className="absolute top-[4px] w-[14px] h-[17px]"
+                />
                 <div className="flex-center w-[296px] h-7 bg-white border rounded-full border-orange-200">
                   <span className="text-sm text-orange-500">
                     이야기를 작성해서 전송해주세요.

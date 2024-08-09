@@ -20,6 +20,7 @@ import {
   transcriptState,
 } from "../state/recoil";
 import timerIcon from "../assets/icons/timer.png";
+import bubble from "../assets/images/bubble.png";
 
 const VoiceRequest = () => {
   const [isVoiceRequest, setIsVoiceRequest] = useState<boolean>(false);
@@ -163,7 +164,11 @@ const VoiceRequest = () => {
                   <h1 className="text-center font-semibold text-xl leading-8">
                     TIFY가 듣고 있어요 ..
                   </h1>
-                  <div className="flex-center pt-3.5">
+                  <div className="relative flex-center pt-3.5">
+                    <img
+                      src={bubble}
+                      className="absolute top-[4px] w-[14px] h-[17px]"
+                    />
                     <div className="flex-center w-[296px] h-7 bg-white border rounded-full border-orange-200">
                       <span className="text-sm text-orange-500">
                         이야기를 끝내셨다면 완료 버튼을 눌러주세요.

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import LottieWho from "../assets/lottie/who.json";
 import { IoChevronBackSharp } from "react-icons/io5";
+import bubble from "../assets/images/bubble.png";
 
 const RequestGuide = () => {
   return (
@@ -19,7 +20,8 @@ const RequestGuide = () => {
           누구에게 <br />
           어떤 선물을 하고 싶나요?
         </h1>
-        <div className="flex-center pt-3.5">
+        <div className="relative flex-center pt-3.5">
+          <img src={bubble} className="absolute top-[4px] w-[14px] h-[17px]" />
           <div className="flex-center w-[296px] h-7 bg-white border rounded-full border-orange-200">
             <span className="text-sm text-orange-500">
               아래의 버튼을 누르고 자유롭게 이야기해 주세요.
