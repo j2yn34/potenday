@@ -99,9 +99,7 @@ const Mypage = () => {
           <div className="w-full h-[75px] bg-black rounded-xl px-5 py-3 flex items-center justify-between">
             <div>
               <div className="text-white">{userInfo.nickname}님</div>
-              <span className="text-white text-xs text-gray-400">
-                내 정보 관리
-              </span>
+              <span className="text-xs text-gray-400">내 정보 관리</span>
             </div>
             <IoIosArrowForward className="text-white" />
           </div>
