@@ -9,6 +9,7 @@ import { accessTokenState } from "../state/recoil";
 import formatDate from "../hooks/formatDate";
 import Notice from "../components/common/Notice";
 import HistoryLoad from "../components/skeletonUI/HistoryLoad";
+import ScrollToTopButton from "../components/buttons/ScrollToTopBtn";
 
 const History = () => {
   const token = useRecoilValue<string>(accessTokenState);
@@ -105,6 +106,7 @@ const History = () => {
           )}
         </>
       )}
+      <ScrollToTopButton />
     </div>
   );
 };

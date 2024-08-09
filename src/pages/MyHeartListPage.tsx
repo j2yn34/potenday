@@ -4,6 +4,7 @@ import { accessTokenState } from "../state/recoil";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ConfirmModal from "../components/common/ConfirmModal";
+import ScrollToTopButton from "../components/buttons/ScrollToTopBtn";
 
 const MyHeartListPage = () => {
   const token = useRecoilValue<string>(accessTokenState);
@@ -49,7 +50,10 @@ const MyHeartListPage = () => {
           rightName={"로그인 하기"}
         />
       ) : (
-        <MyHeartList />
+        <>
+          <MyHeartList />
+          <ScrollToTopButton />
+        </>
       )}
     </div>
   );
