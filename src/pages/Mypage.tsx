@@ -126,7 +126,7 @@ const Mypage = () => {
         <ConfirmModal
           isSad={false}
           title={"로그아웃 하시겠어요?"}
-          text={""}
+          text={"로그아웃 하면 이후 기록이 저장되지 않아요."}
           leftBtn={() => closeModal(setShowLogoutModal)}
           confirm={runLogout}
           leftName={"취소"}
