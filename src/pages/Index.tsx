@@ -8,14 +8,14 @@ import { BsChevronDown } from "react-icons/bs";
 
 const Index = () => {
   const handleScroll = () => {
-    window.scrollBy({ top: 550, left: 0, behavior: "smooth" });
+    window.scrollBy({ top: 476, left: 0, behavior: "smooth" });
   };
 
   return (
     <div className="bg-white">
       <div className="home-bg">
         <Header />
-        <div className="px-5">
+        <div className="px-5 pt-[74px]">
           <div className="flex flex-col items-center mb-9">
             <h1 className="text-center text-2xl font-semibold leading-9 mt-10 mb-6">
               1분 만에 고르는

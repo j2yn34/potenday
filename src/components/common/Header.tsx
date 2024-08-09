@@ -5,18 +5,20 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="px-5 pt-8 pb-[18px] bg-purple-0">
-      <div className="flex justify-between">
-        <button>
-          <img src={headerLogo} alt="TIFY 로고" />
-        </button>
-        <div className="flex gap-5">
-          <Link to="/heartlist">
-            <img src={heartIcon} alt="관심목록" />
-          </Link>
-          <Link to="/mypage">
-            <img src={userIcon} alt="내 정보" />
-          </Link>
+    <div className="fixed z-40 w-full max-w-[480px]">
+      <div className="px-5 pt-8 pb-[18px] bg-purple-0">
+        <div className="flex justify-between">
+          <button>
+            <img src={headerLogo} alt="TIFY 로고" />
+          </button>
+          <div className="flex gap-5">
+            <Link to="/heartlist">
+              <img src={heartIcon} alt="관심목록" />
+            </Link>
+            <Link to="/mypage">
+              <img src={userIcon} alt="내 정보" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
