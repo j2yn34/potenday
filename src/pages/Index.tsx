@@ -7,6 +7,10 @@ import icon from "../assets/images/tabIcon.png";
 import { BsChevronDown } from "react-icons/bs";
 
 const Index = () => {
+  const handleScroll = () => {
+    window.scrollBy({ top: 550, left: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="bg-white">
       <div className="home-bg">
@@ -25,12 +29,12 @@ const Index = () => {
               선물 고르러 가기
             </Link>
             <Lottie className="w-[240px] h-[240px] mt-3" animationData={home} />
-            <div className="relative w-full">
+            <button onClick={handleScroll} className="relative w-full">
               <BsChevronDown
                 size={32}
                 className="text-gray-500 absolute top-[-12px] left-[46.5%]"
               />
-            </div>
+            </button>
           </div>
           <div className="flex-center flex-col py-12">
             <img src={icon} className="w-[32px] mb-[10px]" />
