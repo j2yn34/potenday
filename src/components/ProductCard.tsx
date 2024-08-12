@@ -37,9 +37,7 @@ const ProductCard = ({
   const navigate = useNavigate();
 
   const handleHeart = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (isShareMode) {
-      return;
-    }
+    if (isShareMode) return;
 
     e.preventDefault();
     e.stopPropagation();
@@ -124,46 +122,48 @@ const ProductCard = ({
   };
 
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isShareMode) {
-      return;
-    }
-    e.stopPropagation();
-    if (!showModal) {
-      window.open(data.link, "_blank", "noopener,noreferrer");
+    if (isShareMode && onSelect) {
+      e.stopPropagation();
+      onSelect();
+    } else {
+      e.stopPropagation();
+      if (!showModal) {
+        window.open(data.link, "_blank", "noopener,noreferrer");
 
-      if (token) {
-        try {
-          axios
-            .post(
-              `/api/api/v1/user/history`,
-              {
-                title: data.title,
-                link: data.link,
-                image: data.image,
-                lprice: data.lprice,
-                hprice: data.hprice,
-                mallName: data.mallName,
-                productId: data.productId,
-                productType: data.productType,
-                brand: data.brand,
-                maker: data.maker,
-                category1: data.category1,
-                category2: data.category2,
-                category3: data.category3,
-                category4: data.category4,
-              },
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            )
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((err) => {
-              console.error("Error:", err);
-            });
-        } catch (err) {
-          console.error("Error:", err);
+        if (token) {
+          try {
+            axios
+              .post(
+                `/api/api/v1/user/history`,
+                {
+                  title: data.title,
+                  link: data.link,
+                  image: data.image,
+                  lprice: data.lprice,
+                  hprice: data.hprice,
+                  mallName: data.mallName,
+                  productId: data.productId,
+                  productType: data.productType,
+                  brand: data.brand,
+                  maker: data.maker,
+                  category1: data.category1,
+                  category2: data.category2,
+                  category3: data.category3,
+                  category4: data.category4,
+                },
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              )
+              .then((response) => {
+                console.log(response.data);
+              })
+              .catch((err) => {
+                console.error("Error:", err);
+              });
+          } catch (err) {
+            console.error("Error:", err);
+          }
         }
       }
     }
