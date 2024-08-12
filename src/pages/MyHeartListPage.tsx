@@ -43,7 +43,7 @@ const MyHeartListPage = () => {
         <ConfirmModal
           isSad={false}
           title={"로그인이 필요한 기능이에요"}
-          text={"로그인 하고 관심 선물을 저장해 보세요"}
+          text={"관심 선물을 저장하고 공유해 보세요"}
           leftBtn={cancle}
           confirm={goHome}
           leftName={"취소"}
