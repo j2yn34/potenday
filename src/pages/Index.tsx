@@ -13,7 +13,7 @@ const Index = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white full-height">
       <Header />
       <div className="home-bg px-5 relative">
         <div className="pt-[74px]">
@@ -41,10 +41,10 @@ const Index = () => {
         <div className="flex-center flex-col py-12">
           <img src={icon} className="w-[32px] mb-[10px]" />
           <h1 className="text-[22px] font-semibold leading-9 mb-2">
-            T!FY의 인기선물
+            T!FY의 인기 선물
           </h1>
           <span className="text-gray-500 text-sm">
-            많은 사람들이 찜한 인기 선물을 구경해보세요!
+            많은 사람들이 찜한 인기 선물을 구경해 보세요!
           </span>
         </div>
         <ProductSection />

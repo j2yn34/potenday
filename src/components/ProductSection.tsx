@@ -66,6 +66,11 @@ const ProductSection = () => {
     <>
       {isLoading ? (
         <ProductListLoad />
+      ) : groupedProducts.length === 0 ? (
+        <div className="flex-center pb-16 text-gray-400 text-center text-sm">
+          아직 인기 선물이 없어요. <br />
+          가장 먼저 하트를 눌러 보세요!
+        </div>
       ) : (
         <>
           {groupedProducts.map((group) => (
