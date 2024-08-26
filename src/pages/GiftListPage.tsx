@@ -163,7 +163,7 @@ const GiftListPage = () => {
               )}
             </div>
           </div>
-          <div className="w-screen h-[26px] mb-3 pl-5 -ml-5 bg-gray-100">
+          <div className="w-[calc(100%+40px)] h-[26px] mb-3 pl-5 -ml-5 bg-gray-100">
             <span className="text-xs text-gray-600 font-medium pl-5">
               할인가가 적용되지 않은 가격입니다.
             </span>

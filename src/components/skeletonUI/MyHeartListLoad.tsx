@@ -7,7 +7,7 @@ const MyHeartListLoad = () => {
         <div className="w-[50px] h-5 bg-gray-300 rounded-sm"></div>
         <div className="w-[50px] h-5 bg-gray-300 rounded-sm"></div>
       </div>
-      <div className="w-screen -ml-5 h-[6px] bg-[#E7E5F2] my-2" />
+      <div className="w-[calc(100%+40px)] -ml-5 h-[6px] bg-[#E7E5F2] my-2" />
       <div className="flex justify-end">
         <div className="w-[76px] h-[32px] rounded-full mt-2 bg-gray-300" />
       </div>

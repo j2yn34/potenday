@@ -90,7 +90,7 @@ const History = () => {
             </div>
           ) : (
             <div>
-              <div className="w-screen h-[26px] mb-8 pl-5 -ml-5 bg-gray-100">
+              <div className="w-[calc(100%+40px)] h-[26px] mb-8 pl-5 -ml-5 bg-gray-100">
                 <span className="text-xs text-gray-600 font-medium">
                   최근 7일 동안의 기록을 볼 수 있어요.
                 </span>

@@ -181,7 +181,7 @@ const MyHeartList = () => {
                       </button>
                     ))}
                   </div>
-                  <div className="w-screen -ml-5 h-[6px] bg-[#E7E5F2]" />
+                  <div className="w-[calc(100%+40px)] -ml-5 h-[6px] bg-[#E7E5F2]" />
                 </div>
                 <div className="flex w-full items-center justify-between">
                   {isShareMode && (

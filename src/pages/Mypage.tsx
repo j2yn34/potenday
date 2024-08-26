@@ -104,7 +104,7 @@ const Mypage = () => {
             <IoIosArrowForward className="text-white" />
           </div>
         </Link>
-        <div className="w-screen h-[6px] bg-[#E7E5F2] mt-4 -ml-5" />
+        <div className="w-[calc(100%+40px)] h-[6px] bg-[#E7E5F2] mt-4 -ml-5" />
         <div>
           {titleList.map((title) => (
             <div className="w-full h-14" key={title.title}>
