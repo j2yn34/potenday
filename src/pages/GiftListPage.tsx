@@ -171,7 +171,13 @@ const GiftListPage = () => {
         </>
       )}
       <div className="overflow-y-auto h-full px-5 pb-24">
-        <GiftList data={filteredGifts} />
+        {filteredGifts.every((gift) => gift.products.length === 0) ? (
+          <div className="text-center text-gray-500 text-sm pt-20">
+            아직 TIFY에 해당 카테고리의 상품이 없습니다.
+          </div>
+        ) : (
+          <GiftList data={filteredGifts} />
+        )}
       </div>
       <div className="fixed w-full max-w-[480px] bottom-0 z-40 flex justify-center gap-2 p-4 bg-purple-50">
         <button
