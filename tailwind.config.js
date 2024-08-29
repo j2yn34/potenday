@@ -11,15 +11,12 @@ export default {
       xl: "1200px",
     },
     extend: {
-      height: {
-        "vh-full": "var(--vh, 1vh) * 100",
-      },
       colors: {
         white: "#FFFFFF",
         black: "#000000",
         "orange-0": "#FFFAF7",
         "orange-50": "#FEEEE4",
-        "orange-200": "#FFC09C ",
+        "orange-200": "#FFC09C",
         "orange-500": "#FF5E00",
         "purple-0": "#F9F9FC",
         "purple-50": "#F5F4FA",
