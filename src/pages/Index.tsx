@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/common/Header";
 import Lottie from "lottie-react";
 import home from "../assets/lottie/home.json";
-import ProductSection from "../components/ProductSection";
+import ProductSection from "../components/PopularSection";
 import icon from "../assets/images/tabIcon.png";
 import { BsChevronDown } from "react-icons/bs";
 import ScrollToTopButton from "../components/buttons/ScrollToTopBtn";

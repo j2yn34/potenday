@@ -7,13 +7,13 @@ import { ProductListType } from "../type";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 
-const ProductSection = () => {
+const PopularSection = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [groupedProducts, setGroupedProducts] = useState<ProductListType[]>([]);
   const token = useRecoilValue<string>(accessTokenState);
 
   useEffect(() => {
-    const getTopHeartData = async () => {
+    const getPopularData = async () => {
       setIsLoading(true);
       try {
         const response = await axios.get("/api/api/v1/product/popular/info", {
@@ -59,7 +59,7 @@ const ProductSection = () => {
       }
     };
 
-    getTopHeartData();
+    getPopularData();
   }, []);
 
   return (
@@ -86,4 +86,4 @@ const ProductSection = () => {
   );
 };
 
-export default ProductSection;
+export default PopularSection;
