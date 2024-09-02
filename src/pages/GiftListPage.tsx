@@ -126,26 +126,32 @@ const GiftListPage = () => {
   }
 
   return (
-    <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg bg-purple-50">
-      <h1 className="mb-6 pt-8 text-center font-semibold text-xl leading-8">
-        총 {totalCount}개의 추천 선물
-      </h1>
+    <div className="relative w-full overflow-hidden full-height mx-auto max-w-screen-lg bg-purple-50">
+      <div className="fixed top-0 z-50 w-full max-w-[480px] bg-purple-50">
+        <h1 className="py-7 text-center font-semibold text-xl leading-8">
+          총 {totalCount}개의 추천 선물
+        </h1>
+      </div>
       {categories.length !== 0 && (
         <>
-          <div className="flex category-scroll overflow-x-auto gap-5 mb-4 px-5">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => handleCategoryClick(category)}
-                className={`${
-                  selectedCategory === category ? "text-black" : "text-gray-500"
-                } font-semibold whitespace-nowrap py-2`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="fixed top-[88px] z-50 w-full max-w-[480px] bg-purple-50">
+            <div className="flex category-scroll overflow-x-auto gap-5 mb-2 px-5">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryClick(category)}
+                  className={`${
+                    selectedCategory === category
+                      ? "text-black"
+                      : "text-gray-500"
+                  } font-semibold whitespace-nowrap py-2`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="mb-6 px-5">
+          <div className="pt-[152px] mb-6 px-5">
             <div className="flex items-center gap-[6px] pl-2 mb-2">
               <img src={fullGift} className="w-[16px] h-[16px]" />
               <span className="text-orange-500 text-sm font-semibold">
