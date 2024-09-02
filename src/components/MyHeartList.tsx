@@ -131,15 +131,19 @@ const MyHeartList = () => {
   };
 
   return (
-    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
-      <div className="absolute z-40 pt-8 -ml-1">
-        <Link to="/">
-          <IoChevronBackSharp size={24} />
-        </Link>
+    <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
+      <div className="sticky top-0 z-50 w-full max-w-[480px] bg-purple-50">
+        <div className="flex items-center justify-between py-8">
+          <Link to="/" className="flex items-center">
+            <IoChevronBackSharp size={24} />
+          </Link>
+          <h1 className="text-center font-semibold text-xl leading-8">
+            관심 목록
+          </h1>
+          <div className="w-6"></div>
+        </div>
       </div>
-      <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
-        관심 목록
-      </h1>
+
       <div className="flex flex-col gap-3">
         {isLoading ? (
           <MyHeartListLoad />
@@ -157,7 +161,7 @@ const MyHeartList = () => {
               </div>
             ) : (
               <div className="flex flex-col">
-                <div>
+                <div className="fixed top-[96px] z-50 w-full max-w-[480px] bg-purple-50">
                   <div className="flex category-scroll overflow-x-auto gap-5 pb-3">
                     <button
                       onClick={() => handleCategoryClick("")}
@@ -181,15 +185,16 @@ const MyHeartList = () => {
                       </button>
                     ))}
                   </div>
-                  <div className="w-[calc(100%+40px)] -ml-5 h-[6px] bg-[#E7E5F2]" />
+                  <div className="w-full -ml-5 h-[6px] bg-[#E7E5F2]" />
                 </div>
-                <div className="flex w-full items-center justify-between">
+
+                <div className="fixed top-[138px] z-50 w-full max-w-[480px] bg-purple-50 flex items-center justify-between">
                   {isShareMode && (
                     <span className="text-sm font-medium flex-shrink-0">
                       {selectedProducts.size}개의 선물 선택
                     </span>
                   )}
-                  <div className="flex w-full justify-end py-3">
+                  <div className="flex w-[calc(100%-40px)] justify-end py-3">
                     <button
                       className="flex-center gap-1 w-fit px-4 py-[6px] bg-white rounded-full border border-gray-300"
                       onClick={handleShareModeToggle}
@@ -204,7 +209,7 @@ const MyHeartList = () => {
                     </button>
                   </div>
                 </div>
-                <div className={`${isShareMode && "pb-[100px] "}`}>
+                <div className={`pt-[100px] ${isShareMode && "pb-[100px]"}`}>
                   {Object.keys(groupedHeart).map((date) => (
                     <div key={date} className="pb-8">
                       <div className="pb-6 font-medium">{date}</div>
@@ -229,6 +234,7 @@ const MyHeartList = () => {
                     </div>
                   ))}
                 </div>
+
                 {showCopiedMessage && (
                   <div className="fixed z-50 bottom-0 w-full max-w-[480px] -ml-5 pt-4 pb-10 px-5">
                     <div className="flex-center w-full h-[41px] bg-black rounded-md">
@@ -239,6 +245,7 @@ const MyHeartList = () => {
                     </div>
                   </div>
                 )}
+
                 {isShareMode && (
                   <div className="fixed z-50 bottom-0 w-full max-w-[480px] -ml-5 bg-purple-50 pt-4 pb-8 px-5">
                     <button
