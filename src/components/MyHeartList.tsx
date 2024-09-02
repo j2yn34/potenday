@@ -131,7 +131,7 @@ const MyHeartList = () => {
   };
 
   return (
-    <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
+    <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
       <div className="sticky top-0 z-50 w-full max-w-[480px] bg-purple-50">
         <div className="flex items-center justify-between py-8">
           <Link to="/" className="flex items-center">
@@ -161,7 +161,7 @@ const MyHeartList = () => {
               </div>
             ) : (
               <div className="flex flex-col">
-                <div className="fixed top-[96px] z-50 w-full max-w-[480px] bg-purple-50">
+                <div className="sticky top-[96px] z-50 w-full max-w-[480px] bg-purple-50">
                   <div className="flex category-scroll overflow-x-auto gap-5 pb-3">
                     <button
                       onClick={() => handleCategoryClick("")}
@@ -185,16 +185,16 @@ const MyHeartList = () => {
                       </button>
                     ))}
                   </div>
-                  <div className="w-full -ml-5 h-[6px] bg-[#E7E5F2]" />
+                  <div className="w-[calc(100%+40px)] -ml-5 h-[6px] bg-[#E7E5F2]" />
                 </div>
 
-                <div className="fixed top-[138px] z-50 w-full max-w-[480px] bg-purple-50 flex items-center justify-between">
+                <div className="fixed top-[138px] z-50 w-full max-w-[480px] pr-10 bg-purple-50 flex items-center justify-between">
                   {isShareMode && (
                     <span className="text-sm font-medium flex-shrink-0">
                       {selectedProducts.size}개의 선물 선택
                     </span>
                   )}
-                  <div className="flex w-[calc(100%-40px)] justify-end py-3">
+                  <div className="flex justify-end w-full py-3">
                     <button
                       className="flex-center gap-1 w-fit px-4 py-[6px] bg-white rounded-full border border-gray-300"
                       onClick={handleShareModeToggle}
@@ -209,7 +209,7 @@ const MyHeartList = () => {
                     </button>
                   </div>
                 </div>
-                <div className={`pt-[100px] ${isShareMode && "pb-[100px]"}`}>
+                <div className={`pt-[58px] ${isShareMode && "pb-[100px]"}`}>
                   {Object.keys(groupedHeart).map((date) => (
                     <div key={date} className="pb-8">
                       <div className="pb-6 font-medium">{date}</div>
