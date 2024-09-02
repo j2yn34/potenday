@@ -63,15 +63,18 @@ const History = () => {
   const groupedHistory = transformHistoryData(historyList);
 
   return (
-    <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
-      <div className="absolute z-40 pt-7 -ml-1">
-        <Link to="/mypage">
-          <IoChevronBackSharp size={24} />
-        </Link>
+    <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
+      <div className="sticky top-0 z-50 w-full max-w-[480px] bg-purple-50">
+        <div className="flex items-center justify-between py-8">
+          <Link to="/" className="flex items-center">
+            <IoChevronBackSharp size={24} />
+          </Link>
+          <h1 className="text-center font-semibold text-xl leading-8">
+            최근 본 선물
+          </h1>
+          <div className="w-6"></div>
+        </div>
       </div>
-      <h1 className="mb-7 pt-7 text-center font-semibold text-xl leading-8">
-        최근 본 선물
-      </h1>
       {isLoading ? (
         <div className="pt-[54px]">
           <HistoryLoad />
