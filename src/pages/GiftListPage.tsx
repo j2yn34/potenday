@@ -31,6 +31,9 @@ const GiftListPage = () => {
     categories[0] || ""
   );
   const [initialFetchDone, setInitialFetchDone] = useState(false);
+  const [commentsCache, setCommentsCache] = useState<{ [key: string]: string }>(
+    {}
+  );
 
   const filteredGifts = selectedCategory
     ? giftList.filter((gift) => gift.category === selectedCategory)
@@ -38,35 +41,32 @@ const GiftListPage = () => {
 
   useEffect(() => {
     if (categories.length > 0 && !initialFetchDone) {
-      const fetchComment = async (category: string) => {
-        setIsCommentLoading(true);
-        try {
-          const commentUrl = `/api/api/v1/ai/category/comment`;
-          const res = await axios.get(commentUrl, {
-            params: { category },
-          });
-          setComment(res.data.data.comment);
-        } catch (err) {
-          console.error("Error comment:", err);
-          setComment("코멘트를 불러오는 중 오류가 발생했어요.");
-        } finally {
-          setIsCommentLoading(false);
-        }
-      };
-      fetchComment(categories[0]);
+      handleCategoryClick(categories[0]);
       setInitialFetchDone(true);
     }
   }, [categories, initialFetchDone]);
 
   const handleCategoryClick = async (category: string) => {
-    setIsCommentLoading(true);
     setSelectedCategory(category);
+
+    if (commentsCache[category]) {
+      setComment(commentsCache[category]);
+      return;
+    }
+
+    setIsCommentLoading(true);
     try {
       const commentUrl = `/api/api/v1/ai/category/comment`;
       const res = await axios.get(commentUrl, {
         params: { category },
       });
-      setComment(res.data.data.comment);
+      const newComment = res.data.data.comment;
+      setComment(newComment);
+
+      setCommentsCache((prevCache) => ({
+        ...prevCache,
+        [category]: newComment,
+      }));
     } catch (err) {
       console.error("Error comment:", err);
       setComment("코멘트를 불러오는 중 오류가 발생했어요.");
