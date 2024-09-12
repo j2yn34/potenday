@@ -65,8 +65,8 @@ const History = () => {
   return (
     <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
       <div className="sticky top-0 z-50 w-full max-w-[480px] bg-purple-50">
-        <div className="flex items-center justify-between py-8">
-          <Link to="/" className="flex items-center">
+        <div className="flex items-center justify-between py-7">
+          <Link to="/mypage" className="flex items-center">
             <IoChevronBackSharp size={24} />
           </Link>
           <h1 className="text-center font-semibold text-xl leading-8">
