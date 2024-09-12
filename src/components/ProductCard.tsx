@@ -197,7 +197,7 @@ const ProductCard = ({
   };
 
   return (
-    <div onClick={handleCardClick} className="cursor-pointer relative">
+    <article onClick={handleCardClick} className="cursor-pointer relative">
       <div className="relative">
         <div className="aspect-w-1 aspect-h-1">
           {isSelected && (
@@ -228,19 +228,15 @@ const ProductCard = ({
           </div>
         )}
         <button
-          className={`absolute z-20 bottom-0 right-0 ${
+          className={`absolute z-20 bottom-0 right-0 p-3 ${
             isSharedPage && "hidden"
           }`}
           onClick={handleHeart}
         >
           {isLiked ? (
-            <div className="p-3">
-              <FaHeart size={24} className="text-orange-500" />
-            </div>
+            <FaHeart size={24} className="text-orange-500" />
           ) : (
-            <div className="p-3">
-              <img src={emptyHeart} className="w-[26px]" />
-            </div>
+            <img src={emptyHeart} className="w-[26px]" />
           )}
         </button>
       </div>
@@ -273,7 +269,7 @@ const ProductCard = ({
           />
         </div>
       )}
-    </div>
+    </article>
   );
 };
 
