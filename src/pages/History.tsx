@@ -98,13 +98,15 @@ const History = () => {
                   최근 7일 동안의 기록을 볼 수 있어요.
                 </span>
               </div>
-              {Object.keys(groupedHistory).map((date) => (
-                <HistoryList
-                  key={date}
-                  date={date}
-                  products={groupedHistory[date]}
-                />
-              ))}
+              <main>
+                {Object.keys(groupedHistory).map((date) => (
+                  <HistoryList
+                    key={date}
+                    date={date}
+                    products={groupedHistory[date]}
+                  />
+                ))}
+              </main>
             </div>
           )}
         </>

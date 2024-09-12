@@ -9,8 +9,8 @@ const HistoryList = ({
   products: HistoryListType[];
 }) => {
   return (
-    <div className="pb-14">
-      <div className="pb-6 font-medium">{date}</div>
+    <section className="pb-14">
+      <p className="pb-6 font-medium">{date}</p>
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
         {products.map((historyItem) => (
           <ProductCard
@@ -20,7 +20,7 @@ const HistoryList = ({
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

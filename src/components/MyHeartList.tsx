@@ -209,10 +209,10 @@ const MyHeartList = () => {
                     </button>
                   </div>
                 </div>
-                <div className={`pt-[58px] ${isShareMode && "pb-[100px]"}`}>
+                <main className={`pt-[58px] ${isShareMode && "pb-[100px]"}`}>
                   {Object.keys(groupedHeart).map((date) => (
-                    <div key={date} className="pb-8">
-                      <div className="pb-6 font-medium">{date}</div>
+                    <section key={date} className="pb-8">
+                      <p className="pb-6 font-medium">{date}</p>
                       <div className="grid grid-cols-2 gap-x-4 gap-y-8 items-start">
                         {groupedHeart[date].flatMap((item) =>
                           item.itemList.map((product: ProductType) => (
@@ -231,9 +231,9 @@ const MyHeartList = () => {
                           ))
                         )}
                       </div>
-                    </div>
+                    </section>
                   ))}
-                </div>
+                </main>
 
                 {showCopiedMessage && (
                   <div className="fixed z-50 bottom-0 w-full max-w-[480px] -ml-5 pt-4 pb-10 px-5">
