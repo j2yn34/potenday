@@ -15,8 +15,8 @@ const Index = () => {
   return (
     <div className="bg-white full-height">
       <Header />
-      <div className="home-bg px-5 relative">
-        <div className="pt-[74px]">
+      <main className="home-bg px-5 relative">
+        <section className="pt-[74px]">
           <div className="flex flex-col items-center mb-9">
             <h1 className="text-center text-2xl font-semibold leading-9 mt-10 mb-6">
               1분 만에 고르는
@@ -37,19 +37,19 @@ const Index = () => {
               />
             </button>
           </div>
-        </div>
-        <div className="flex-center flex-col py-12">
+        </section>
+        <section className="flex-center flex-col py-12">
           <img src={icon} className="w-[32px] mb-[10px]" />
-          <h1 className="text-[22px] font-semibold leading-9 mb-2">
+          <h2 className="text-[22px] font-semibold leading-9 mb-2">
             T!FY의 인기 선물
-          </h1>
-          <span className="text-gray-500 text-sm">
+          </h2>
+          <p className="text-gray-500 text-sm">
             많은 사람들이 찜한 인기 선물을 구경해 보세요!
-          </span>
-        </div>
+          </p>
+        </section>
         <ProductSection />
         <ScrollToTopButton />
-      </div>
+      </main>
     </div>
   );
 };
