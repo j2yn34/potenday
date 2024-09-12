@@ -56,7 +56,7 @@ const Terms = () => {
         <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
           이용약관
         </h1>
-        <div className="text-sm pb-12">
+        <p className="text-sm pb-12">
           안녕하세요. <br />
           <br />
           취향에 맞는 선물을 주고 싶은 당신에게 제공하는 상품 추천 생성형
@@ -64,7 +64,7 @@ const Terms = () => {
           <br />
           티피 서비스를 제공하는 선물발굴단&#40;이하 “GDT”&#41; 팀이 준비한
           약관을 읽어주시면 감사드리겠습니다.
-        </div>
+        </p>
         {termsArr.map((term) => (
           <section key={term.title} className="pb-8">
             <h1 className="font-semibold mb-2">{term.title}</h1>

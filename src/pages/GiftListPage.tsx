@@ -178,9 +178,9 @@ const GiftListPage = () => {
       )}
       <div className="overflow-y-auto h-full px-5 pb-24">
         {filteredGifts.every((gift) => gift.products.length === 0) ? (
-          <div className="text-center text-gray-500 text-sm pt-20">
+          <p className="text-center text-gray-500 text-sm pt-20">
             아직 TIFY에 해당 카테고리의 상품이 없습니다.
-          </div>
+          </p>
         ) : (
           <GiftList data={filteredGifts} />
         )}
