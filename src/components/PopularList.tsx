@@ -1,7 +1,7 @@
 import ProductCard from "./ProductCard";
 import { ProductType } from "../type";
 
-const ProductList = ({
+const PopularList = ({
   category,
   products,
 }: {
@@ -24,4 +24,4 @@ const ProductList = ({
   );
 };
 
-export default ProductList;
+export default PopularList;

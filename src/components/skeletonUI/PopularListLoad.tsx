@@ -1,4 +1,4 @@
-const ProductListLoad = () => {
+const PopularListLoad = () => {
   return (
     <>
       <div>
@@ -24,4 +24,4 @@ const ProductListLoad = () => {
   );
 };
 
-export default ProductListLoad;
+export default PopularListLoad;

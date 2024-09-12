@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import ProductList from "./ProductList";
+import PopularList from "./PopularList";
 import axios from "axios";
 import { ProductType } from "../type";
-import ProductListLoad from "./skeletonUI/ProductListLoad";
+import PopularListLoad from "./skeletonUI/PopularListLoad";
 import { ProductListType } from "../type";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
@@ -65,7 +65,7 @@ const PopularSection = () => {
   return (
     <>
       {isLoading ? (
-        <ProductListLoad />
+        <PopularListLoad />
       ) : groupedProducts.length === 0 ? (
         <div className="flex-center pb-16 text-gray-400 text-center text-sm">
           아직 인기 선물이 없어요. <br />
@@ -74,7 +74,7 @@ const PopularSection = () => {
       ) : (
         <>
           {groupedProducts.map((group) => (
-            <ProductList
+            <PopularList
               category={group.category}
               products={group.products}
               key={group.category}
