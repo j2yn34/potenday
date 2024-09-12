@@ -7,17 +7,21 @@ const Header = () => {
   return (
     <header className="fixed z-40 w-full max-w-[480px] px-5 pt-8 pb-[18px] bg-purple-0">
       <div className="flex justify-between">
-        <button>
-          <img src={headerLogo} alt="TIFY 로고" />
-        </button>
-        <div className="flex gap-5">
-          <Link to="/heartlist">
-            <img src={heartIcon} alt="관심목록" />
-          </Link>
-          <Link to="/mypage">
-            <img src={userIcon} alt="내 정보" />
-          </Link>
-        </div>
+        <img src={headerLogo} alt="TIFY 로고" />
+        <nav className="flex gap-5">
+          <ul className="flex gap-5">
+            <li>
+              <Link to="/heartlist">
+                <img src={heartIcon} alt="관심목록" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/mypage">
+                <img src={userIcon} alt="내 정보" />
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );
