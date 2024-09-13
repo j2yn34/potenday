@@ -1,6 +1,6 @@
 const HistoryLoad = () => {
   return (
-    <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg bg-purple-50">
+    <div className="relative w-full full-height overflow-hidden mx-auto bg-purple-50">
       {Array.from(Array(2)).map((_, index) => (
         <div className="pb-14 animate-pulse" key={index}>
           <div className="w-[80px] h-[18px] rounded bg-gray-300 mt-3 mb-6"></div>

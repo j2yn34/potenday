@@ -126,7 +126,7 @@ const GiftListPage = () => {
   }
 
   return (
-    <div className="relative w-full overflow-hidden full-height mx-auto max-w-screen-lg bg-purple-50">
+    <div className="relative w-full overflow-hidden full-height mx-auto bg-purple-50">
       <div className="fixed top-0 z-50 w-full max-w-[480px] bg-purple-50">
         <h1 className="py-7 text-center font-semibold text-xl leading-8">
           총 {totalCount}개의 추천 선물

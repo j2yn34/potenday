@@ -18,17 +18,18 @@ const GiftList = ({ data }: { data: ProductListType[] }) => {
   return (
     <div className="flex flex-col gap-3">
       {data.map((gift) => (
-        <div key={gift.category}>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-6 items-start">
-            {gift.products.map((product: ProductType, index: number) => (
-              <ProductCard
-                data={product}
-                key={`${product.productId}+${index}`}
-                liked={product.wish}
-                giftCategory={gift.category}
-              />
-            ))}
-          </div>
+        <div
+          key={gift.category}
+          className="grid grid-cols-2 gap-x-4 gap-y-6 items-start"
+        >
+          {gift.products.map((product: ProductType, index: number) => (
+            <ProductCard
+              data={product}
+              key={`${product.productId}+${index}`}
+              liked={product.wish}
+              giftCategory={gift.category}
+            />
+          ))}
         </div>
       ))}
     </div>

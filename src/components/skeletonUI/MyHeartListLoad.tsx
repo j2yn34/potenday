@@ -1,6 +1,6 @@
 const MyHeartListLoad = () => {
   return (
-    <div className="relative w-full full-height overflow-hidden mx-auto max-w-screen-lg bg-purple-50">
+    <div className="relative w-full full-height overflow-hidden mx-auto bg-purple-50">
       <div className="pb-3 flex gap-5 animate-pulse">
         <div className="w-[40px] h-5 bg-gray-300 rounded-sm"></div>
         <div className="w-[50px] h-5 bg-gray-300 rounded-sm"></div>

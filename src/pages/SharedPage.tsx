@@ -24,7 +24,7 @@ const SharedPage = () => {
   }, []);
 
   return (
-    <div className="shared-bg relative w-full overflow-hidden mx-auto max-w-screen-lg">
+    <div className="shared-bg relative w-full overflow-hidden mx-auto">
       <div className="w-full full-height shared-bg-img px-5">
         <div className="flex flex-col">
           {products.length === 0 ? (
