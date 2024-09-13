@@ -19,7 +19,7 @@ const LoginPage = () => {
       <div className="relative px-5 full-height flex flex-col justify-between p-20">
         {!isOnboarding && (
           <div className="absolute z-40 top-0 pt-8 -ml-1">
-            <Link to="/">
+            <Link to="/" aria-label="뒤로가기">
               <IoChevronBackSharp size={24} />
             </Link>
           </div>

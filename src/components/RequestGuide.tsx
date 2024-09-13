@@ -8,7 +8,7 @@ const RequestGuide = () => {
   return (
     <>
       <div className="absolute z-40 pt-8 -ml-1">
-        <Link to="/">
+        <Link to="/" aria-label="뒤로가기">
           <IoChevronBackSharp size={24} />
         </Link>
       </div>

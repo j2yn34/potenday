@@ -62,7 +62,7 @@ const TextRequest = () => {
         <>
           <div>
             <div className="absolute z-40 pt-8 -ml-1">
-              <Link to="/voice">
+              <Link to="/voice" aria-label="뒤로가기">
                 <IoChevronBackSharp size={24} />
               </Link>
             </div>

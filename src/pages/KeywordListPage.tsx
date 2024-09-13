@@ -128,7 +128,7 @@ const KeywordListPage = () => {
     <>
       <div className="px-5 full-height flex flex-col justify-between">
         <div className="absolute z-40 pt-8 -ml-1">
-          <button onClick={onGoBackward}>
+          <button onClick={onGoBackward} aria-label="뒤로가기">
             <IoChevronBackSharp size={24} />
           </button>
         </div>
