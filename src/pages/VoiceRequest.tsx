@@ -151,7 +151,11 @@ const VoiceRequest = () => {
           {isVoiceRequest ? (
             <>
               <div>
-                <button className="absolute z-40 pt-8 -ml-1" onClick={goHome}>
+                <button
+                  className="absolute z-40 pt-8 -ml-1"
+                  onClick={goHome}
+                  aria-label="홈으로 가기"
+                >
                   <IoChevronBackSharp size={24} />
                 </button>
                 <div className="pt-8">
@@ -213,12 +217,14 @@ const VoiceRequest = () => {
                     isTranscriptEmpty ? "hidden" : "bg-white flex-center "
                   }`}
                   onClick={handleReset}
+                  aria-label="리셋"
                 >
                   <GrPowerReset size={20} />
                 </button>
                 <button
                   className="w-[100px] h-16 rounded-full bg-black flex-center text-white"
                   onClick={toggleListening}
+                  aria-label={listening ? "음성인식 일시정지" : "음성인식 시작"}
                 >
                   {listening ? (
                     <MdOutlinePause size={32} />

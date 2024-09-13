@@ -26,11 +26,16 @@ const Index = () => {
             <Link
               to="/voice"
               className="flex-center w-[158px] h-14 bg-black text-white rounded-lg"
+              aria-label="선물 추천 요청 페이지로 이동"
             >
               선물 고르러 가기
             </Link>
             <Lottie className="w-[240px] h-[240px] mt-3" animationData={home} />
-            <button onClick={handleScroll} className="relative w-full">
+            <button
+              onClick={handleScroll}
+              className="relative w-full"
+              aria-label="페이지 아래로 이동"
+            >
               <BsChevronDown
                 size={32}
                 className="text-gray-500 absolute top-[-12px] left-[46.5%]"
@@ -39,7 +44,7 @@ const Index = () => {
           </div>
         </section>
         <section className="flex-center flex-col py-12">
-          <img src={icon} className="w-[32px] mb-[10px]" />
+          <img src={icon} className="w-[32px] mb-[10px]" alt="T!FY의 아이콘" />
           <h2 className="text-[22px] font-semibold leading-9 mb-2">
             T!FY의 인기 선물
           </h2>

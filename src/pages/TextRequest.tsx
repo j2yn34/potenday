@@ -111,6 +111,7 @@ const TextRequest = () => {
                       : "bg-black text-white"
                   }`}
                   disabled={isEmpty}
+                  aria-label="입력 완료"
                 >
                   <PiArrowUpBold size={20} />
                 </button>

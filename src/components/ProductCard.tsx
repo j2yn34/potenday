@@ -232,6 +232,7 @@ const ProductCard = ({
             isSharedPage && "hidden"
           }`}
           onClick={handleHeart}
+          aria-label={isLiked ? "관심목록에서 삭제" : "관심목록에 저장"}
         >
           {isLiked ? (
             <FaHeart size={24} className="text-orange-500" />

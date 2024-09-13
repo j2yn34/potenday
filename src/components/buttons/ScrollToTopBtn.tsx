@@ -39,6 +39,7 @@ const ScrollToTopButton = () => {
       onClick={scrollToTop}
       className="fixed z-40 bottom-9 p-3 bg-white text-gray-800 rounded-full shadow-[0_2px_6px_3px_rgba(0,0,0,0.1)]"
       style={{ right: buttonRightPosition }}
+      aria-label="화면 최상단으로 스크롤 이동"
     >
       <BsArrowUp size={24} />
     </button>
