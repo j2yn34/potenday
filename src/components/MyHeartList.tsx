@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 import { HeartListType, HeartTimeList, ProductType } from "../type";
-import { Link } from "react-router-dom";
-import { IoChevronBackSharp } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import Notice from "./common/Notice";
 import formatDate from "../hooks/formatDate";
 import ProductCard from "./ProductCard";
 import shareIcon from "../assets/icons/share.png";
 import MyHeartListLoad from "./skeletonUI/MyHeartListLoad";
+import TitleHeader from "./common/TitleHeader";
+import { useNavigate } from "react-router-dom";
 
 const MyHeartList = () => {
   const token = useRecoilValue<string>(accessTokenState);
+  const navigate = useNavigate();
   const [myHeartCards, setMyHeartCards] = useState<HeartListType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -132,17 +133,7 @@ const MyHeartList = () => {
 
   return (
     <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
-      <div className="sticky top-0 z-50 w-full max-w-[480px] bg-purple-50">
-        <div className="flex items-center justify-between py-8">
-          <Link to="/" className="flex items-center">
-            <IoChevronBackSharp size={24} />
-          </Link>
-          <h1 className="text-center font-semibold text-xl leading-8">
-            관심 목록
-          </h1>
-          <div className="w-6"></div>
-        </div>
-      </div>
+      <TitleHeader goBack={() => navigate("/")} pageTitle={"관심 목록"} />
 
       <div className="flex flex-col gap-3">
         {isLoading ? (
@@ -161,7 +152,7 @@ const MyHeartList = () => {
               </div>
             ) : (
               <div className="flex flex-col">
-                <div className="sticky top-[96px] z-50 w-full max-w-[480px] bg-purple-50">
+                <div className="sticky top-[92px] z-50 w-full max-w-[480px] bg-purple-50">
                   <div className="flex category-scroll overflow-x-auto gap-5 pb-3">
                     <button
                       onClick={() => handleCategoryClick("")}
@@ -188,7 +179,7 @@ const MyHeartList = () => {
                   <div className="w-[calc(100%+40px)] -ml-5 h-[6px] bg-[#E7E5F2]" />
                 </div>
 
-                <div className="fixed top-[138px] z-50 w-full max-w-[480px] pr-10 bg-purple-50 flex items-center justify-between">
+                <div className="fixed top-[134px] z-50 w-full max-w-[480px] pr-10 bg-purple-50 flex items-center justify-between">
                   {isShareMode && (
                     <span className="text-sm font-medium flex-shrink-0">
                       {selectedProducts.size}개의 선물 선택

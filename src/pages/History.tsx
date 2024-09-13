@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { IoChevronBackSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
 import HistoryList from "../components/HistoryList";
 import { HistoryListType } from "../type";
 import { useRecoilValue } from "recoil";
@@ -10,11 +8,14 @@ import formatDate from "../hooks/formatDate";
 import Notice from "../components/common/Notice";
 import HistoryLoad from "../components/skeletonUI/HistoryLoad";
 import ScrollToTopButton from "../components/buttons/ScrollToTopBtn";
+import TitleHeader from "../components/common/TitleHeader";
+import { useNavigate } from "react-router-dom";
 
 const History = () => {
   const token = useRecoilValue<string>(accessTokenState);
   const [historyList, setHistoryList] = useState<HistoryListType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,17 +65,10 @@ const History = () => {
 
   return (
     <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
-      <div className="sticky top-0 z-50 w-full max-w-[480px] bg-purple-50">
-        <div className="flex items-center justify-between py-7">
-          <Link to="/mypage" className="flex items-center">
-            <IoChevronBackSharp size={24} />
-          </Link>
-          <h1 className="text-center font-semibold text-xl leading-8">
-            최근 본 선물
-          </h1>
-          <div className="w-6"></div>
-        </div>
-      </div>
+      <TitleHeader
+        goBack={() => navigate("/mypage")}
+        pageTitle={"최근 본 선물"}
+      />
       {isLoading ? (
         <div className="pt-[54px]">
           <HistoryLoad />

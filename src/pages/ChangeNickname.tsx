@@ -1,10 +1,10 @@
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { accessTokenState, userInfoState } from "../state/recoil";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { IoChevronBackSharp } from "react-icons/io5";
 import { UserInfoState } from "../state/recoilType";
 import { useState, useCallback, ChangeEvent } from "react";
+import TitleHeader from "../components/common/TitleHeader";
 
 const regExp = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
 
@@ -57,15 +57,11 @@ const ChangeNickname = () => {
 
   return (
     <>
-      <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
-        <div className="absolute z-40 pt-8 -ml-1">
-          <Link to="/myinfo">
-            <IoChevronBackSharp size={24} />
-          </Link>
-        </div>
-        <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
-          닉네임 변경
-        </h1>
+      <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
+        <TitleHeader
+          goBack={() => navigate("/myinfo")}
+          pageTitle={"닉네임 변경"}
+        />
         <form onSubmit={onSubmit}>
           <input
             type="text"

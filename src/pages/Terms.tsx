@@ -1,7 +1,9 @@
-import { IoChevronBackSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import TitleHeader from "../components/common/TitleHeader";
 
 const Terms = () => {
+  const navigate = useNavigate();
+
   const termsArr = [
     {
       title: "제 1 조 (목적)",
@@ -47,15 +49,11 @@ const Terms = () => {
 
   return (
     <>
-      <div className="relative w-full full-height overflow-hidden px-5 mx-auto max-w-screen-lg bg-purple-50">
-        <div className="absolute z-40 pt-8 -ml-1">
-          <Link to="/mypage">
-            <IoChevronBackSharp size={24} />
-          </Link>
-        </div>
-        <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
-          이용약관
-        </h1>
+      <div className="relative w-full full-height overflow-hidden px-5 mx-auto bg-purple-50">
+        <TitleHeader
+          goBack={() => navigate("/mypage")}
+          pageTitle={"이용약관"}
+        />
         <p className="text-sm pb-12">
           안녕하세요. <br />
           <br />

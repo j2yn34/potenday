@@ -11,11 +11,11 @@ import {
   onboardingState,
   userInfoState,
 } from "../state/recoil";
-import { IoChevronBackSharp } from "react-icons/io5";
 import { UserInfoState } from "../state/recoilType";
 import { IoIosArrowForward } from "react-icons/io";
 import ConfirmModal from "../components/common/ConfirmModal";
 import axios from "axios";
+import TitleHeader from "../components/common/TitleHeader";
 
 const Mypage = () => {
   const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
@@ -86,15 +86,8 @@ const Mypage = () => {
 
   return (
     <>
-      <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
-        <div className="absolute z-40 pt-8 -ml-1">
-          <Link to="/">
-            <IoChevronBackSharp size={24} />
-          </Link>
-        </div>
-        <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
-          내 정보
-        </h1>
+      <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
+        <TitleHeader goBack={() => navigate("/")} pageTitle={"내 정보"} />
         <Link to="/myinfo">
           <div className="w-full h-[75px] bg-black rounded-xl px-5 py-3 flex items-center justify-between">
             <div>

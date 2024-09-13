@@ -1,11 +1,11 @@
 import axios from "axios";
 import { Dispatch, SetStateAction, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { IoChevronBackSharp } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { accessTokenState, userInfoState } from "../state/recoil";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import ConfirmModal from "../components/common/ConfirmModal";
+import TitleHeader from "../components/common/TitleHeader";
 
 const MyInfo = () => {
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -54,15 +54,11 @@ const MyInfo = () => {
 
   return (
     <>
-      <div className="relative w-full full-height px-5 mx-auto max-w-screen-lg bg-purple-50">
-        <div className="absolute z-40 pt-8 -ml-1">
-          <Link to="/mypage">
-            <IoChevronBackSharp size={24} />
-          </Link>
-        </div>
-        <h1 className="mb-8 pt-8 text-center font-semibold text-xl leading-8">
-          내 정보 관리
-        </h1>
+      <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
+        <TitleHeader
+          goBack={() => navigate("/mypage")}
+          pageTitle={"내 정보 관리"}
+        />
         <div>
           {titleList.map((title) => (
             <div className="w-full h-14" key={title.title}>
