@@ -26,7 +26,7 @@ const LoginRedirectPage = () => {
           headers: { Authorization: `Bearer ${token}` },
           responseType: "json",
         });
-        console.log(token, response.data);
+        // console.log(token, response.data);
 
         const { id, nickname } = response.data.data;
         setUserInfo({ id, nickname });

@@ -95,7 +95,7 @@ const VoiceRequest = () => {
   }
 
   const submitRequest = () => {
-    console.log(transcript);
+    // console.log(transcript);
     SpeechRecognition.stopListening();
     setIsKeywordLoading(true);
     setIsDoneRequest(true);
@@ -103,7 +103,7 @@ const VoiceRequest = () => {
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
       .then((res) => {
         setTranscript(transcript);
-        console.log("submit Response:", res.data);
+        // console.log("submit Response:", res.data);
         setKeywordList(res.data.data.keywordList);
         setIsKeywordLoading(false);
       })

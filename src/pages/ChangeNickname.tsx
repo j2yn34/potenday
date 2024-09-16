@@ -24,7 +24,7 @@ const ChangeNickname = () => {
     e.preventDefault();
 
     try {
-      const res = await axios({
+      await axios({
         method: "post",
         url: `/api/api/v1/user`,
         data: { nickname: inputValue },
@@ -36,7 +36,6 @@ const ChangeNickname = () => {
         ...prev,
         nickname: inputValue,
       }));
-      console.log(res);
     } catch (error) {
       console.error("닉네임 변경 실패: ", error);
       return;

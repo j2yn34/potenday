@@ -30,7 +30,7 @@ const TextRequest = () => {
 
   const submitRequest = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(message);
+    // console.log(message);
     setTranscript(message);
     setIsKeywordLoading(true);
     setIsDoneRequest(true);
@@ -38,7 +38,7 @@ const TextRequest = () => {
       .get(`/api/api/v1/ai/parsing/keyword?text=${message}`)
       .then((res) => {
         // console.log("Response:", res.data);
-        console.log("keywordList: ", res.data.data.keywordList);
+        // console.log("keywordList: ", res.data.data.keywordList);
         setKeywordList(res.data.data.keywordList);
         setIsKeywordLoading(false);
       })

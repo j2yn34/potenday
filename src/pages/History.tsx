@@ -27,7 +27,7 @@ const History = () => {
           headers: { Authorization: `Bearer ${token}` },
           responseType: "json",
         });
-        console.log(response.data.data.history);
+        // console.log(response.data.data.history);
         setHistoryList(response.data.data.history);
         setIsLoading(false);
       } catch (err) {

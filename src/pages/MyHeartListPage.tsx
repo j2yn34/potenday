@@ -10,7 +10,6 @@ const MyHeartListPage = () => {
   const token = useRecoilValue<string>(accessTokenState);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState<boolean>(false);
-  console.log("token", token);
 
   useEffect(() => {
     if (!token) {

@@ -3,7 +3,7 @@ import { keywordListState } from "../state/recoil";
 
 const KeywordList = () => {
   const keywordList = useRecoilValue<string[]>(keywordListState);
-  console.log(keywordList);
+  // console.log(keywordList);
 
   return (
     <div className="flex flex-col gap-4 items-center">

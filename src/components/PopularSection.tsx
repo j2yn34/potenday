@@ -49,7 +49,7 @@ const PopularSection = () => {
             })
           );
 
-          console.log("grouped: ", groupedArray);
+          // console.log("grouped: ", groupedArray);
           setGroupedProducts(groupedArray);
           setIsLoading(false);
         }

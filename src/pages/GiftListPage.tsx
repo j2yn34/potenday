@@ -93,7 +93,7 @@ const GiftListPage = () => {
     axios
       .get(url)
       .then((res) => {
-        console.log("Response:", res.data.data.items);
+        // console.log("Response:", res.data.data.items);
         setGiftList(res.data.data.items);
         setIsLoading(false);
       })

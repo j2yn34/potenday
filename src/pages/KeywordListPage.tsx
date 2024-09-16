@@ -55,7 +55,7 @@ const KeywordListPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log("giftlist Response:", res.data.data.items);
+        // console.log("giftlist Response:", res.data.data.items);
         setGiftList(res.data.data.items);
         setIsLoading(false);
         navigate("/giftlist");
@@ -71,17 +71,17 @@ const KeywordListPage = () => {
   const reloadKeyword = () => {
     setIsLoading(true);
     setIsReloaded(true);
-    console.log(transcript);
+    // console.log(transcript);
     axios
       .get(`/api/api/v1/ai/parsing/keyword?text=${transcript}`)
       .then((res) => {
-        console.log("reloadKeyword Response:", res.data);
+        // console.log("reloadKeyword Response:", res.data);
         setKeywordList(res.data.data.keywordList);
         if (res.data.data.keywordList.length === 0) {
           setIsLoading(false);
           openKeywordErrModal();
         }
-        console.log("reloadKeyword keywordList: ", res.data.data.keywordList);
+        // console.log("reload keywordList: ", res.data.data.keywordList);
         setIsLoading(false);
       })
       .catch((err) => {
