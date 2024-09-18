@@ -17,6 +17,18 @@ export type ProductType = {
   insDate: string;
 };
 
+export type CardType = Omit<ProductType, "wish" | "insDate">;
+
+export type TuningType = {
+  keyword1: string;
+  keyword2: string;
+  keyword3: string;
+  keyword4: string;
+  keyword5: string;
+  keyword6: string;
+  product: string;
+};
+
 export type ProductListType = {
   category: string;
   products: ProductType[];

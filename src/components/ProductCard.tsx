@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProductType } from "../type";
+import { CardType, ProductType, TuningType } from "../type";
 import { FaHeart } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import axios from "axios";
@@ -36,6 +36,23 @@ const ProductCard = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const makeAxiosRequest = async (
+    method: "post" | "delete",
+    url: string,
+    data?: CardType | TuningType,
+    token?: string
+  ) => {
+    const config = token
+      ? {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      : {};
+    return axios[method](url, data, config);
+  };
+
+  const prepareKeywords = (keywords: string[]) =>
+    [...keywords, ...Array(6 - keywords.length).fill("")].slice(0, 6);
+
   const handleHeart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isShareMode) return;
 
@@ -48,35 +65,11 @@ const ProductCard = ({
     }
 
     try {
-      if (isLiked) {
-        const response = await axios.delete(
-          `/api/api/v1/user/wish/${data.productId}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        console.log(response.data);
-        if (giftCategory) {
-          const giftKeywords = [
-            ...keywordList,
-            ...Array(6 - keywordList.length).fill(""),
-          ].slice(0, 6);
+      const wishUrl = `/api/api/v1/user/wish/${isLiked ? data.productId : ""}`;
+      const method = isLiked ? "delete" : "post";
 
-          const tuning = await axios.post("/api/api/v1/ai/tuning/delete", {
-            keyword1: giftKeywords[0],
-            keyword2: giftKeywords[1],
-            keyword3: giftKeywords[2],
-            keyword4: giftKeywords[3],
-            keyword5: giftKeywords[4],
-            keyword6: giftKeywords[5],
-            product: giftCategory,
-          });
-          console.log(tuning.data);
-        }
-      } else {
-        const response = await axios.post(
-          `/api/api/v1/user/wish`,
-          {
+      const requestData = !isLiked
+        ? {
             title: data.title,
             link: data.link,
             image: data.image,
@@ -91,37 +84,40 @@ const ProductCard = ({
             category2: data.category2,
             category3: data.category3,
             category4: data.category4,
-          },
-          {
-            headers: { Authorization: `Bearer ${token}` },
           }
-        );
-        console.log(response.data);
-        if (giftCategory) {
-          const giftKeywords = [
-            ...keywordList,
-            ...Array(6 - keywordList.length).fill(""),
-          ].slice(0, 6);
+        : undefined;
 
-          const tuning = await axios.post("/api/api/v1/ai/tuning/add", {
-            keyword1: giftKeywords[0],
-            keyword2: giftKeywords[1],
-            keyword3: giftKeywords[2],
-            keyword4: giftKeywords[3],
-            keyword5: giftKeywords[4],
-            keyword6: giftKeywords[5],
-            product: giftCategory,
-          });
-          console.log(tuning.data);
-        }
+      await makeAxiosRequest(method, wishUrl, requestData, token);
+
+      if (giftCategory) {
+        const giftKeywords = prepareKeywords(keywordList);
+        const tuningUrl = `/api/api/v1/ai/tuning/${isLiked ? "delete" : "add"}`;
+        const tuningData = {
+          keyword1: giftKeywords[0],
+          keyword2: giftKeywords[1],
+          keyword3: giftKeywords[2],
+          keyword4: giftKeywords[3],
+          keyword5: giftKeywords[4],
+          keyword6: giftKeywords[5],
+          product: giftCategory,
+        };
+
+        const tuningResponse = await makeAxiosRequest(
+          "post",
+          tuningUrl,
+          tuningData,
+          token
+        );
+        console.log(tuningResponse.data);
       }
+
       setIsLiked(!isLiked);
     } catch (err) {
       console.error("Error:", err);
     }
   };
 
-  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleCardClick = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (isShareMode && onSelect) {
       e.stopPropagation();
       onSelect();
@@ -132,35 +128,27 @@ const ProductCard = ({
 
         if (token) {
           try {
-            axios
-              .post(
-                `/api/api/v1/user/history`,
-                {
-                  title: data.title,
-                  link: data.link,
-                  image: data.image,
-                  lprice: data.lprice,
-                  hprice: data.hprice,
-                  mallName: data.mallName,
-                  productId: data.productId,
-                  productType: data.productType,
-                  brand: data.brand,
-                  maker: data.maker,
-                  category1: data.category1,
-                  category2: data.category2,
-                  category3: data.category3,
-                  category4: data.category4,
-                },
-                {
-                  headers: { Authorization: `Bearer ${token}` },
-                }
-              )
-              .then((response) => {
-                console.log(response.data);
-              })
-              .catch((err) => {
-                console.error("Error:", err);
-              });
+            await makeAxiosRequest(
+              "post",
+              `/api/api/v1/user/history`,
+              {
+                title: data.title,
+                link: data.link,
+                image: data.image,
+                lprice: data.lprice,
+                hprice: data.hprice,
+                mallName: data.mallName,
+                productId: data.productId,
+                productType: data.productType,
+                brand: data.brand,
+                maker: data.maker,
+                category1: data.category1,
+                category2: data.category2,
+                category3: data.category3,
+                category4: data.category4,
+              },
+              token
+            );
           } catch (err) {
             console.error("Error:", err);
           }
