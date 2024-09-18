@@ -53,6 +53,37 @@ const ProductCard = ({
   const prepareKeywords = (keywords: string[]) =>
     [...keywords, ...Array(6 - keywords.length).fill("")].slice(0, 6);
 
+  const creatCardData = (data: ProductType): CardType => ({
+    title: data.title,
+    link: data.link,
+    image: data.image,
+    lprice: data.lprice,
+    hprice: data.hprice,
+    mallName: data.mallName,
+    productId: data.productId,
+    productType: data.productType,
+    brand: data.brand,
+    maker: data.maker,
+    category1: data.category1,
+    category2: data.category2,
+    category3: data.category3,
+    category4: data.category4,
+  });
+
+  const creatTuningData = (giftCategory: string, keywords: string[]) => {
+    const giftKeywords = prepareKeywords(keywords);
+
+    return {
+      keyword1: giftKeywords[0],
+      keyword2: giftKeywords[1],
+      keyword3: giftKeywords[2],
+      keyword4: giftKeywords[3],
+      keyword5: giftKeywords[4],
+      keyword6: giftKeywords[5],
+      product: giftCategory,
+    };
+  };
+
   const handleHeart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isShareMode) return;
 
@@ -67,48 +98,15 @@ const ProductCard = ({
     try {
       const wishUrl = `/api/api/v1/user/wish/${isLiked ? data.productId : ""}`;
       const method = isLiked ? "delete" : "post";
-
-      const requestData = !isLiked
-        ? {
-            title: data.title,
-            link: data.link,
-            image: data.image,
-            lprice: data.lprice,
-            hprice: data.hprice,
-            mallName: data.mallName,
-            productId: data.productId,
-            productType: data.productType,
-            brand: data.brand,
-            maker: data.maker,
-            category1: data.category1,
-            category2: data.category2,
-            category3: data.category3,
-            category4: data.category4,
-          }
-        : undefined;
+      const requestData = !isLiked ? creatCardData(data) : undefined;
 
       await makeAxiosRequest(method, wishUrl, requestData, token);
 
       if (giftCategory) {
-        const giftKeywords = prepareKeywords(keywordList);
         const tuningUrl = `/api/api/v1/ai/tuning/${isLiked ? "delete" : "add"}`;
-        const tuningData = {
-          keyword1: giftKeywords[0],
-          keyword2: giftKeywords[1],
-          keyword3: giftKeywords[2],
-          keyword4: giftKeywords[3],
-          keyword5: giftKeywords[4],
-          keyword6: giftKeywords[5],
-          product: giftCategory,
-        };
+        const tuningData = creatTuningData(giftCategory, keywordList);
 
-        const tuningResponse = await makeAxiosRequest(
-          "post",
-          tuningUrl,
-          tuningData,
-          token
-        );
-        console.log(tuningResponse.data);
+        await makeAxiosRequest("post", tuningUrl, tuningData, token);
       }
 
       setIsLiked(!isLiked);
@@ -131,22 +129,7 @@ const ProductCard = ({
             await makeAxiosRequest(
               "post",
               `/api/api/v1/user/history`,
-              {
-                title: data.title,
-                link: data.link,
-                image: data.image,
-                lprice: data.lprice,
-                hprice: data.hprice,
-                mallName: data.mallName,
-                productId: data.productId,
-                productType: data.productType,
-                brand: data.brand,
-                maker: data.maker,
-                category1: data.category1,
-                category2: data.category2,
-                category3: data.category3,
-                category4: data.category4,
-              },
+              creatCardData(data),
               token
             );
           } catch (err) {
