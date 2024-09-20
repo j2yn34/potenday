@@ -208,7 +208,7 @@ const ProductCard = ({
           {isLiked ? (
             <FaHeart size={24} className="text-orange-500" />
           ) : (
-            <img src={emptyHeart} className="w-[26px]" />
+            <img src={emptyHeart} className="w-[26px]" alt="하트" />
           )}
         </button>
       </div>
