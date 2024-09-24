@@ -44,7 +44,11 @@ const Index = () => {
           </div>
         </section>
         <section className="flex-center flex-col py-12">
-          <img src={icon} className="w-[32px] mb-[10px]" alt="T!FY의 아이콘" />
+          <img
+            src={icon}
+            className="w-[32px] h-[32px] mb-[10px]"
+            alt="TIFY의 아이콘"
+          />
           <h2 className="text-[22px] font-semibold leading-9 mb-2">
             T!FY의 인기 선물
           </h2>
