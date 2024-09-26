@@ -49,9 +49,9 @@ const MyHeartList = () => {
         setGroupedHeart(groupByDate(timeListData));
 
         setSelectedCategory("");
-        setIsLoading(false);
       } catch (err) {
         console.error("Error:", err);
+      } finally {
         setIsLoading(false);
       }
     };
