@@ -65,9 +65,13 @@ const VoiceRequest = () => {
 
   useEffect(() => {
     if (timer === 0) {
-      submitRequest();
+      if (transcript.trim() === "") {
+        handleReset();
+      } else {
+        submitRequest();
+      }
     }
-  }, [timer]);
+  }, [timer, transcript]);
 
   useEffect(() => {
     if (!listening) return;
