@@ -35,9 +35,8 @@ export type ProductListType = {
 };
 
 export type HistoryListType = {
-  item: ProductType;
-  date: string;
   id: number;
+  date: string;
   product: ProductType;
   wish: boolean;
 };
