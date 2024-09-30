@@ -48,7 +48,7 @@ export const onboardingState = atom<boolean>({
   default: false,
 });
 
-export const isKeywordLoadingState = atom({
+export const isKeywordLoadingState = atom<boolean>({
   key: "isKeywordLoadingState",
   default: false,
 });
