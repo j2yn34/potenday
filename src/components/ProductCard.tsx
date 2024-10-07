@@ -229,17 +229,15 @@ const ProductCard = ({
         </div>
       </div>
       {showModal && (
-        <div className="full-height">
-          <ConfirmModal
-            isSad={true}
-            title={"로그인이 필요한 기능이에요."}
-            text={"로그인하고 마음에 드는 선물을 골라보세요."}
-            leftBtn={cancel}
-            confirm={goLogin}
-            leftName={"취소"}
-            rightName={"로그인하기"}
-          />
-        </div>
+        <ConfirmModal
+          isSad={true}
+          title={"로그인이 필요한 기능이에요."}
+          text={"로그인하고 마음에 드는 선물을 골라보세요."}
+          leftBtn={cancel}
+          confirm={goLogin}
+          leftName={"취소"}
+          rightName={"로그인하기"}
+        />
       )}
     </article>
   );
