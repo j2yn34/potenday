@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { CardType, ProductType, TuningType } from "../type";
 import { FaHeart } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
@@ -8,7 +8,6 @@ import { keywordListState } from "../state/recoil";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../state/recoil";
 import { useNavigate } from "react-router-dom";
-import ConfirmModal from "./common/ConfirmModal";
 
 type ProductCardProps = {
   data: ProductType;
@@ -167,6 +166,8 @@ const ProductCard = ({
     document.body.style.overflow = "auto";
   };
 
+  const ConfirmModal = lazy(() => import("./common/ConfirmModal"));
+
   return (
     <article onClick={handleCardClick} className="cursor-pointer relative">
       <div className="relative">
@@ -229,15 +230,17 @@ const ProductCard = ({
         </div>
       </div>
       {showModal && (
-        <ConfirmModal
-          isSad={true}
-          title={"로그인이 필요한 기능이에요."}
-          text={"로그인하고 마음에 드는 선물을 골라보세요."}
-          leftBtn={cancel}
-          confirm={goLogin}
-          leftName={"취소"}
-          rightName={"로그인하기"}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ConfirmModal
+            isSad={true}
+            title={"로그인이 필요한 기능이에요."}
+            text={"로그인하고 마음에 드는 선물을 골라보세요."}
+            leftBtn={cancel}
+            confirm={goLogin}
+            leftName={"취소"}
+            rightName={"로그인하기"}
+          />
+        </Suspense>
       )}
     </article>
   );
