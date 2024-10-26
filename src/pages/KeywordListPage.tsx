@@ -11,10 +11,9 @@ import {
 } from "../state/recoil";
 import KeywordList from "../components/KeywordList";
 import { ProductListType } from "../type";
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import LoadingFull from "../components/common/LoadingFull";
 import { UserInfoState } from "../state/recoilType";
-import ConfirmModal from "../components/common/ConfirmModal";
 import { accessTokenState } from "../state/recoil";
 
 const KeywordListPage = () => {
@@ -124,6 +123,8 @@ const KeywordListPage = () => {
     navigate("/voice");
   };
 
+  const ConfirmModal = lazy(() => import("../components/common/ConfirmModal"));
+
   return (
     <>
       <div className="px-5 full-height flex flex-col justify-between">
@@ -175,30 +176,34 @@ const KeywordListPage = () => {
         </div>
       </div>
       {(keywordList.length === 0 || showKeywordErrModal) && (
-        <div className="full-height">
-          <ConfirmModal
-            isSad={true}
-            title={"키워드를 불러올 수 없어요."}
-            text={"더 자세히 이야기해 보세요."}
-            leftBtn={goVoice}
-            confirm={goHome}
-            leftName={"다시 할래요"}
-            rightName={"홈으로"}
-          />
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="full-height">
+            <ConfirmModal
+              isSad={true}
+              title={"키워드를 불러올 수 없어요."}
+              text={"더 자세히 이야기해 보세요."}
+              leftBtn={goVoice}
+              confirm={goHome}
+              leftName={"다시 할래요"}
+              rightName={"홈으로"}
+            />
+          </div>
+        </Suspense>
       )}
       {showGistListErrModal && (
-        <div className="full-height">
-          <ConfirmModal
-            isSad={true}
-            title={"딱 맞는 선물을 찾지 못했어요."}
-            text={"더 자세히 이야기해 보세요."}
-            leftBtn={goVoice}
-            confirm={goHome}
-            leftName={"다시 할래요"}
-            rightName={"홈으로"}
-          />
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="full-height">
+            <ConfirmModal
+              isSad={true}
+              title={"딱 맞는 선물을 찾지 못했어요."}
+              text={"더 자세히 이야기해 보세요."}
+              leftBtn={goVoice}
+              confirm={goHome}
+              leftName={"다시 할래요"}
+              rightName={"홈으로"}
+            />
+          </div>
+        </Suspense>
       )}
     </>
   );
