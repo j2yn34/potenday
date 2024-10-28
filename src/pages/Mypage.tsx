@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Suspense,
+  lazy,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import {
   useRecoilState,
   useRecoilValue,
@@ -13,7 +20,6 @@ import {
 } from "../state/recoil";
 import { UserInfoState } from "../state/recoilType";
 import { IoIosArrowForward } from "react-icons/io";
-import ConfirmModal from "../components/common/ConfirmModal";
 import axios from "axios";
 import TitleHeader from "../components/common/TitleHeader";
 
@@ -84,6 +90,8 @@ const Mypage = () => {
     document.body.style.overflow = "auto";
   };
 
+  const ConfirmModal = lazy(() => import("../components/common/ConfirmModal"));
+
   return (
     <>
       <div className="relative w-full full-height px-5 mx-auto bg-purple-50">
@@ -116,15 +124,17 @@ const Mypage = () => {
         </div>
       </div>
       {showLogoutModal && (
-        <ConfirmModal
-          isSad={false}
-          title={"로그아웃 하시겠어요?"}
-          text={"로그아웃 하면 이후 기록이 저장되지 않아요."}
-          leftBtn={() => closeModal(setShowLogoutModal)}
-          confirm={runLogout}
-          leftName={"취소"}
-          rightName={"확인"}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ConfirmModal
+            isSad={false}
+            title={"로그아웃 하시겠어요?"}
+            text={"로그아웃 하면 이후 기록이 저장되지 않아요."}
+            leftBtn={() => closeModal(setShowLogoutModal)}
+            confirm={runLogout}
+            leftName={"취소"}
+            rightName={"확인"}
+          />
+        </Suspense>
       )}
     </>
   );
